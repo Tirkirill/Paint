@@ -49,6 +49,7 @@ namespace Paint
             this.FrameGallery = new System.Windows.Forms.Panel();
             this.ChangeButton = new System.Windows.Forms.Button();
             this.FrameDurationBox = new System.Windows.Forms.TextBox();
+            this.DeleteFrameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -251,12 +252,23 @@ namespace Paint
             this.FrameDurationBox.TabIndex = 23;
             this.FrameDurationBox.Text = "0,5";
             // 
+            // DeleteFrameButton
+            // 
+            this.DeleteFrameButton.Location = new System.Drawing.Point(569, 13);
+            this.DeleteFrameButton.Name = "DeleteFrameButton";
+            this.DeleteFrameButton.Size = new System.Drawing.Size(92, 23);
+            this.DeleteFrameButton.TabIndex = 24;
+            this.DeleteFrameButton.Text = "Удалить";
+            this.DeleteFrameButton.UseVisualStyleBackColor = true;
+            this.DeleteFrameButton.Click += new System.EventHandler(this.DeleteFrameButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 595);
+            this.Controls.Add(this.DeleteFrameButton);
             this.Controls.Add(this.FrameDurationBox);
             this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.FrameGallery);
@@ -308,6 +320,7 @@ namespace Paint
         private System.Windows.Forms.Panel FrameGallery;
         private System.Windows.Forms.Button ChangeButton;
         private System.Windows.Forms.TextBox FrameDurationBox;
+        private System.Windows.Forms.Button DeleteFrameButton;
     }
 }
 

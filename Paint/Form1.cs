@@ -138,8 +138,8 @@ namespace Paint
             scale = coef;
             Canvas.Width = (int)(ImgWidth * coef);
             Canvas.Height = (int)(ImgHeight * coef);
-            RefreshG();
             Canvas.Image = bm;
+            RefreshG();
         }
 
         private void SaveAnimationButton_Click(object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace Paint
                 aw.Open(sfd.FileName, bm.Width, bm.Height);
                 for (int j =0; j<bitmaps.Count; j++)
                 {
-                    Bitmap bitmap = bitmaps[j];
+                    Bitmap bitmap = (Bitmap)bitmaps[j].Clone();
                     float secs = FrameDurations[j];
                     for (int i = 0; i < secs*framerate; i++)
                     {
@@ -167,22 +167,29 @@ namespace Paint
         {
             PictureBox pb = (PictureBox)sender;
             int tag = int.Parse(pb.Tag.ToString());
-            bm = bitmaps[tag];
-            for (int i = 0; i<bitmaps.Count; i++)
-            {
-                FrameGallery.Controls.Find("pbb" + i.ToString(), false)[0].BackColor = Color.Black;
-            }
-            FrameGallery.Controls.Find("pbb" + tag.ToString(), false)[0].BackColor = Color.Blue;
+            bm = (Bitmap)bitmaps[tag].Clone();
+            CurrentIndex = tag;
+            SetGalleryFrameBorder(tag);
+            
+            Canvas.Image = (Bitmap)bm.Clone();
             RefreshG();
             RefreshGI();
-            Canvas.Image = bm;
-            CurrentIndex = tag;
+            
         }
 
         private void RefreshPB(PictureBox pb, Label Lpb, int tag)
         {
-            pb.Image = bitmaps[tag];
+            pb.Image = (Bitmap)bitmaps[tag].Clone();
             Lpb.Text = FrameDurations[tag].ToString() + " секунд";
+        }
+
+        private void SetGalleryFrameBorder(int index)
+        {
+            for (int i = 0; i < bitmaps.Count; i++)
+            {
+                FrameGallery.Controls.Find("pbb" + i.ToString(), false)[0].BackColor = Color.Black;
+            }
+            FrameGallery.Controls.Find("pbb" + index.ToString(), false)[0].BackColor = Color.Blue;
         }
 
         private void AddFrame_Click(object sender, EventArgs e)
@@ -219,7 +226,7 @@ namespace Paint
                 
 
                 LocY += 95;
-                pb.Image = bitmaps[bitmaps.Count - 1];
+                pb.Image = (Bitmap)bitmaps[bitmaps.Count - 1].Clone();
                 pb.Click += PbOnClick;
                 pb.Cursor = Cursors.Hand;
                 pb.Tag = pbTag;
@@ -228,6 +235,7 @@ namespace Paint
 
                 FrameDurations.Add(FrameDuration);
                 CurrentIndex = pbTag;
+                SetGalleryFrameBorder(CurrentIndex);
                 RefreshG();
                 RefreshGI();
             }
@@ -261,6 +269,12 @@ namespace Paint
                 MessageBox.Show("Введите длительность кадра корректно!");
             }
             
+        }
+
+        private void DeleteFrameButton_Click(object sender, EventArgs e)
+        {
+            bitmaps.RemoveAt(CurrentIndex);
+            FrameDurations.RemoveAt(CurrentIndex);
         }
     }
 }
