@@ -167,14 +167,18 @@ namespace Paint
         {
             PictureBox pb = (PictureBox)sender;
             int tag = int.Parse(pb.Tag.ToString());
+            SelectPB(tag, pb);
+        }
+
+        private void SelectPB(int tag, PictureBox pb)
+        {
             bm = (Bitmap)bitmaps[tag].Clone();
             CurrentIndex = tag;
             SetGalleryFrameBorder(tag);
-            
+
             Canvas.Image = (Bitmap)bm.Clone();
             RefreshG();
             RefreshGI();
-            
         }
 
         private void RefreshPB(PictureBox pb, Label Lpb, int tag)
@@ -191,6 +195,37 @@ namespace Paint
             }
             FrameGallery.Controls.Find("pbb" + index.ToString(), false)[0].BackColor = Color.Blue;
         }
+        public void AddFrameToGallery(int index, int Loc)
+        {
+            Label pbLabel = new Label();
+            Label pbBorder = new Label();
+            float FrameDuration = FrameDurations[index];
+            pbLabel.Parent = FrameGallery;
+            pbBorder.Parent = FrameGallery;
+            pbBorder.Location = new Point(8, Loc - 2);
+            pbBorder.BackColor = Color.Black;
+            pbBorder.Name = "pbb" + index.ToString();
+
+            pbLabel.Location = new Point(10, Loc + 60);
+            pbLabel.Text = FrameDuration.ToString() + " секунд";
+            pbLabel.Name = "Lpb" + index;
+            PictureBox pb = new PictureBox();
+            pb.Parent = FrameGallery;
+            pbBorder.Width = 104;
+            pbBorder.Height = 54;
+            pb.Width = 100;
+            pb.Height = 50;
+            pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pb.Location = new Point(10, Loc);
+
+            pb.Image = (Bitmap)bitmaps[index].Clone();
+            pb.Click += PbOnClick;
+            pb.Cursor = Cursors.Hand;
+            pb.Tag = index;
+            pb.Name = "pb" + index.ToString();
+            pb.BringToFront();
+        }
 
         private void AddFrame_Click(object sender, EventArgs e)
         {
@@ -199,41 +234,13 @@ namespace Paint
             if (TryGetFrameDuration(out dur))
             {
                 bitmaps.Add((Bitmap)bm.Clone());
-                float FrameDuration = float.Parse(FrameDurationBox.Text);
+                FrameDurations.Add(dur);
+
                 int pbTag = bitmaps.Count - 1;
-                Label pbLabel = new Label();
-                Label pbBorder = new Label();
 
-                pbLabel.Parent = FrameGallery;
-                pbBorder.Parent = FrameGallery;
-                pbBorder.Location = new Point(8, LocY - 2);
-                pbBorder.BackColor = Color.Black;
-                pbBorder.Name = "pbb" + pbTag.ToString();
-                
-
-                pbLabel.Location = new Point(10, LocY + 60);
-                pbLabel.Text = FrameDuration.ToString() + " секунд";
-                pbLabel.Name = "Lpb" + pbTag;
-                PictureBox pb = new PictureBox();
-                pb.Parent = FrameGallery;
-                pbBorder.Width = 104;
-                pbBorder.Height = 54;
-                pb.Width = 100;
-                pb.Height = 50;
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                pb.Location = new Point(10, LocY);
-                
-
+                AddFrameToGallery(pbTag, LocY);
                 LocY += 95;
-                pb.Image = (Bitmap)bitmaps[bitmaps.Count - 1].Clone();
-                pb.Click += PbOnClick;
-                pb.Cursor = Cursors.Hand;
-                pb.Tag = pbTag;
-                pb.Name = "pb" + pbTag.ToString();
-                pb.BringToFront();
-
-                FrameDurations.Add(FrameDuration);
+                
                 CurrentIndex = pbTag;
                 SetGalleryFrameBorder(CurrentIndex);
                 RefreshG();
@@ -243,8 +250,6 @@ namespace Paint
             {
                 MessageBox.Show("Введите длительность кадра корректно!");
             }
-            
-
         }
 
         private bool TryGetFrameDuration(out float dur)
@@ -258,7 +263,7 @@ namespace Paint
             float dur;
             if (TryGetFrameDuration(out dur))
             {
-                PictureBox pbCurr = (PictureBox)FrameGallery.Controls.Find("pb" + CurrentIndex, false)[0];
+                PictureBox pbCurr = getPb(CurrentIndex);
                 Label LpbCurr = (Label)FrameGallery.Controls.Find("Lpb" + CurrentIndex, false)[0];
                 bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
                 FrameDurations[CurrentIndex] = dur;
@@ -271,10 +276,47 @@ namespace Paint
             
         }
 
+        private void DisposeFrame(int index)
+        {
+            getPb(index).Dispose();
+            FrameGallery.Controls.Find("pbb" + index, false)[0].Dispose();
+            FrameGallery.Controls.Find("Lpb" + index, false)[0].Dispose();
+        }
+
+        private PictureBox getPb(int index)
+        {
+            return (PictureBox)FrameGallery.Controls.Find("pb" + index, false)[0];
+        }
+
+        private void ChangeTagFrame(int index, int z)
+        {
+            int NewTag = index + z;
+            PictureBox pb = getPb(index);
+            pb.Name = "pb" + NewTag;
+            pb.Tag = NewTag;
+            FrameGallery.Controls.Find("pbb" + index, false)[0].Name = "pbb" + NewTag;
+            FrameGallery.Controls.Find("Lpb" + index, false)[0].Name = "Lpb" + NewTag;
+        }
+
         private void DeleteFrameButton_Click(object sender, EventArgs e)
         {
+            DisposeFrame(CurrentIndex);
+            int Loc = 25 + ((bitmaps.Count-1) - (CurrentIndex+1)) * 95;
+            for (int i=CurrentIndex+1; i<bitmaps.Count; i++)
+            {
+                DisposeFrame(i);
+                AddFrameToGallery(i, Loc);
+                ChangeTagFrame(i, -1);
+                Loc += 95;
+                LocY -= 95;
+            }
             bitmaps.RemoveAt(CurrentIndex);
             FrameDurations.RemoveAt(CurrentIndex);
+            CurrentIndex = 0;
+            if (bitmaps.Count > 0)
+            {
+                SelectPB(0, getPb(0));
+            }
         }
     }
 }
