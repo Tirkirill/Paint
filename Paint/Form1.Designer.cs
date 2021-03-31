@@ -226,6 +226,7 @@ namespace Paint
             // 
             // FrameGallery
             // 
+            this.FrameGallery.AutoScroll = true;
             this.FrameGallery.Controls.Add(this.GalleryLabel);
             this.FrameGallery.Location = new System.Drawing.Point(835, 89);
             this.FrameGallery.Name = "FrameGallery";

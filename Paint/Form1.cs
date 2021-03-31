@@ -168,6 +168,11 @@ namespace Paint
             PictureBox pb = (PictureBox)sender;
             int tag = int.Parse(pb.Tag.ToString());
             bm = bitmaps[tag];
+            for (int i = 0; i<bitmaps.Count; i++)
+            {
+                FrameGallery.Controls.Find("pbb" + i.ToString(), false)[0].BackColor = Color.Black;
+            }
+            FrameGallery.Controls.Find("pbb" + tag.ToString(), false)[0].BackColor = Color.Blue;
             RefreshG();
             RefreshGI();
             Canvas.Image = bm;
@@ -190,22 +195,37 @@ namespace Paint
                 float FrameDuration = float.Parse(FrameDurationBox.Text);
                 int pbTag = bitmaps.Count - 1;
                 Label pbLabel = new Label();
+                Label pbBorder = new Label();
+
                 pbLabel.Parent = FrameGallery;
+                pbBorder.Parent = FrameGallery;
+                pbBorder.Location = new Point(8, LocY - 2);
+                pbBorder.BackColor = Color.Black;
+                pbBorder.Name = "pbb" + pbTag.ToString();
+                
+
                 pbLabel.Location = new Point(10, LocY + 60);
                 pbLabel.Text = FrameDuration.ToString() + " секунд";
                 pbLabel.Name = "Lpb" + pbTag;
                 PictureBox pb = new PictureBox();
                 pb.Parent = FrameGallery;
+                pbBorder.Width = 104;
+                pbBorder.Height = 54;
                 pb.Width = 100;
                 pb.Height = 50;
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
                 pb.Location = new Point(10, LocY);
+                
+
                 LocY += 95;
                 pb.Image = bitmaps[bitmaps.Count - 1];
                 pb.Click += PbOnClick;
                 pb.Cursor = Cursors.Hand;
                 pb.Tag = pbTag;
                 pb.Name = "pb" + pbTag.ToString();
+                pb.BringToFront();
+
                 FrameDurations.Add(FrameDuration);
                 CurrentIndex = pbTag;
                 RefreshG();
