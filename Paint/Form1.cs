@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Accord.Video.VFW;
+using System.Collections.Generic;
 
 namespace Paint
 {
@@ -9,15 +11,16 @@ namespace Paint
         public Form1(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
             InitializeComponent();
-            bm = new Bitmap(CanvasWidth, CanvasHeight);
-            gI = Graphics.FromImage(bm);
             ImgWidth = CanvasWidth;
             ImgHeight = CanvasHeight;
+            bm = CreateFrame();
+            RefreshGI();
             Canvas.Width = CanvasWidth;
             Canvas.Height = CanvasHeight;
-            g = Canvas.CreateGraphics();
+            RefreshG();
             SetBackColor(BackColor);
             this.CanvasColor = BackColor;
+            this.CurrentIndex = 0;
         }
 
         bool paint = false;
@@ -30,9 +33,23 @@ namespace Paint
         int ImgWidth;
         int ImgHeight;
         Color CanvasColor;
+        List<Bitmap> bitmaps = new List<Bitmap>();
+        int LocY = 25;
+        int CurrentIndex;
+        
+        private Bitmap CreateFrame()
+        {
+            return new Bitmap(ImgWidth, ImgHeight);
+        }
+
+        private void RefreshGI()
+        {
+            gI = Graphics.FromImage(bm);
+        }
 
         private void SetBackColor(Color BackColor)
         {
+            CanvasColor = BackColor;
             Canvas.BackColor = BackColor;
             g.Clear(BackColor);
             gI.Clear(BackColor);
@@ -121,6 +138,68 @@ namespace Paint
             Canvas.Height = (int)(ImgHeight * coef);
             RefreshG();
             Canvas.Image = bm;
+        }
+
+        private void SaveAnimationButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                AVIWriter aw = new AVIWriter();
+                aw.Open(sfd.FileName, bm.Width, bm.Height);
+                foreach (Bitmap bitmap in bitmaps)
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        aw.AddFrame(bitmap);
+                    }
+                }
+                aw.Close();
+            }
+        }
+
+        private void PbOnClick(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            int tag = int.Parse(pb.Tag.ToString());
+            bm = bitmaps[tag];
+            RefreshG();
+            RefreshGI();
+            Canvas.Image = bm;
+            CurrentIndex = tag;
+        }
+
+        private void RefreshPB(PictureBox pb)
+        {
+            pb.Image = bitmaps[int.Parse(pb.Tag.ToString())];
+        }
+
+        private void AddFrame_Click(object sender, EventArgs e)
+        {
+            bitmaps.Add((Bitmap)bm.Clone());
+            PictureBox pb = new PictureBox();
+            pb.Parent = FrameGallery;
+            pb.Width = 100;
+            pb.Height = 50;
+            pb.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb.Location = new Point(10, LocY);
+            LocY += 75;
+            pb.Image = bitmaps[bitmaps.Count - 1];
+            pb.Click += PbOnClick;
+            pb.Cursor = Cursors.Hand;
+            pb.Tag = bitmaps.Count - 1;
+            pb.Name = "pb" + pb.Tag.ToString();
+            RefreshG();
+            RefreshGI();
+
+        }
+
+        private void ChangeButton_Click(object sender, EventArgs e)
+        {
+            PictureBox pbCurr = (PictureBox)FrameGallery.Controls.Find("pb" + CurrentIndex, false)[0];
+            bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
+            RefreshPB(pbCurr);
+            
         }
     }
 }

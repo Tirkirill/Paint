@@ -43,10 +43,16 @@ namespace Paint
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.GalleryLabel = new System.Windows.Forms.Label();
+            this.SaveAnimationButton = new System.Windows.Forms.Button();
+            this.AddFrame = new System.Windows.Forms.Button();
+            this.FrameGallery = new System.Windows.Forms.Panel();
+            this.ChangeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.FrameGallery.SuspendLayout();
             this.SuspendLayout();
             // 
             // ClearButton
@@ -167,16 +173,17 @@ namespace Paint
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.Canvas);
             this.panel1.Location = new System.Drawing.Point(12, 89);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 462);
+            this.panel1.Size = new System.Drawing.Size(800, 470);
             this.panel1.TabIndex = 13;
             // 
             // trackBar1
             // 
             this.trackBar1.LargeChange = 25;
-            this.trackBar1.Location = new System.Drawing.Point(605, 557);
+            this.trackBar1.Location = new System.Drawing.Point(605, 560);
             this.trackBar1.Maximum = 200;
             this.trackBar1.Minimum = 25;
             this.trackBar1.Name = "trackBar1";
@@ -186,12 +193,64 @@ namespace Paint
             this.trackBar1.Value = 100;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // GalleryLabel
+            // 
+            this.GalleryLabel.AutoSize = true;
+            this.GalleryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GalleryLabel.Location = new System.Drawing.Point(2, 0);
+            this.GalleryLabel.Name = "GalleryLabel";
+            this.GalleryLabel.Size = new System.Drawing.Size(59, 20);
+            this.GalleryLabel.TabIndex = 17;
+            this.GalleryLabel.Text = "Кадры";
+            // 
+            // SaveAnimationButton
+            // 
+            this.SaveAnimationButton.Location = new System.Drawing.Point(765, 38);
+            this.SaveAnimationButton.Name = "SaveAnimationButton";
+            this.SaveAnimationButton.Size = new System.Drawing.Size(92, 32);
+            this.SaveAnimationButton.TabIndex = 19;
+            this.SaveAnimationButton.Text = "Создать мульт";
+            this.SaveAnimationButton.UseVisualStyleBackColor = true;
+            this.SaveAnimationButton.Click += new System.EventHandler(this.SaveAnimationButton_Click);
+            // 
+            // AddFrame
+            // 
+            this.AddFrame.Location = new System.Drawing.Point(667, 13);
+            this.AddFrame.Name = "AddFrame";
+            this.AddFrame.Size = new System.Drawing.Size(92, 23);
+            this.AddFrame.TabIndex = 20;
+            this.AddFrame.Text = "Добавить";
+            this.AddFrame.UseVisualStyleBackColor = true;
+            this.AddFrame.Click += new System.EventHandler(this.AddFrame_Click);
+            // 
+            // FrameGallery
+            // 
+            this.FrameGallery.Controls.Add(this.GalleryLabel);
+            this.FrameGallery.Location = new System.Drawing.Point(835, 89);
+            this.FrameGallery.Name = "FrameGallery";
+            this.FrameGallery.Size = new System.Drawing.Size(120, 470);
+            this.FrameGallery.TabIndex = 21;
+            // 
+            // ChangeButton
+            // 
+            this.ChangeButton.Location = new System.Drawing.Point(765, 13);
+            this.ChangeButton.Name = "ChangeButton";
+            this.ChangeButton.Size = new System.Drawing.Size(92, 23);
+            this.ChangeButton.TabIndex = 22;
+            this.ChangeButton.Text = "Изменить";
+            this.ChangeButton.UseVisualStyleBackColor = true;
+            this.ChangeButton.Click += new System.EventHandler(this.ChangeButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(884, 595);
+            this.ClientSize = new System.Drawing.Size(1154, 595);
+            this.Controls.Add(this.ChangeButton);
+            this.Controls.Add(this.FrameGallery);
+            this.Controls.Add(this.AddFrame);
+            this.Controls.Add(this.SaveAnimationButton);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.SaveButton);
@@ -210,6 +269,8 @@ namespace Paint
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.FrameGallery.ResumeLayout(false);
+            this.FrameGallery.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,6 +291,11 @@ namespace Paint
         private System.Windows.Forms.PictureBox Canvas;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label GalleryLabel;
+        private System.Windows.Forms.Button SaveAnimationButton;
+        private System.Windows.Forms.Button AddFrame;
+        private System.Windows.Forms.Panel FrameGallery;
+        private System.Windows.Forms.Button ChangeButton;
     }
 }
 

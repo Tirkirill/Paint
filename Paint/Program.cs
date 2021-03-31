@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-using AForge;
 
 namespace Paint
 {
@@ -21,7 +20,6 @@ namespace Paint
             CreateForm cr1 = new CreateForm();
             if (cr1.ShowDialog() == DialogResult.OK)
             {
-                AviWr
                 Application.Run(new Form1(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
             }
             
