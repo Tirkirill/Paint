@@ -36,6 +36,8 @@ namespace Paint
         List<Bitmap> bitmaps = new List<Bitmap>();
         int LocY = 25;
         int CurrentIndex;
+        List<float> FrameDurations= new List<float>();
+        int framerate = 24;
         
         private Bitmap CreateFrame()
         {
@@ -146,10 +148,13 @@ namespace Paint
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 AVIWriter aw = new AVIWriter();
+                aw.FrameRate = framerate;
                 aw.Open(sfd.FileName, bm.Width, bm.Height);
-                foreach (Bitmap bitmap in bitmaps)
+                for (int j =0; j<bitmaps.Count; j++)
                 {
-                    for (int i = 0; i < 12; i++)
+                    Bitmap bitmap = bitmaps[j];
+                    float secs = FrameDurations[j];
+                    for (int i = 0; i < secs*framerate; i++)
                     {
                         aw.AddFrame(bitmap);
                     }
@@ -169,36 +174,72 @@ namespace Paint
             CurrentIndex = tag;
         }
 
-        private void RefreshPB(PictureBox pb)
+        private void RefreshPB(PictureBox pb, Label Lpb, int tag)
         {
-            pb.Image = bitmaps[int.Parse(pb.Tag.ToString())];
+            pb.Image = bitmaps[tag];
+            Lpb.Text = FrameDurations[tag].ToString() + " секунд";
         }
 
         private void AddFrame_Click(object sender, EventArgs e)
         {
-            bitmaps.Add((Bitmap)bm.Clone());
-            PictureBox pb = new PictureBox();
-            pb.Parent = FrameGallery;
-            pb.Width = 100;
-            pb.Height = 50;
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb.Location = new Point(10, LocY);
-            LocY += 75;
-            pb.Image = bitmaps[bitmaps.Count - 1];
-            pb.Click += PbOnClick;
-            pb.Cursor = Cursors.Hand;
-            pb.Tag = bitmaps.Count - 1;
-            pb.Name = "pb" + pb.Tag.ToString();
-            RefreshG();
-            RefreshGI();
+            
+            float dur;
+            if (TryGetFrameDuration(out dur))
+            {
+                bitmaps.Add((Bitmap)bm.Clone());
+                float FrameDuration = float.Parse(FrameDurationBox.Text);
+                int pbTag = bitmaps.Count - 1;
+                Label pbLabel = new Label();
+                pbLabel.Parent = FrameGallery;
+                pbLabel.Location = new Point(10, LocY + 60);
+                pbLabel.Text = FrameDuration.ToString() + " секунд";
+                pbLabel.Name = "Lpb" + pbTag;
+                PictureBox pb = new PictureBox();
+                pb.Parent = FrameGallery;
+                pb.Width = 100;
+                pb.Height = 50;
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Location = new Point(10, LocY);
+                LocY += 95;
+                pb.Image = bitmaps[bitmaps.Count - 1];
+                pb.Click += PbOnClick;
+                pb.Cursor = Cursors.Hand;
+                pb.Tag = pbTag;
+                pb.Name = "pb" + pbTag.ToString();
+                FrameDurations.Add(FrameDuration);
+                CurrentIndex = pbTag;
+                RefreshG();
+                RefreshGI();
+            }
+            else
+            {
+                MessageBox.Show("Введите длительность кадра корректно!");
+            }
+            
 
+        }
+
+        private bool TryGetFrameDuration(out float dur)
+        {
+            return float.TryParse(FrameDurationBox.Text, out dur);
         }
 
         private void ChangeButton_Click(object sender, EventArgs e)
         {
-            PictureBox pbCurr = (PictureBox)FrameGallery.Controls.Find("pb" + CurrentIndex, false)[0];
-            bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
-            RefreshPB(pbCurr);
+            
+            float dur;
+            if (TryGetFrameDuration(out dur))
+            {
+                PictureBox pbCurr = (PictureBox)FrameGallery.Controls.Find("pb" + CurrentIndex, false)[0];
+                Label LpbCurr = (Label)FrameGallery.Controls.Find("Lpb" + CurrentIndex, false)[0];
+                bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
+                FrameDurations[CurrentIndex] = dur;
+                RefreshPB(pbCurr, LpbCurr, CurrentIndex);
+            }
+            else
+            {
+                MessageBox.Show("Введите длительность кадра корректно!");
+            }
             
         }
     }

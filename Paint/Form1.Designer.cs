@@ -48,6 +48,7 @@ namespace Paint
             this.AddFrame = new System.Windows.Forms.Button();
             this.FrameGallery = new System.Windows.Forms.Panel();
             this.ChangeButton = new System.Windows.Forms.Button();
+            this.FrameDurationBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -241,12 +242,21 @@ namespace Paint
             this.ChangeButton.UseVisualStyleBackColor = true;
             this.ChangeButton.Click += new System.EventHandler(this.ChangeButton_Click);
             // 
+            // FrameDurationBox
+            // 
+            this.FrameDurationBox.Location = new System.Drawing.Point(896, 13);
+            this.FrameDurationBox.Name = "FrameDurationBox";
+            this.FrameDurationBox.Size = new System.Drawing.Size(100, 20);
+            this.FrameDurationBox.TabIndex = 23;
+            this.FrameDurationBox.Text = "0,5";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 595);
+            this.Controls.Add(this.FrameDurationBox);
             this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.FrameGallery);
             this.Controls.Add(this.AddFrame);
@@ -296,6 +306,7 @@ namespace Paint
         private System.Windows.Forms.Button AddFrame;
         private System.Windows.Forms.Panel FrameGallery;
         private System.Windows.Forms.Button ChangeButton;
+        private System.Windows.Forms.TextBox FrameDurationBox;
     }
 }
 
