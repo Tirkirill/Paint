@@ -53,7 +53,18 @@ namespace Paint
             FrameLabel.Name = "Lpb" + NewTag;
         }
 
+        public void ChangeLocation(int z)
+        {
+            this.Location = new Point(this.Location.X, this.Location.Y + z);
+            Border.Location = new Point(Border.Location.X, Border.Location.Y + z);
+            FrameLabel.Location = new Point(FrameLabel.Location.X, FrameLabel.Location.Y + z);
+        }
 
-
+        new public void Dispose()
+        {
+            Border.Dispose();
+            FrameLabel.Dispose();
+            base.Dispose();
+        }
     }
 }
