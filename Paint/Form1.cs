@@ -134,14 +134,15 @@ namespace Paint
             }
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void ScaleBar_Scroll(object sender, EventArgs e)
         {
-            double coef = (double)trackBar1.Value / 100;
+            int val = ScaleBar.Value;
+            double coef = (double)val / 100;
             scale = coef;
             Canvas.Width = (int)(ImgWidth * coef);
             Canvas.Height = (int)(ImgHeight * coef);
-            Canvas.Image = bm;
-            RefreshG();
+            ScaleLabel.Text = val.ToString() + "%";
+            RefreshCanvas();
         }
 
         private void SaveAnimationButton_Click(object sender, EventArgs e)
@@ -178,8 +179,7 @@ namespace Paint
             CurrentIndex = tag;
             SetGalleryFrameBorder(tag);
 
-            Canvas.Image = (Bitmap)bm.Clone();
-            RefreshG();
+            RefreshCanvas();
             RefreshGI();
         }
 
@@ -231,24 +231,14 @@ namespace Paint
 
         private void AddFrame_Click(object sender, EventArgs e)
         {
-            
             float dur;
             if (TryGetFrameDuration(out dur))
             {
                 bitmaps.Add((Bitmap)bm.Clone());
                 FrameDurations.Add(dur);
-
                 int pbTag = bitmaps.Count - 1;
-                FrameGallery.AutoSize = true;
-                AddFrameToGallery(pbTag, LocY);
-                FrameGallery.AutoSize = false;
-                for (int i = 0; i<bitmaps.Count; i++)
-                {
-                    Point s = getPb(i).Location;
-                    int y = s.Y;
-                }
+                AddFrameToGallery(pbTag, LocY-FrameGallery.VerticalScroll.Value);
                 LocY += 95;
-                
                 CurrentIndex = pbTag;
                 SetGalleryFrameBorder(CurrentIndex);
                 RefreshG();
@@ -346,10 +336,15 @@ namespace Paint
             }
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void RefreshCanvas()
         {
             Canvas.Image = bm;
             RefreshG();
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            RefreshCanvas();
         }
     }
 }

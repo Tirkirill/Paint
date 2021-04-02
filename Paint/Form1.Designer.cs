@@ -42,7 +42,7 @@ namespace Paint
             this.SaveButton = new System.Windows.Forms.Button();
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.ScaleBar = new System.Windows.Forms.TrackBar();
             this.GalleryLabel = new System.Windows.Forms.Label();
             this.SaveAnimationButton = new System.Windows.Forms.Button();
             this.AddFrame = new System.Windows.Forms.Button();
@@ -50,10 +50,11 @@ namespace Paint
             this.ChangeButton = new System.Windows.Forms.Button();
             this.FrameDurationBox = new System.Windows.Forms.TextBox();
             this.DeleteFrameButton = new System.Windows.Forms.Button();
+            this.ScaleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScaleBar)).BeginInit();
             this.FrameGallery.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,18 +183,18 @@ namespace Paint
             this.panel1.Size = new System.Drawing.Size(800, 470);
             this.panel1.TabIndex = 13;
             // 
-            // trackBar1
+            // ScaleBar
             // 
-            this.trackBar1.LargeChange = 25;
-            this.trackBar1.Location = new System.Drawing.Point(605, 560);
-            this.trackBar1.Maximum = 200;
-            this.trackBar1.Minimum = 25;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(207, 45);
-            this.trackBar1.SmallChange = 13;
-            this.trackBar1.TabIndex = 16;
-            this.trackBar1.Value = 100;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.ScaleBar.LargeChange = 25;
+            this.ScaleBar.Location = new System.Drawing.Point(605, 560);
+            this.ScaleBar.Maximum = 200;
+            this.ScaleBar.Minimum = 25;
+            this.ScaleBar.Name = "ScaleBar";
+            this.ScaleBar.Size = new System.Drawing.Size(207, 45);
+            this.ScaleBar.SmallChange = 13;
+            this.ScaleBar.TabIndex = 16;
+            this.ScaleBar.Value = 100;
+            this.ScaleBar.Scroll += new System.EventHandler(this.ScaleBar_Scroll);
             // 
             // GalleryLabel
             // 
@@ -228,7 +229,6 @@ namespace Paint
             // FrameGallery
             // 
             this.FrameGallery.AutoScroll = true;
-            this.FrameGallery.AutoSize = true;
             this.FrameGallery.Controls.Add(this.GalleryLabel);
             this.FrameGallery.Location = new System.Drawing.Point(835, 89);
             this.FrameGallery.Name = "FrameGallery";
@@ -263,19 +263,30 @@ namespace Paint
             this.DeleteFrameButton.UseVisualStyleBackColor = true;
             this.DeleteFrameButton.Click += new System.EventHandler(this.DeleteFrameButton_Click);
             // 
+            // ScaleLabel
+            // 
+            this.ScaleLabel.AutoSize = true;
+            this.ScaleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ScaleLabel.Location = new System.Drawing.Point(566, 562);
+            this.ScaleLabel.Name = "ScaleLabel";
+            this.ScaleLabel.Size = new System.Drawing.Size(41, 16);
+            this.ScaleLabel.TabIndex = 25;
+            this.ScaleLabel.Text = "100%";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1154, 595);
+            this.ClientSize = new System.Drawing.Size(1154, 613);
+            this.Controls.Add(this.ScaleLabel);
             this.Controls.Add(this.DeleteFrameButton);
             this.Controls.Add(this.FrameDurationBox);
             this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.FrameGallery);
             this.Controls.Add(this.AddFrame);
             this.Controls.Add(this.SaveAnimationButton);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.ScaleBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CreateNewButton);
@@ -293,7 +304,7 @@ namespace Paint
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScaleBar)).EndInit();
             this.FrameGallery.ResumeLayout(false);
             this.FrameGallery.PerformLayout();
             this.ResumeLayout(false);
@@ -315,7 +326,7 @@ namespace Paint
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.PictureBox Canvas;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar ScaleBar;
         private System.Windows.Forms.Label GalleryLabel;
         private System.Windows.Forms.Button SaveAnimationButton;
         private System.Windows.Forms.Button AddFrame;
@@ -323,6 +334,7 @@ namespace Paint
         private System.Windows.Forms.Button ChangeButton;
         private System.Windows.Forms.TextBox FrameDurationBox;
         private System.Windows.Forms.Button DeleteFrameButton;
+        private System.Windows.Forms.Label ScaleLabel;
     }
 }
 
