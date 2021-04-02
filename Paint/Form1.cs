@@ -38,6 +38,9 @@ namespace Paint
         int CurrentIndex;
         List<float> FrameDurations= new List<float>();
         int framerate = 24;
+        bool isDragging = false;
+        Frame DraggingObj;
+        int IndexAfterDrag;
         
         private Bitmap CreateFrame()
         {
@@ -175,6 +178,63 @@ namespace Paint
             SelectPB(tag);
         }
 
+        private void PbOnDoubleClick(object sender, EventArgs e)
+        {
+            if (isDragging)
+            {
+                isDragging = false;
+            }
+            else
+            {
+                isDragging = true;
+                DraggingObj = getPb(CurrentIndex).Clone();
+                DraggingObj.Click += DragOnClick;
+                DraggingObj.BringToFront();
+            }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                if (sender is Panel)
+                {
+                    DraggingObj.Location = new Point(e.X - Frame.FrameWidth / 2, e.Y - Frame.FrameHeight / 2);
+                }
+                else
+                {
+                    Control send = (Control)sender;
+                    Frame frsend;
+                    if (sender is Frame)
+                    {
+                        frsend = (Frame)sender;
+                    }
+                    else
+                    {
+                        frsend = getPb(int.Parse(send.Tag.ToString()));
+                    }
+
+                    if (!(IndexAfterDrag == CurrentIndex)) {
+                        getPb(IndexAfterDrag).Border.BackColor = Color.Black;
+                    }
+                    
+                    IndexAfterDrag = int.Parse(frsend.Tag.ToString());
+                    if (!(IndexAfterDrag == CurrentIndex))
+                    {
+                        frsend.Border.BackColor = Color.Green;
+                    }
+                    DraggingObj.Location = new Point(send.Location.X + e.X - Frame.FrameWidth / 2, send.Location.Y + e.Y - Frame.FrameHeight / 2);
+
+                }
+            }
+        }
+
+        private void DragOnClick(object sender, EventArgs e)
+        {
+            SwapFrames(CurrentIndex, IndexAfterDrag);
+            StopDrag();
+        }
+
         private void SelectPB(int tag)
         {
             bm = (Bitmap)bitmaps[tag].Clone();
@@ -184,8 +244,16 @@ namespace Paint
             RefreshGI();
         }
 
-        private void RefreshPB(Frame pb, int tag)
+        private void StopDrag()
         {
+            isDragging = false;
+            DraggingObj.Dispose();
+            DraggingObj = null;
+        }
+
+        private void RefreshPB(int tag)
+        {
+            Frame pb = getPb(tag);
             pb.Image = (Bitmap)bitmaps[tag].Clone();
             pb.FrameLabel.Text = FrameDurations[tag].ToString() + " секунд";
         }
@@ -196,11 +264,30 @@ namespace Paint
             FrameGallery.Controls.Find(StringResources.BorderNamePrefix + index.ToString(), false)[0].BackColor = Color.Blue;
         }
 
+        private void SwapFrames(int currentInd, int newInd)
+        {
+            Bitmap SwapBm = (Bitmap)bitmaps[currentInd].Clone();
+            float SwapFd = FrameDurations[currentInd];
+
+            bitmaps[currentInd] = (Bitmap)bitmaps[newInd].Clone();
+            FrameDurations[currentInd] = FrameDurations[newInd];
+
+            bitmaps[newInd] = SwapBm;
+            FrameDurations[newInd] = SwapFd;
+            RefreshPB(currentInd);
+            RefreshPB(newInd);
+        }
+
         public void AddFrameToGallery(int index, int Loc)
         {
             float FrameDuration = FrameDurations[index];
             Frame pb = new Frame(FrameGallery, LocY, index.ToString(), FrameDuration, (Bitmap)bitmaps[index].Clone());
             pb.Click += PbOnClick;
+            pb.DoubleClick += PbOnDoubleClick;
+            pb.MouseMove += OnMouseMove;
+            pb.Border.MouseMove += OnMouseMove;
+            
+            pb.FrameLabel.MouseMove += OnMouseMove;
         }
             private void AddFrame_Click(object sender, EventArgs e)
         {
@@ -225,7 +312,7 @@ namespace Paint
 
         private bool TryGetFrameDuration(out float dur)
         {
-            return float.TryParse(FrameDurationBox.Text, out dur);
+            return float.TryParse(FrameDurationBox.Text, out dur) && dur > 0;
         }
 
         private void ChangeButton_Click(object sender, EventArgs e)
@@ -241,7 +328,7 @@ namespace Paint
                 Frame pbCurr = getPb(CurrentIndex);
                 bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
                 FrameDurations[CurrentIndex] = dur;
-                RefreshPB(pbCurr, CurrentIndex);
+                RefreshPB(CurrentIndex);
             }
             else
             {
@@ -266,7 +353,7 @@ namespace Paint
             for (int i=CurrentIndex+1; i<bitmaps.Count; i++)
             {
                 Frame pb = getPb(i);
-                pb.ChangeLocation(-95);
+                pb.ChangeLocationY(-95);
                 pb.ChangeTag(-1);
             }
             LocY -= 95;
@@ -288,6 +375,16 @@ namespace Paint
         private void Form1_Resize(object sender, EventArgs e)
         {
             RefreshCanvas();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyValue)
+            {
+                case 27:
+                    StopDrag();
+                    break;
+            }
         }
     }
 }

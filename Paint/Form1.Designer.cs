@@ -235,6 +235,7 @@ namespace Paint
             this.FrameGallery.Name = "FrameGallery";
             this.FrameGallery.Size = new System.Drawing.Size(146, 470);
             this.FrameGallery.TabIndex = 21;
+            this.FrameGallery.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
             // 
             // ChangeButton
             // 
@@ -300,8 +301,10 @@ namespace Paint
             this.Controls.Add(this.BrushColorButton);
             this.Controls.Add(this.ClearButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Penгвин";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();

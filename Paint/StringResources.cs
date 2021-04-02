@@ -11,8 +11,8 @@ namespace Paint
         static public string NoFrame = "Сначала нужно добавить хотя бы один кадр";
         static public string IncorrectFrameDurationInput = "Введите длительность кадра корректно!";
 
-        static public string FrameNamePrefix = "zb";
-        static public string LabelNamePrefix = "lzb";
-        static public string BorderNamePrefix = "pzb";
+        static public string FrameNamePrefix = "pb";
+        static public string LabelNamePrefix = "lpb";
+        static public string BorderNamePrefix = "bpb";
     }
 }

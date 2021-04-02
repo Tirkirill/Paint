@@ -11,9 +11,10 @@ namespace Paint
     class Frame:PictureBox
     {
 
-        public bool isDragging = false;
         public Label Border = new Label();
         public Label FrameLabel = new Label();
+        static public int FrameWidth = 100;
+        static public int FrameHeight = 50;
 
         public Frame(Control Parent, int Loc, string index, float FrameDuration, Bitmap bm):base()
         {
@@ -21,8 +22,8 @@ namespace Paint
             Border.Parent = Parent;
             FrameLabel.Parent = Parent;
 
-            this.Width = 100;
-            this.Height = 50;
+            this.Width = FrameWidth;
+            this.Height = FrameHeight;
             this.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Tag = index;
             this.Name = StringResources.FrameNamePrefix + index;
@@ -36,12 +37,19 @@ namespace Paint
             Border.Location = new Point(8, Loc - 2);
             Border.BackColor = Color.Black;
             Border.Name = StringResources.BorderNamePrefix + index;
+            Border.Tag = index;
 
             FrameLabel.Location = new Point(10, Loc + 60);
             FrameLabel.Text = FrameDuration.ToString() + " секунд";
             FrameLabel.Name = StringResources.LabelNamePrefix + index;
+            FrameLabel.Tag = index;
 
             this.BringToFront();
+        }
+
+        public Frame():base()
+        {
+
         }
 
         public void ChangeTag(int z)
@@ -50,10 +58,12 @@ namespace Paint
             this.Tag = NewTag;
             this.Name = StringResources.FrameNamePrefix + NewTag;
             Border.Name = StringResources.BorderNamePrefix + NewTag;
+            Border.Tag = NewTag;
             FrameLabel.Name = StringResources.LabelNamePrefix + NewTag;
+            FrameLabel.Tag = NewTag;
         }
 
-        public void ChangeLocation(int z)
+        public void ChangeLocationY(int z)
         {
             this.Location = new Point(this.Location.X, this.Location.Y + z);
             Border.Location = new Point(Border.Location.X, Border.Location.Y + z);
@@ -66,5 +76,19 @@ namespace Paint
             FrameLabel.Dispose();
             base.Dispose();
         }
+
+        public Frame Clone()
+        {
+            return new Frame()
+            {
+                Location = this.Location,
+                Parent = this.Parent,
+                Image = (Bitmap)this.Image.Clone(),
+                SizeMode = this.SizeMode,
+                Width = this.Width,
+                Height = this.Height
+            };
+        }
+
     }
 }
