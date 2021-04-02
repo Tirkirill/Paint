@@ -201,39 +201,45 @@ namespace Paint
             }
             FrameGallery.Controls.Find("pbb" + index.ToString(), false)[0].BackColor = Color.Blue;
         }
+        //public void AddFrameToGallery(int index, int Loc)
+        //{
+        //    Label pbLabel = new Label();
+        //    Label pbBorder = new Label();
+        //    float FrameDuration = FrameDurations[index];
+        //    pbLabel.Parent = FrameGallery;
+        //    pbBorder.Parent = FrameGallery;
+        //    pbBorder.Location = new Point(8, Loc - 2);
+        //    pbBorder.BackColor = Color.Black;
+        //    pbBorder.Name = "pbb" + index.ToString();
+
+        //    pbLabel.Location = new Point(10, Loc + 60);
+        //    pbLabel.Text = FrameDuration.ToString() + " секунд";
+        //    pbLabel.Name = "Lpb" + index;
+        //    PictureBox pb = new PictureBox();
+        //    pb.Parent = FrameGallery;
+        //    pbBorder.Width = 104;
+        //    pbBorder.Height = 54;
+        //    pb.Width = 100;
+        //    pb.Height = 50;
+        //    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
+        //    pb.Location = new Point(10, Loc);
+
+        //    pb.Image = (Bitmap)bitmaps[index].Clone();
+        //    pb.Click += PbOnClick;
+        //    pb.Cursor = Cursors.Hand;
+        //    pb.Tag = index;
+        //    pb.Name = "pb" + index.ToString();
+        //    pb.BringToFront();
+        //}
+
         public void AddFrameToGallery(int index, int Loc)
         {
-            Label pbLabel = new Label();
-            Label pbBorder = new Label();
             float FrameDuration = FrameDurations[index];
-            pbLabel.Parent = FrameGallery;
-            pbBorder.Parent = FrameGallery;
-            pbBorder.Location = new Point(8, Loc - 2);
-            pbBorder.BackColor = Color.Black;
-            pbBorder.Name = "pbb" + index.ToString();
-
-            pbLabel.Location = new Point(10, Loc + 60);
-            pbLabel.Text = FrameDuration.ToString() + " секунд";
-            pbLabel.Name = "Lpb" + index;
-            PictureBox pb = new PictureBox();
-            pb.Parent = FrameGallery;
-            pbBorder.Width = 104;
-            pbBorder.Height = 54;
-            pb.Width = 100;
-            pb.Height = 50;
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            pb.Location = new Point(10, Loc);
-
-            pb.Image = (Bitmap)bitmaps[index].Clone();
+            Frame pb = new Frame(FrameGallery, LocY, index.ToString(), FrameDuration, (Bitmap)bitmaps[index].Clone());
             pb.Click += PbOnClick;
-            pb.Cursor = Cursors.Hand;
-            pb.Tag = index;
-            pb.Name = "pb" + index.ToString();
-            pb.BringToFront();
         }
-
-        private void AddFrame_Click(object sender, EventArgs e)
+            private void AddFrame_Click(object sender, EventArgs e)
         {
             float dur;
             if (TryGetFrameDuration(out dur))
