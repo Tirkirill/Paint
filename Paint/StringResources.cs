@@ -10,6 +10,8 @@ namespace Paint
     {
         static public string NoFrame = "Сначала нужно добавить хотя бы один кадр";
         static public string IncorrectFrameDurationInput = "Введите длительность кадра корректно!";
+        static public string IncorrectWidthInputTemplate = "Ширина должна быть от {0} до {1}!";
+        static public string IncorrectHeightInputTemplate = "Высота должна быть от {0} до {1}!";
 
         static public string FrameNamePrefix = "pb";
         static public string LabelNamePrefix = "lpb";

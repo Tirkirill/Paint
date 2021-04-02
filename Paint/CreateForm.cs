@@ -32,8 +32,21 @@ namespace Paint
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            CanvasWidth = int.Parse(WidthBox.Text);
-            CanvasHeight = int.Parse(HeightBox.Text);
+            if (int.TryParse(WidthBox.Text, out CanvasWidth)
+                && CanvasWidth <= Register.MaxFrameWidth && CanvasWidth >= Register.MinFrameWidth)
+            {
+                if (int.TryParse(HeightBox.Text, out CanvasHeight) && CanvasHeight<= Register.MaxFrameHeight && CanvasHeight >= Register.MinFrameHeight) {
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show(String.Format(StringResources.IncorrectHeightInputTemplate, Register.MinFrameHeight, Register.MaxFrameHeight));
+                }
+            }
+            else
+            {
+                MessageBox.Show(String.Format(StringResources.IncorrectWidthInputTemplate, Register.MinFrameWidth, Register.MaxFrameWidth));
+            }
         }
     }
 }

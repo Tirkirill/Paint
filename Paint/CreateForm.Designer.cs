@@ -42,7 +42,6 @@ namespace Paint
             // 
             // CreateButton
             // 
-            this.CreateButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.CreateButton.Location = new System.Drawing.Point(203, 115);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(68, 37);

@@ -31,11 +31,10 @@ namespace Paint
             this.Cursor = Cursors.Hand;
             this.Location = new Point(10, Loc);
 
-            Border.BackColor = Color.Black;
             Border.Width = 104;
             Border.Height = 54;
             Border.Location = new Point(8, Loc - 2);
-            Border.BackColor = Color.Black;
+            Border.BackColor = Register.NormalFrameBackColor;
             Border.Name = StringResources.BorderNamePrefix + index;
             Border.Tag = index;
 

@@ -214,14 +214,14 @@ namespace Paint
                         frsend = getPb(int.Parse(send.Tag.ToString()));
                     }
 
-                    if (!(IndexAfterDrag == CurrentIndex)) {
-                        getPb(IndexAfterDrag).Border.BackColor = Color.Black;
+                    if (IndexAfterDrag != CurrentIndex && IndexAfterDrag != -1) {
+                        getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
                     }
                     
                     IndexAfterDrag = int.Parse(frsend.Tag.ToString());
                     if (!(IndexAfterDrag == CurrentIndex))
                     {
-                        frsend.Border.BackColor = Color.Green;
+                        frsend.Border.BackColor = Register.DroppableFrameBackColor;
                     }
                     DraggingObj.Location = new Point(send.Location.X + e.X - Frame.FrameWidth / 2, send.Location.Y + e.Y - Frame.FrameHeight / 2);
 
@@ -231,8 +231,11 @@ namespace Paint
 
         private void DragOnClick(object sender, EventArgs e)
         {
-            SwapFrames(CurrentIndex, IndexAfterDrag);
-            SelectPB(IndexAfterDrag);
+            if (IndexAfterDrag != -1)
+            {
+                SwapFrames(CurrentIndex, IndexAfterDrag);
+                SelectPB(IndexAfterDrag);
+            }
             StopDrag();
         }
 
@@ -247,9 +250,14 @@ namespace Paint
 
         private void StopDrag()
         {
+            if (IndexAfterDrag != -1)
+            {
+                getPb(IndexAfterDrag).BackColor = Register.NormalFrameBackColor;
+            }
             isDragging = false;
             DraggingObj.Dispose();
             DraggingObj = null;
+            IndexAfterDrag = -1;
         }
 
         private void RefreshPB(int tag)
@@ -261,8 +269,8 @@ namespace Paint
 
         private void SetGalleryFrameBorder(int prev, int index)
         {
-            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + prev.ToString(), false)[0].BackColor = Color.Black;
-            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + index.ToString(), false)[0].BackColor = Color.Blue;
+            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + prev.ToString(), false)[0].BackColor = Register.NormalFrameBackColor;
+            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + index.ToString(), false)[0].BackColor = Register.CurrentFrameBackColor;
         }
 
         private void SwapFrames(int currentInd, int newInd)
@@ -383,6 +391,11 @@ namespace Paint
             switch (e.KeyValue)
             {
                 case 27:
+                    if (IndexAfterDrag != -1 && IndexAfterDrag!=CurrentIndex)
+                    {
+                        getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
+                    }
+                    
                     StopDrag();
                     break;
             }
