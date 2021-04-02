@@ -232,6 +232,7 @@ namespace Paint
         private void DragOnClick(object sender, EventArgs e)
         {
             SwapFrames(CurrentIndex, IndexAfterDrag);
+            SelectPB(IndexAfterDrag);
             StopDrag();
         }
 
@@ -281,7 +282,7 @@ namespace Paint
         public void AddFrameToGallery(int index, int Loc)
         {
             float FrameDuration = FrameDurations[index];
-            Frame pb = new Frame(FrameGallery, LocY, index.ToString(), FrameDuration, (Bitmap)bitmaps[index].Clone());
+            Frame pb = new Frame(FrameGallery, Loc, index.ToString(), FrameDuration, (Bitmap)bitmaps[index].Clone());
             pb.Click += PbOnClick;
             pb.DoubleClick += PbOnDoubleClick;
             pb.MouseMove += OnMouseMove;
