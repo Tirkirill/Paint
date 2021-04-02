@@ -29,6 +29,7 @@ namespace Paint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.ClearButton = new System.Windows.Forms.Button();
             this.BrushColorButton = new System.Windows.Forms.Button();
@@ -92,7 +93,7 @@ namespace Paint
             // 
             this.BrushSizeBar.Location = new System.Drawing.Point(24, 38);
             this.BrushSizeBar.Maximum = 100;
-            this.BrushSizeBar.Minimum = 5;
+            this.BrushSizeBar.Minimum = 1;
             this.BrushSizeBar.Name = "BrushSizeBar";
             this.BrushSizeBar.Size = new System.Drawing.Size(146, 45);
             this.BrushSizeBar.TabIndex = 4;
@@ -298,6 +299,7 @@ namespace Paint
             this.Controls.Add(this.BrushColorLabel);
             this.Controls.Add(this.BrushColorButton);
             this.Controls.Add(this.ClearButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Penгвин";
             this.Resize += new System.EventHandler(this.Form1_Resize);

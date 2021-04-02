@@ -29,6 +29,7 @@ namespace Paint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateForm));
             this.CreateButton = new System.Windows.Forms.Button();
             this.BackColorDialog = new System.Windows.Forms.ColorDialog();
             this.BackColorLabel = new System.Windows.Forms.Label();
@@ -122,6 +123,7 @@ namespace Paint
             this.Controls.Add(this.BackColorLabel);
             this.Controls.Add(this.BackColorButton);
             this.Controls.Add(this.CreateButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateForm";
             this.Text = "Создание";
             this.ResumeLayout(false);

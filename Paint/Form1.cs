@@ -38,6 +38,8 @@ namespace Paint
         int CurrentIndex;
         List<float> FrameDurations= new List<float>();
         int framerate = 24;
+
+        bool FrameIsDragging = false;
         
         private Bitmap CreateFrame()
         {
