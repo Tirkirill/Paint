@@ -53,11 +53,13 @@ namespace Paint
         {
             CanvasColor = BackColor;
             Canvas.BackColor = BackColor;
-            g.Clear(BackColor);
             bm = CreateFrame();
+            RefreshG();
+            g.Clear(BackColor);
             RefreshGI();
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
+            Canvas.Image = null;
         }
 
 
