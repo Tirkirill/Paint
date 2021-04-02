@@ -291,9 +291,9 @@ namespace Paint
             getLpb(index).Dispose();
         }
 
-        private PictureBox getPb(int index)
+        private Frame getPb(int index)
         {
-            return (PictureBox)FrameGallery.Controls.Find("pb" + index, false)[0];
+            return (Frame)FrameGallery.Controls.Find("pb" + index, false)[0];
         }
 
         private Label getPbb(int index)
@@ -308,15 +308,15 @@ namespace Paint
 
         
 
-        private void ChangeTagFrame(int index, int z)
-        {
-            int NewTag = index + z;
-            PictureBox pb = getPb(index);
-            pb.Name = "pb" + NewTag;
-            pb.Tag = NewTag;
-            getPbb(index).Name = "pbb" + NewTag;
-            getLpb(index).Name = "Lpb" + NewTag;
-        }
+        //private void ChangeTagFrame(int index, int z)
+        //{
+        //    int NewTag = index + z;
+        //    PictureBox pb = getPb(index);
+        //    pb.Name = "pb" + NewTag;
+        //    pb.Tag = NewTag;
+        //    getPbb(index).Name = "pbb" + NewTag;
+        //    getLpb(index).Name = "Lpb" + NewTag;
+        //}
 
         private void ChangeFrameLocation(int index, int z)
         {
@@ -334,7 +334,8 @@ namespace Paint
             for (int i=CurrentIndex+1; i<bitmaps.Count; i++)
             {
                 ChangeFrameLocation(i, -95);
-                ChangeTagFrame(i, -1);
+                getPb(i).ChangeTag(-1);
+                //ChangeTagFrame(i, -1);
             }
             LocY -= 95;
             bitmaps.RemoveAt(CurrentIndex);

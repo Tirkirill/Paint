@@ -44,6 +44,15 @@ namespace Paint
             this.BringToFront();
         }
 
+        public void ChangeTag(int z)
+        {
+            int NewTag = int.Parse(this.Tag.ToString()) + z;
+            this.Tag = NewTag;
+            this.Name = "pb" + NewTag;
+            Border.Name = "pbb" + NewTag;
+            FrameLabel.Name = "Lpb" + NewTag;
+        }
+
 
 
     }
