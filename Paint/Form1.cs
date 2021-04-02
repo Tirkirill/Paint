@@ -172,15 +172,14 @@ namespace Paint
         {
             PictureBox pb = (PictureBox)sender;
             int tag = int.Parse(pb.Tag.ToString());
-            SelectPB(tag, pb);
+            SelectPB(tag);
         }
 
-        private void SelectPB(int tag, PictureBox pb)
+        private void SelectPB(int tag)
         {
             bm = (Bitmap)bitmaps[tag].Clone();
+            SetGalleryFrameBorder(CurrentIndex, tag);
             CurrentIndex = tag;
-            SetGalleryFrameBorder(tag);
-
             RefreshCanvas();
             RefreshGI();
         }
@@ -191,13 +190,10 @@ namespace Paint
             pb.FrameLabel.Text = FrameDurations[tag].ToString() + " секунд";
         }
 
-        private void SetGalleryFrameBorder(int index)
+        private void SetGalleryFrameBorder(int prev, int index)
         {
-            for (int i = 0; i < bitmaps.Count; i++)
-            {
-                FrameGallery.Controls.Find("pbb" + i.ToString(), false)[0].BackColor = Color.Black;
-            }
-            FrameGallery.Controls.Find("pbb" + index.ToString(), false)[0].BackColor = Color.Blue;
+            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + prev.ToString(), false)[0].BackColor = Color.Black;
+            FrameGallery.Controls.Find(StringResources.BorderNamePrefix + index.ToString(), false)[0].BackColor = Color.Blue;
         }
 
         public void AddFrameToGallery(int index, int Loc)
@@ -216,14 +212,14 @@ namespace Paint
                 int pbTag = bitmaps.Count - 1;
                 AddFrameToGallery(pbTag, LocY-FrameGallery.VerticalScroll.Value);
                 LocY += 95;
+                SetGalleryFrameBorder(CurrentIndex, pbTag);
                 CurrentIndex = pbTag;
-                SetGalleryFrameBorder(CurrentIndex);
                 RefreshG();
                 RefreshGI();
             }
             else
             {
-                MessageBox.Show("Введите длительность кадра корректно!");
+                MessageBox.Show(StringResources.IncorrectFrameDurationInput);
             }
         }
 
@@ -234,7 +230,11 @@ namespace Paint
 
         private void ChangeButton_Click(object sender, EventArgs e)
         {
-            
+            if (bitmaps.Count == 0)
+            {
+                MessageBox.Show(StringResources.NoFrame);
+                return;
+            }
             float dur;
             if (TryGetFrameDuration(out dur))
             {
@@ -245,18 +245,23 @@ namespace Paint
             }
             else
             {
-                MessageBox.Show("Введите длительность кадра корректно!");
+                MessageBox.Show(StringResources.IncorrectFrameDurationInput);
             }
             
         }
 
         private Frame getPb(int index)
         {
-            return (Frame)FrameGallery.Controls.Find("pb" + index, false)[0];
+            return (Frame)FrameGallery.Controls.Find(StringResources.FrameNamePrefix + index, false)[0];
         }
 
         private void DeleteFrameButton_Click(object sender, EventArgs e)
         {
+            if (bitmaps.Count == 0)
+            {
+                MessageBox.Show(StringResources.NoFrame);
+                return;
+            }
             getPb(CurrentIndex).Dispose();
             for (int i=CurrentIndex+1; i<bitmaps.Count; i++)
             {
@@ -270,7 +275,7 @@ namespace Paint
             CurrentIndex = 0;
             if (bitmaps.Count > 0)
             {
-                SelectPB(0, getPb(0));
+                SelectPB(0);
             }
         }
 

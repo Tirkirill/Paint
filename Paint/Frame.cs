@@ -25,7 +25,7 @@ namespace Paint
             this.Height = 50;
             this.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Tag = index;
-            this.Name = "pb" + index;
+            this.Name = StringResources.FrameNamePrefix + index;
             this.Image = (Bitmap)bm.Clone();
             this.Cursor = Cursors.Hand;
             this.Location = new Point(10, Loc);
@@ -35,11 +35,11 @@ namespace Paint
             Border.Height = 54;
             Border.Location = new Point(8, Loc - 2);
             Border.BackColor = Color.Black;
-            Border.Name = "pbb" + index;
+            Border.Name = StringResources.BorderNamePrefix + index;
 
             FrameLabel.Location = new Point(10, Loc + 60);
             FrameLabel.Text = FrameDuration.ToString() + " секунд";
-            FrameLabel.Name = "Lpb" + index;
+            FrameLabel.Name = StringResources.LabelNamePrefix + index;
 
             this.BringToFront();
         }
@@ -48,9 +48,9 @@ namespace Paint
         {
             int NewTag = int.Parse(this.Tag.ToString()) + z;
             this.Tag = NewTag;
-            this.Name = "pb" + NewTag;
-            Border.Name = "pbb" + NewTag;
-            FrameLabel.Name = "Lpb" + NewTag;
+            this.Name = StringResources.FrameNamePrefix + NewTag;
+            Border.Name = StringResources.BorderNamePrefix + NewTag;
+            FrameLabel.Name = StringResources.LabelNamePrefix + NewTag;
         }
 
         public void ChangeLocation(int z)
