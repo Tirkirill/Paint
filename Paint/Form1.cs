@@ -54,6 +54,8 @@ namespace Paint
             CanvasColor = BackColor;
             Canvas.BackColor = BackColor;
             g.Clear(BackColor);
+            bm = CreateFrame();
+            RefreshGI();
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
         }
@@ -264,7 +266,7 @@ namespace Paint
             if (TryGetFrameDuration(out dur))
             {
                 PictureBox pbCurr = getPb(CurrentIndex);
-                Label LpbCurr = (Label)FrameGallery.Controls.Find("Lpb" + CurrentIndex, false)[0];
+                Label LpbCurr = getLpb(CurrentIndex);
                 bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
                 FrameDurations[CurrentIndex] = dur;
                 RefreshPB(pbCurr, LpbCurr, CurrentIndex);
@@ -279,8 +281,8 @@ namespace Paint
         private void DisposeFrame(int index)
         {
             getPb(index).Dispose();
-            FrameGallery.Controls.Find("pbb" + index, false)[0].Dispose();
-            FrameGallery.Controls.Find("Lpb" + index, false)[0].Dispose();
+            getPbb(index).Dispose();
+            getLpb(index).Dispose();
         }
 
         private PictureBox getPb(int index)
@@ -288,28 +290,47 @@ namespace Paint
             return (PictureBox)FrameGallery.Controls.Find("pb" + index, false)[0];
         }
 
+        private Label getPbb(int index)
+        {
+            return (Label)FrameGallery.Controls.Find("pbb" + index, false)[0];
+        }
+
+        private Label getLpb(int index)
+        {
+            return (Label)FrameGallery.Controls.Find("Lpb" + index, false)[0];
+        }
+
+        
+
         private void ChangeTagFrame(int index, int z)
         {
             int NewTag = index + z;
             PictureBox pb = getPb(index);
             pb.Name = "pb" + NewTag;
             pb.Tag = NewTag;
-            FrameGallery.Controls.Find("pbb" + index, false)[0].Name = "pbb" + NewTag;
-            FrameGallery.Controls.Find("Lpb" + index, false)[0].Name = "Lpb" + NewTag;
+            getPbb(index).Name = "pbb" + NewTag;
+            getLpb(index).Name = "Lpb" + NewTag;
+        }
+
+        private void ChangeFrameLocation(int index, int z)
+        {
+            PictureBox pb = getPb(index);
+            Label pbb = getPbb(index);
+            Label Lpb = getLpb(index);
+            pb.Location = new Point(pb.Location.X, pb.Location.Y + z);
+            pbb.Location = new Point(pbb.Location.X, pbb.Location.Y + z);
+            Lpb.Location = new Point(Lpb.Location.X, Lpb.Location.Y + z);
         }
 
         private void DeleteFrameButton_Click(object sender, EventArgs e)
         {
             DisposeFrame(CurrentIndex);
-            int Loc = 25 + ((bitmaps.Count-1) - (CurrentIndex+1)) * 95;
             for (int i=CurrentIndex+1; i<bitmaps.Count; i++)
             {
-                DisposeFrame(i);
-                AddFrameToGallery(i, Loc);
+                ChangeFrameLocation(i, -95);
                 ChangeTagFrame(i, -1);
-                Loc += 95;
-                LocY -= 95;
             }
+            LocY -= 95;
             bitmaps.RemoveAt(CurrentIndex);
             FrameDurations.RemoveAt(CurrentIndex);
             CurrentIndex = 0;

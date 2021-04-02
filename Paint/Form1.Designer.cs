@@ -231,7 +231,7 @@ namespace Paint
             this.FrameGallery.Controls.Add(this.GalleryLabel);
             this.FrameGallery.Location = new System.Drawing.Point(835, 89);
             this.FrameGallery.Name = "FrameGallery";
-            this.FrameGallery.Size = new System.Drawing.Size(120, 470);
+            this.FrameGallery.Size = new System.Drawing.Size(146, 470);
             this.FrameGallery.TabIndex = 21;
             // 
             // ChangeButton
