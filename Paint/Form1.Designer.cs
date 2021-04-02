@@ -228,6 +228,7 @@ namespace Paint
             // FrameGallery
             // 
             this.FrameGallery.AutoScroll = true;
+            this.FrameGallery.AutoSize = true;
             this.FrameGallery.Controls.Add(this.GalleryLabel);
             this.FrameGallery.Location = new System.Drawing.Point(835, 89);
             this.FrameGallery.Name = "FrameGallery";
@@ -288,6 +289,7 @@ namespace Paint
             this.Controls.Add(this.ClearButton);
             this.Name = "Form1";
             this.Text = "Penгвин";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.panel1.ResumeLayout(false);

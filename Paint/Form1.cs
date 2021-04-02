@@ -16,7 +16,7 @@ namespace Paint
             bm = CreateFrame();
             RefreshGI();
             Canvas.Width = CanvasWidth;
-            Canvas.Height = CanvasHeight;
+            Canvas.Height = CanvasHeight; 
             RefreshG();
             SetBackColor(BackColor);
             this.CanvasColor = BackColor;
@@ -239,8 +239,14 @@ namespace Paint
                 FrameDurations.Add(dur);
 
                 int pbTag = bitmaps.Count - 1;
-
+                FrameGallery.AutoSize = true;
                 AddFrameToGallery(pbTag, LocY);
+                FrameGallery.AutoSize = false;
+                for (int i = 0; i<bitmaps.Count; i++)
+                {
+                    Point s = getPb(i).Location;
+                    int y = s.Y;
+                }
                 LocY += 95;
                 
                 CurrentIndex = pbTag;
@@ -338,6 +344,12 @@ namespace Paint
             {
                 SelectPB(0, getPb(0));
             }
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            Canvas.Image = bm;
+            RefreshG();
         }
     }
 }
