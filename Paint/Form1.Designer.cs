@@ -52,6 +52,8 @@ namespace Paint
             this.FrameDurationBox = new System.Windows.Forms.TextBox();
             this.DeleteFrameButton = new System.Windows.Forms.Button();
             this.ScaleLabel = new System.Windows.Forms.Label();
+            this.LineButton = new System.Windows.Forms.Button();
+            this.BrushButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -97,7 +99,7 @@ namespace Paint
             this.BrushSizeBar.Name = "BrushSizeBar";
             this.BrushSizeBar.Size = new System.Drawing.Size(146, 45);
             this.BrushSizeBar.TabIndex = 4;
-            this.BrushSizeBar.Value = 5;
+            this.BrushSizeBar.Value = 20;
             this.BrushSizeBar.Scroll += new System.EventHandler(this.BrushSizeBar_Scroll);
             // 
             // BrushSizeBarLabel
@@ -136,9 +138,9 @@ namespace Paint
             this.BrushSizeValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BrushSizeValueLabel.Location = new System.Drawing.Point(141, 67);
             this.BrushSizeValueLabel.Name = "BrushSizeValueLabel";
-            this.BrushSizeValueLabel.Size = new System.Drawing.Size(15, 16);
+            this.BrushSizeValueLabel.Size = new System.Drawing.Size(22, 16);
             this.BrushSizeValueLabel.TabIndex = 8;
-            this.BrushSizeValueLabel.Text = "5";
+            this.BrushSizeValueLabel.Text = "20";
             // 
             // CreateNewButton
             // 
@@ -275,12 +277,38 @@ namespace Paint
             this.ScaleLabel.TabIndex = 25;
             this.ScaleLabel.Text = "100%";
             // 
+            // LineButton
+            // 
+            this.LineButton.BackColor = System.Drawing.Color.Transparent;
+            this.LineButton.ForeColor = System.Drawing.Color.Black;
+            this.LineButton.Location = new System.Drawing.Point(284, 12);
+            this.LineButton.Name = "LineButton";
+            this.LineButton.Size = new System.Drawing.Size(61, 23);
+            this.LineButton.TabIndex = 26;
+            this.LineButton.Text = "линия";
+            this.LineButton.UseVisualStyleBackColor = false;
+            this.LineButton.Click += new System.EventHandler(this.LineButton_Click);
+            // 
+            // BrushButton
+            // 
+            this.BrushButton.BackColor = System.Drawing.Color.Transparent;
+            this.BrushButton.ForeColor = System.Drawing.Color.Black;
+            this.BrushButton.Location = new System.Drawing.Point(350, 12);
+            this.BrushButton.Name = "BrushButton";
+            this.BrushButton.Size = new System.Drawing.Size(61, 23);
+            this.BrushButton.TabIndex = 27;
+            this.BrushButton.Text = "Кисть";
+            this.BrushButton.UseVisualStyleBackColor = false;
+            this.BrushButton.Click += new System.EventHandler(this.BrushButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 613);
+            this.Controls.Add(this.BrushButton);
+            this.Controls.Add(this.LineButton);
             this.Controls.Add(this.ScaleLabel);
             this.Controls.Add(this.DeleteFrameButton);
             this.Controls.Add(this.FrameDurationBox);
@@ -340,6 +368,8 @@ namespace Paint
         private System.Windows.Forms.TextBox FrameDurationBox;
         private System.Windows.Forms.Button DeleteFrameButton;
         private System.Windows.Forms.Label ScaleLabel;
+        private System.Windows.Forms.Button LineButton;
+        private System.Windows.Forms.Button BrushButton;
     }
 }
 

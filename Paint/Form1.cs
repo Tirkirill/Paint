@@ -14,6 +14,7 @@ namespace Paint
             ImgWidth = CanvasWidth;
             ImgHeight = CanvasHeight;
             bm = CreateFrame();
+            CurrentInstrument = new MBrush(pen, 20, 1);
             RefreshGI();
             Canvas.Width = CanvasWidth;
             Canvas.Height = CanvasHeight; 
@@ -24,10 +25,13 @@ namespace Paint
         }
 
         bool paint = false;
+        SolidBrush brush = new SolidBrush(Color.Black);
+        Pen pen = new Pen(Color.Black);
+
         int size = 20;
-        SolidBrush color = new SolidBrush(Color.Black);
-        Bitmap bm;
         double scale = 1;
+
+        Bitmap bm;
         Graphics g;
         Graphics gI;
         int ImgWidth;
@@ -41,6 +45,7 @@ namespace Paint
         bool isDragging = false;
         Frame DraggingObj;
         int IndexAfterDrag;
+        Instrument CurrentInstrument;
         
         private Bitmap CreateFrame()
         {
@@ -50,6 +55,7 @@ namespace Paint
         private void RefreshGI()
         {
             gI = Graphics.FromImage(bm);
+            CurrentInstrument.gI = gI;
         }
 
         private void SetBackColor(Color BackColor)
@@ -75,23 +81,20 @@ namespace Paint
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
+            CurrentInstrument.OnMouseUp(e.X, e.Y);
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
-            float SizeCoef = (float)(size * scale);
-            g.FillEllipse(color, e.X - SizeCoef / 2, e.Y - SizeCoef / 2, SizeCoef, SizeCoef);
-            gI.FillEllipse(color, (float)((e.X / scale) - size / 2), (float)((e.Y / scale) - size / 2), size, size);
+            CurrentInstrument.OnMouseDown(e.X, e.Y);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (paint)
             {
-                float SizeCoef = (float)(size * scale);
-                g.FillEllipse(color, e.X - SizeCoef / 2, e.Y - SizeCoef / 2, SizeCoef, SizeCoef);
-                gI.FillEllipse(color, (float)((e.X/scale) - size / 2), (float)((e.Y / scale) - size / 2), size, size);
+                CurrentInstrument.OnMouseMove(e.X, e.Y);
             }
         }
 
@@ -99,7 +102,7 @@ namespace Paint
         {
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
-                color.Color = ColorDialog.Color;
+                pen.Color = ColorDialog.Color;
                 BrushColorButton.BackColor = ColorDialog.Color;
             }
                 
@@ -108,6 +111,7 @@ namespace Paint
         private void BrushSizeBar_Scroll(object sender, EventArgs e)
         {
             int value = BrushSizeBar.Value;
+            CurrentInstrument.size = value;
             size = value;
             BrushSizeValueLabel.Text = value.ToString();
         }
@@ -128,6 +132,7 @@ namespace Paint
         private void RefreshG()
         {
             g = Canvas.CreateGraphics();
+            CurrentInstrument.g = g;
         }
 
         private void SaveFile(object sender, EventArgs e)
@@ -143,6 +148,7 @@ namespace Paint
         {
             int val = ScaleBar.Value;
             double coef = (double)val / 100;
+            CurrentInstrument.scale = coef;
             scale = coef;
             Canvas.Width = (int)(ImgWidth * coef);
             Canvas.Height = (int)(ImgHeight * coef);
@@ -334,7 +340,6 @@ namespace Paint
             float dur;
             if (TryGetFrameDuration(out dur))
             {
-                Frame pbCurr = getPb(CurrentIndex);
                 bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
                 FrameDurations[CurrentIndex] = dur;
                 RefreshPB(CurrentIndex);
@@ -399,6 +404,16 @@ namespace Paint
                     StopDrag();
                     break;
             }
+        }
+
+        private void LineButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MLine(pen, size, scale, g, gI);
+        }
+
+        private void BrushButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MBrush(pen, size, scale, g, gI);
         }
     }
 }
