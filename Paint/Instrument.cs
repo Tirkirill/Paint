@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Paint
 {
@@ -15,6 +16,7 @@ namespace Paint
         public double scale;
         public Brush brush;
         public Pen pen;
+        public PictureBox Canvas;
         public abstract void OnMouseDown(int X, int Y);
 
         public abstract void OnMouseMove(int X, int Y);

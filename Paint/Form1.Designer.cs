@@ -54,6 +54,7 @@ namespace Paint
             this.ScaleLabel = new System.Windows.Forms.Label();
             this.LineButton = new System.Windows.Forms.Button();
             this.BrushButton = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -332,6 +333,7 @@ namespace Paint
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Penгвин";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
@@ -370,6 +372,7 @@ namespace Paint
         private System.Windows.Forms.Label ScaleLabel;
         private System.Windows.Forms.Button LineButton;
         private System.Windows.Forms.Button BrushButton;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

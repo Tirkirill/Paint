@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Accord.Video.VFW;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 
 namespace Paint
 {
@@ -81,12 +82,14 @@ namespace Paint
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
+            RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y);
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
+            RefreshCanvas();
             CurrentInstrument.OnMouseDown(e.X, e.Y);
         }
 
@@ -408,12 +411,17 @@ namespace Paint
 
         private void LineButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MLine(pen, size, scale, g, gI);
+            CurrentInstrument = new MLine(pen, size, scale, g, gI, Canvas);
         }
 
         private void BrushButton_Click(object sender, EventArgs e)
         {
             CurrentInstrument = new MBrush(pen, size, scale, g, gI);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
