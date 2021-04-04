@@ -8,9 +8,8 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class MLine : Shape
+    public class MRectangle : Shape
     {
-
         public override void OnMouseDown(int X, int Y)
         {
             fX = X;
@@ -24,7 +23,9 @@ namespace Paint
             pen.Width = size;
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
-            GRepres.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
+            float width = (float)Math.Abs((fX - X) / scale);
+            float height = (float)Math.Abs((fY - Y) / scale);
+            GRepres.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale),width ,height);
             Canvas.Image = Repres;
         }
 
@@ -33,12 +34,14 @@ namespace Paint
             Canvas.Invalidate();
             float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
-            gI.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
+            float width = (float)Math.Abs((fX - X) / scale);
+            float height = (float)Math.Abs((fY - Y) / scale);
+            gI.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
             pen.Width = SizeCoef;
-            g.DrawLine(pen, fX, fY, X, Y);
+            g.DrawRectangle(pen, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
         }
 
-        public MLine(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
+        public MRectangle(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.size = size;

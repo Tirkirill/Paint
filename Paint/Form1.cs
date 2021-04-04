@@ -101,12 +101,12 @@ namespace Paint
             }
         }
 
-        private void BrushColorButton_Click(object sender, EventArgs e)
+        private void PenColorButton_Click(object sender, EventArgs e)
         {
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 pen.Color = ColorDialog.Color;
-                BrushColorButton.BackColor = ColorDialog.Color;
+                PenColorButton.BackColor = ColorDialog.Color;
             }
                 
         }
@@ -422,6 +422,20 @@ namespace Paint
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BrushColorButton_Click(object sender, EventArgs e)
+        {
+            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            {
+                brush.Color = ColorDialog.Color;
+                BrushColorButton.BackColor = ColorDialog.Color;
+            }
+        }
+
+        private void RectangleButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MRectangle(pen, size, scale, g, gI, Canvas);
         }
     }
 }
