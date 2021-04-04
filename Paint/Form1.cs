@@ -23,7 +23,8 @@ namespace Paint
             SetBackColor(BackColor);
             this.CanvasColor = BackColor;
             this.CurrentIndex = 0;
-            history.Add((Bitmap)bm.Clone());
+            AddToHistory();
+
         }
 
         List<Bitmap> history = new List<Bitmap>();
@@ -79,6 +80,7 @@ namespace Paint
         {
             g.Clear(CanvasColor);
             gI.Clear(CanvasColor);
+            ClearHistory();
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
@@ -86,6 +88,22 @@ namespace Paint
             paint = false;
             RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y);
+            AddToHistory();
+        }
+
+        private void AddToHistory()
+        {
+            history.Add((Bitmap)bm.Clone());
+            if (history.Count > 100)
+            {
+                history.RemoveAt(0);
+            }
+        }
+
+        private void ClearHistory()
+        {
+            history.Clear();
+            AddToHistory();
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
@@ -257,6 +275,7 @@ namespace Paint
             CurrentIndex = tag;
             RefreshCanvas();
             RefreshGI();
+            ClearHistory();
         }
 
         private void StopDrag()
@@ -407,6 +426,17 @@ namespace Paint
                     }
                     
                     StopDrag();
+                    break;
+                case 90:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        if (history.Count <= 1) break;
+                        history.RemoveAt(history.Count - 1);
+                        if (history.Count == 0) break;
+                        bm = (Bitmap)history[history.Count - 1].Clone();
+                        RefreshCanvas();
+                        RefreshGI();
+                    }
                     break;
             }
         }
