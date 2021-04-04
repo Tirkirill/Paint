@@ -59,6 +59,7 @@ namespace Paint
             this.label1 = new System.Windows.Forms.Label();
             this.BrushColorButton = new System.Windows.Forms.Button();
             this.EllipseButton = new System.Windows.Forms.Button();
+            this.TriangleButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -111,7 +112,7 @@ namespace Paint
             // 
             this.BrushSizeBarLabel.AutoSize = true;
             this.BrushSizeBarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushSizeBarLabel.Location = new System.Drawing.Point(155, 44);
+            this.BrushSizeBarLabel.Location = new System.Drawing.Point(161, 40);
             this.BrushSizeBarLabel.Name = "BrushSizeBarLabel";
             this.BrushSizeBarLabel.Size = new System.Drawing.Size(112, 20);
             this.BrushSizeBarLabel.TabIndex = 5;
@@ -194,7 +195,7 @@ namespace Paint
             // ScaleBar
             // 
             this.ScaleBar.LargeChange = 25;
-            this.ScaleBar.Location = new System.Drawing.Point(605, 560);
+            this.ScaleBar.Location = new System.Drawing.Point(605, 606);
             this.ScaleBar.Maximum = 200;
             this.ScaleBar.Minimum = 25;
             this.ScaleBar.Name = "ScaleBar";
@@ -238,7 +239,7 @@ namespace Paint
             // 
             this.FrameGallery.AutoScroll = true;
             this.FrameGallery.Controls.Add(this.GalleryLabel);
-            this.FrameGallery.Location = new System.Drawing.Point(835, 89);
+            this.FrameGallery.Location = new System.Drawing.Point(836, 131);
             this.FrameGallery.Name = "FrameGallery";
             this.FrameGallery.Size = new System.Drawing.Size(146, 470);
             this.FrameGallery.TabIndex = 21;
@@ -276,7 +277,7 @@ namespace Paint
             // 
             this.ScaleLabel.AutoSize = true;
             this.ScaleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ScaleLabel.Location = new System.Drawing.Point(566, 562);
+            this.ScaleLabel.Location = new System.Drawing.Point(566, 611);
             this.ScaleLabel.Name = "ScaleLabel";
             this.ScaleLabel.Size = new System.Drawing.Size(41, 16);
             this.ScaleLabel.TabIndex = 25;
@@ -348,13 +349,27 @@ namespace Paint
             this.EllipseButton.TabIndex = 31;
             this.EllipseButton.Text = "Овал";
             this.EllipseButton.UseVisualStyleBackColor = false;
+            this.EllipseButton.Click += new System.EventHandler(this.EllipseButton_Click);
+            // 
+            // TriangleButton
+            // 
+            this.TriangleButton.BackColor = System.Drawing.Color.Transparent;
+            this.TriangleButton.ForeColor = System.Drawing.Color.Black;
+            this.TriangleButton.Location = new System.Drawing.Point(350, 41);
+            this.TriangleButton.Name = "TriangleButton";
+            this.TriangleButton.Size = new System.Drawing.Size(81, 23);
+            this.TriangleButton.TabIndex = 32;
+            this.TriangleButton.Text = "Треугольник";
+            this.TriangleButton.UseVisualStyleBackColor = false;
+            this.TriangleButton.Click += new System.EventHandler(this.TriangleButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1154, 613);
+            this.ClientSize = new System.Drawing.Size(1154, 641);
+            this.Controls.Add(this.TriangleButton);
             this.Controls.Add(this.EllipseButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BrushColorButton);
@@ -428,6 +443,7 @@ namespace Paint
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BrushColorButton;
         private System.Windows.Forms.Button EllipseButton;
+        private System.Windows.Forms.Button TriangleButton;
     }
 }
 

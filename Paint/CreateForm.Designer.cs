@@ -78,7 +78,7 @@ namespace Paint
             this.WidthBox.Name = "WidthBox";
             this.WidthBox.Size = new System.Drawing.Size(100, 20);
             this.WidthBox.TabIndex = 10;
-            this.WidthBox.Text = "300";
+            this.WidthBox.Text = "900";
             // 
             // HeightBox
             // 
@@ -86,7 +86,7 @@ namespace Paint
             this.HeightBox.Name = "HeightBox";
             this.HeightBox.Size = new System.Drawing.Size(100, 20);
             this.HeightBox.TabIndex = 11;
-            this.HeightBox.Text = "200";
+            this.HeightBox.Text = "600";
             // 
             // WidthLabel
             // 

@@ -23,8 +23,10 @@ namespace Paint
             SetBackColor(BackColor);
             this.CanvasColor = BackColor;
             this.CurrentIndex = 0;
+            history.Add((Bitmap)bm.Clone());
         }
 
+        List<Bitmap> history = new List<Bitmap>();
         bool paint = false;
         SolidBrush brush = new SolidBrush(Color.Black);
         Pen pen = new Pen(Color.Black);
@@ -436,6 +438,16 @@ namespace Paint
         private void RectangleButton_Click(object sender, EventArgs e)
         {
             CurrentInstrument = new MRectangle(pen, brush, size, scale, g, gI, Canvas);
+        }
+
+        private void EllipseButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MEllipse(pen, brush, size, scale, g, gI, Canvas);
+        }
+
+        private void TriangleButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MTriangle(pen, brush, size, scale, g, gI, Canvas);
         }
     }
 }
