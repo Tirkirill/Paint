@@ -12,28 +12,47 @@ namespace Paint
         public Form1(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
             InitializeComponent();
+            Init(BackColor, CanvasWidth, CanvasHeight);
+        }
+
+        private void Init(Color BackColor, int CanvasWidth, int CanvasHeight)
+        {
+            pen = new Pen(Color.Black);
+            brush = new SolidBrush(Color.Black);
             ImgWidth = CanvasWidth;
             ImgHeight = CanvasHeight;
             bm = CreateFrame();
             CurrentInstrument = new MBrush(pen, 20, 1);
             RefreshGI();
             Canvas.Width = CanvasWidth;
-            Canvas.Height = CanvasHeight; 
+            Canvas.Height = CanvasHeight;
             RefreshG();
             SetBackColor(BackColor);
             this.CanvasColor = BackColor;
             this.CurrentIndex = 0;
+            FrameDurations = new List<float>();
+            bitmaps =  new List<Bitmap>();
+            LocY = 25;
+            history = new List<Bitmap>();
             AddToHistory();
-
+            SetSize(20);
+            BrushSizeBar.Value = 20;
+            SetScale(100);
+            ScaleBar.Value = 100;
+            paint = false;
+            framerate = 24;
+            BrushColorButton.BackColor = Color.Black;
+            PenColorButton.BackColor = Color.Black;
+            SetBrush();
         }
 
-        List<Bitmap> history = new List<Bitmap>();
-        bool paint = false;
-        SolidBrush brush = new SolidBrush(Color.Black);
-        Pen pen = new Pen(Color.Black);
+        List<Bitmap> history;
+        bool paint;
+        SolidBrush brush;
+        Pen pen;
 
-        int size = 20;
-        double scale = 1;
+        int size;
+        double scale;
 
         Bitmap bm;
         Graphics g;
@@ -41,11 +60,11 @@ namespace Paint
         int ImgWidth;
         int ImgHeight;
         Color CanvasColor;
-        List<Bitmap> bitmaps = new List<Bitmap>();
-        int LocY = 25;
+        List<Bitmap> bitmaps;
+        int LocY;
         int CurrentIndex;
-        List<float> FrameDurations= new List<float>();
-        int framerate = 24;
+        List<float> FrameDurations;
+        int framerate;
         bool isDragging = false;
         Frame DraggingObj;
         int IndexAfterDrag;
@@ -73,6 +92,7 @@ namespace Paint
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
             Canvas.Image = null;
+            SetEraser();
         }
 
 
@@ -134,6 +154,11 @@ namespace Paint
         private void BrushSizeBar_Scroll(object sender, EventArgs e)
         {
             int value = BrushSizeBar.Value;
+            SetSize(value);
+        }
+
+        private void SetSize(int value)
+        {
             CurrentInstrument.size = value;
             size = value;
             BrushSizeValueLabel.Text = value.ToString();
@@ -149,7 +174,15 @@ namespace Paint
 
         private void CreateNewButton_Click(object sender, EventArgs e)
         {
-
+            CreateForm cr = new CreateForm();
+            if (cr.ShowDialog() == DialogResult.OK)
+            {
+                for (int i = 0; i<bitmaps.Count; i++)
+                {
+                    getPb(i).Dispose();
+                }
+                Init(cr.CanvasColor, cr.CanvasWidth, cr.CanvasHeight);
+            }
         }
 
         private void RefreshG()
@@ -170,18 +203,31 @@ namespace Paint
         private void ScaleBar_Scroll(object sender, EventArgs e)
         {
             int val = ScaleBar.Value;
-            double coef = (double)val / 100;
+            SetScale(val);
+        }
+
+        private void SetScale(int value)
+        {
+            double coef = (double)value / 100;
             CurrentInstrument.scale = coef;
             scale = coef;
             Canvas.Width = (int)(ImgWidth * coef);
             Canvas.Height = (int)(ImgHeight * coef);
-            ScaleLabel.Text = val.ToString() + "%";
+            ScaleLabel.Text = value.ToString() + "%";
             RefreshCanvas();
         }
 
         private void SaveAnimationButton_Click(object sender, EventArgs e)
         {
+            if (bitmaps.Count == 0)
+            {
+                MessageBox.Show(StringResources.NoFrame);
+                return;
+            }
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = "avi";
+            sfd.AddExtension = true;
+            sfd.Filter = "(*.avi)|*.avi";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 AVIWriter aw = new AVIWriter();
@@ -448,6 +494,11 @@ namespace Paint
 
         private void BrushButton_Click(object sender, EventArgs e)
         {
+            SetBrush();
+        }
+
+        private void SetBrush()
+        {
             CurrentInstrument = new MBrush(pen, size, scale, g, gI);
         }
 
@@ -478,6 +529,22 @@ namespace Paint
         private void TriangleButton_Click(object sender, EventArgs e)
         {
             CurrentInstrument = new MTriangle(pen, brush, size, scale, g, gI, Canvas);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Eraser_Click(object sender, EventArgs e)
+        {
+            SetEraser();
+        }
+
+        private void SetEraser()
+        {
+            Pen pen = new Pen(CanvasColor);
+            CurrentInstrument = new MBrush(pen, size, scale, g, gI);
         }
     }
 }

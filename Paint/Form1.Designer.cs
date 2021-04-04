@@ -60,6 +60,8 @@ namespace Paint
             this.BrushColorButton = new System.Windows.Forms.Button();
             this.EllipseButton = new System.Windows.Forms.Button();
             this.TriangleButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Eraser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -69,7 +71,7 @@ namespace Paint
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(485, 69);
+            this.ClearButton.Location = new System.Drawing.Point(566, 97);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(100, 32);
             this.ClearButton.TabIndex = 1;
@@ -80,7 +82,7 @@ namespace Paint
             // PenColorButton
             // 
             this.PenColorButton.BackColor = System.Drawing.Color.Black;
-            this.PenColorButton.Location = new System.Drawing.Point(284, 67);
+            this.PenColorButton.Location = new System.Drawing.Point(284, 69);
             this.PenColorButton.Name = "PenColorButton";
             this.PenColorButton.Size = new System.Drawing.Size(26, 23);
             this.PenColorButton.TabIndex = 2;
@@ -99,7 +101,7 @@ namespace Paint
             // 
             // BrushSizeBar
             // 
-            this.BrushSizeBar.Location = new System.Drawing.Point(24, 38);
+            this.BrushSizeBar.Location = new System.Drawing.Point(17, 71);
             this.BrushSizeBar.Maximum = 100;
             this.BrushSizeBar.Minimum = 1;
             this.BrushSizeBar.Name = "BrushSizeBar";
@@ -112,7 +114,7 @@ namespace Paint
             // 
             this.BrushSizeBarLabel.AutoSize = true;
             this.BrushSizeBarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushSizeBarLabel.Location = new System.Drawing.Point(161, 40);
+            this.BrushSizeBarLabel.Location = new System.Drawing.Point(156, 78);
             this.BrushSizeBarLabel.Name = "BrushSizeBarLabel";
             this.BrushSizeBarLabel.Size = new System.Drawing.Size(112, 20);
             this.BrushSizeBarLabel.TabIndex = 5;
@@ -122,7 +124,7 @@ namespace Paint
             // 
             this.BackColorLabel.AutoSize = true;
             this.BackColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BackColorLabel.Location = new System.Drawing.Point(140, 9);
+            this.BackColorLabel.Location = new System.Drawing.Point(598, 66);
             this.BackColorLabel.Name = "BackColorLabel";
             this.BackColorLabel.Size = new System.Drawing.Size(94, 20);
             this.BackColorLabel.TabIndex = 7;
@@ -131,7 +133,7 @@ namespace Paint
             // BackColorButton
             // 
             this.BackColorButton.BackColor = System.Drawing.Color.White;
-            this.BackColorButton.Location = new System.Drawing.Point(109, 9);
+            this.BackColorButton.Location = new System.Drawing.Point(566, 66);
             this.BackColorButton.Name = "BackColorButton";
             this.BackColorButton.Size = new System.Drawing.Size(26, 23);
             this.BackColorButton.TabIndex = 6;
@@ -142,7 +144,7 @@ namespace Paint
             // 
             this.BrushSizeValueLabel.AutoSize = true;
             this.BrushSizeValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushSizeValueLabel.Location = new System.Drawing.Point(141, 67);
+            this.BrushSizeValueLabel.Location = new System.Drawing.Point(141, 109);
             this.BrushSizeValueLabel.Name = "BrushSizeValueLabel";
             this.BrushSizeValueLabel.Size = new System.Drawing.Size(22, 16);
             this.BrushSizeValueLabel.TabIndex = 8;
@@ -150,17 +152,17 @@ namespace Paint
             // 
             // CreateNewButton
             // 
-            this.CreateNewButton.Location = new System.Drawing.Point(12, 9);
+            this.CreateNewButton.Location = new System.Drawing.Point(17, 12);
             this.CreateNewButton.Name = "CreateNewButton";
             this.CreateNewButton.Size = new System.Drawing.Size(91, 23);
             this.CreateNewButton.TabIndex = 9;
-            this.CreateNewButton.Text = "Создать";
+            this.CreateNewButton.Text = "Новый";
             this.CreateNewButton.UseVisualStyleBackColor = true;
             this.CreateNewButton.Click += new System.EventHandler(this.CreateNewButton_Click);
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(631, 88);
+            this.SaveButton.Location = new System.Drawing.Point(672, 97);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(140, 32);
             this.SaveButton.TabIndex = 10;
@@ -299,9 +301,9 @@ namespace Paint
             // 
             this.BrushButton.BackColor = System.Drawing.Color.Transparent;
             this.BrushButton.ForeColor = System.Drawing.Color.Black;
-            this.BrushButton.Location = new System.Drawing.Point(350, 12);
+            this.BrushButton.Location = new System.Drawing.Point(351, 12);
             this.BrushButton.Name = "BrushButton";
-            this.BrushButton.Size = new System.Drawing.Size(61, 23);
+            this.BrushButton.Size = new System.Drawing.Size(80, 23);
             this.BrushButton.TabIndex = 27;
             this.BrushButton.Text = "Кисть";
             this.BrushButton.UseVisualStyleBackColor = false;
@@ -311,7 +313,7 @@ namespace Paint
             // 
             this.RectangleButton.BackColor = System.Drawing.Color.Transparent;
             this.RectangleButton.ForeColor = System.Drawing.Color.Black;
-            this.RectangleButton.Location = new System.Drawing.Point(417, 11);
+            this.RectangleButton.Location = new System.Drawing.Point(437, 12);
             this.RectangleButton.Name = "RectangleButton";
             this.RectangleButton.Size = new System.Drawing.Size(100, 23);
             this.RectangleButton.TabIndex = 28;
@@ -363,12 +365,37 @@ namespace Paint
             this.TriangleButton.UseVisualStyleBackColor = false;
             this.TriangleButton.Click += new System.EventHandler(this.TriangleButton_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(833, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 13);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "Длительность кадра(сек.)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // Eraser
+            // 
+            this.Eraser.BackColor = System.Drawing.Color.Transparent;
+            this.Eraser.ForeColor = System.Drawing.Color.Black;
+            this.Eraser.Location = new System.Drawing.Point(437, 41);
+            this.Eraser.Name = "Eraser";
+            this.Eraser.Size = new System.Drawing.Size(100, 23);
+            this.Eraser.TabIndex = 34;
+            this.Eraser.Text = "Ластик";
+            this.Eraser.UseVisualStyleBackColor = false;
+            this.Eraser.Click += new System.EventHandler(this.Eraser_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 641);
+            this.Controls.Add(this.Eraser);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.TriangleButton);
             this.Controls.Add(this.SaveAnimationButton);
             this.Controls.Add(this.EllipseButton);
@@ -444,6 +471,8 @@ namespace Paint
         private System.Windows.Forms.Button BrushColorButton;
         private System.Windows.Forms.Button EllipseButton;
         private System.Windows.Forms.Button TriangleButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button Eraser;
     }
 }
 
