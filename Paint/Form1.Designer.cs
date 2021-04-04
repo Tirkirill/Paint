@@ -69,7 +69,7 @@ namespace Paint
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(541, 38);
+            this.ClearButton.Location = new System.Drawing.Point(485, 69);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(100, 32);
             this.ClearButton.TabIndex = 1;
@@ -160,11 +160,11 @@ namespace Paint
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(648, 38);
+            this.SaveButton.Location = new System.Drawing.Point(631, 88);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(110, 32);
+            this.SaveButton.Size = new System.Drawing.Size(140, 32);
             this.SaveButton.TabIndex = 10;
-            this.SaveButton.Text = "Сохранить как...";
+            this.SaveButton.Text = "Сохранить кадр  как...";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveFile);
             // 
@@ -217,9 +217,9 @@ namespace Paint
             // 
             // SaveAnimationButton
             // 
-            this.SaveAnimationButton.Location = new System.Drawing.Point(765, 38);
+            this.SaveAnimationButton.Location = new System.Drawing.Point(934, 102);
             this.SaveAnimationButton.Name = "SaveAnimationButton";
-            this.SaveAnimationButton.Size = new System.Drawing.Size(92, 32);
+            this.SaveAnimationButton.Size = new System.Drawing.Size(92, 23);
             this.SaveAnimationButton.TabIndex = 19;
             this.SaveAnimationButton.Text = "Создать мульт";
             this.SaveAnimationButton.UseVisualStyleBackColor = true;
@@ -227,7 +227,7 @@ namespace Paint
             // 
             // AddFrame
             // 
-            this.AddFrame.Location = new System.Drawing.Point(667, 13);
+            this.AddFrame.Location = new System.Drawing.Point(836, 78);
             this.AddFrame.Name = "AddFrame";
             this.AddFrame.Size = new System.Drawing.Size(92, 23);
             this.AddFrame.TabIndex = 20;
@@ -241,13 +241,13 @@ namespace Paint
             this.FrameGallery.Controls.Add(this.GalleryLabel);
             this.FrameGallery.Location = new System.Drawing.Point(836, 131);
             this.FrameGallery.Name = "FrameGallery";
-            this.FrameGallery.Size = new System.Drawing.Size(146, 470);
+            this.FrameGallery.Size = new System.Drawing.Size(190, 470);
             this.FrameGallery.TabIndex = 21;
             this.FrameGallery.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
             // 
             // ChangeButton
             // 
-            this.ChangeButton.Location = new System.Drawing.Point(765, 13);
+            this.ChangeButton.Location = new System.Drawing.Point(836, 102);
             this.ChangeButton.Name = "ChangeButton";
             this.ChangeButton.Size = new System.Drawing.Size(92, 23);
             this.ChangeButton.TabIndex = 22;
@@ -257,15 +257,15 @@ namespace Paint
             // 
             // FrameDurationBox
             // 
-            this.FrameDurationBox.Location = new System.Drawing.Point(896, 13);
+            this.FrameDurationBox.Location = new System.Drawing.Point(836, 52);
             this.FrameDurationBox.Name = "FrameDurationBox";
-            this.FrameDurationBox.Size = new System.Drawing.Size(100, 20);
+            this.FrameDurationBox.Size = new System.Drawing.Size(92, 20);
             this.FrameDurationBox.TabIndex = 23;
             this.FrameDurationBox.Text = "0,5";
             // 
             // DeleteFrameButton
             // 
-            this.DeleteFrameButton.Location = new System.Drawing.Point(569, 13);
+            this.DeleteFrameButton.Location = new System.Drawing.Point(934, 78);
             this.DeleteFrameButton.Name = "DeleteFrameButton";
             this.DeleteFrameButton.Size = new System.Drawing.Size(92, 23);
             this.DeleteFrameButton.TabIndex = 24;
@@ -311,7 +311,7 @@ namespace Paint
             // 
             this.RectangleButton.BackColor = System.Drawing.Color.Transparent;
             this.RectangleButton.ForeColor = System.Drawing.Color.Black;
-            this.RectangleButton.Location = new System.Drawing.Point(417, 12);
+            this.RectangleButton.Location = new System.Drawing.Point(417, 11);
             this.RectangleButton.Name = "RectangleButton";
             this.RectangleButton.Size = new System.Drawing.Size(100, 23);
             this.RectangleButton.TabIndex = 28;
@@ -370,6 +370,7 @@ namespace Paint
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 641);
             this.Controls.Add(this.TriangleButton);
+            this.Controls.Add(this.SaveAnimationButton);
             this.Controls.Add(this.EllipseButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BrushColorButton);
@@ -382,7 +383,6 @@ namespace Paint
             this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.FrameGallery);
             this.Controls.Add(this.AddFrame);
-            this.Controls.Add(this.SaveAnimationButton);
             this.Controls.Add(this.ScaleBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.SaveButton);

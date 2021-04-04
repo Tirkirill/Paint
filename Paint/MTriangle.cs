@@ -32,13 +32,10 @@ namespace Paint
         public override void OnMouseUp(int X, int Y)
         {
             Canvas.Invalidate();
-            float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
             float width = fX - X;
             float height = Y - fY;
             DrawShapeGI(gI, X, Y, width, height);
-            pen.Width = SizeCoef;
-            DrawShapeG(X, Y, SizeCoef);
         }
 
         public MTriangle(Pen pen, Brush brush, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
@@ -62,12 +59,6 @@ namespace Paint
             };
             gI.DrawPolygon(pen, points);
             gI.FillPolygon(brush, points);
-        }
-
-        public void DrawShapeG(int X, int Y, float SizeCoef)
-        {
-            g.DrawRectangle(pen, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
-            g.FillRectangle(brush, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
         }
     }
 }
