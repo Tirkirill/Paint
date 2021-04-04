@@ -58,6 +58,7 @@ namespace Paint
             this.RectangleButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BrushColorButton = new System.Windows.Forms.Button();
+            this.EllipseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -78,7 +79,7 @@ namespace Paint
             // PenColorButton
             // 
             this.PenColorButton.BackColor = System.Drawing.Color.Black;
-            this.PenColorButton.Location = new System.Drawing.Point(284, 41);
+            this.PenColorButton.Location = new System.Drawing.Point(284, 67);
             this.PenColorButton.Name = "PenColorButton";
             this.PenColorButton.Size = new System.Drawing.Size(26, 23);
             this.PenColorButton.TabIndex = 2;
@@ -89,7 +90,7 @@ namespace Paint
             // 
             this.BrushColorLabel.AutoSize = true;
             this.BrushColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushColorLabel.Location = new System.Drawing.Point(316, 43);
+            this.BrushColorLabel.Location = new System.Drawing.Point(316, 69);
             this.BrushColorLabel.Name = "BrushColorLabel";
             this.BrushColorLabel.Size = new System.Drawing.Size(163, 20);
             this.BrushColorLabel.TabIndex = 3;
@@ -185,7 +186,7 @@ namespace Paint
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.Canvas);
-            this.panel1.Location = new System.Drawing.Point(12, 108);
+            this.panel1.Location = new System.Drawing.Point(12, 131);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 470);
             this.panel1.TabIndex = 13;
@@ -289,7 +290,7 @@ namespace Paint
             this.LineButton.Name = "LineButton";
             this.LineButton.Size = new System.Drawing.Size(61, 23);
             this.LineButton.TabIndex = 26;
-            this.LineButton.Text = "линия";
+            this.LineButton.Text = "Линия";
             this.LineButton.UseVisualStyleBackColor = false;
             this.LineButton.Click += new System.EventHandler(this.LineButton_Click);
             // 
@@ -321,7 +322,7 @@ namespace Paint
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(316, 69);
+            this.label1.Location = new System.Drawing.Point(316, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 20);
             this.label1.TabIndex = 30;
@@ -330,12 +331,23 @@ namespace Paint
             // BrushColorButton
             // 
             this.BrushColorButton.BackColor = System.Drawing.Color.Black;
-            this.BrushColorButton.Location = new System.Drawing.Point(284, 67);
+            this.BrushColorButton.Location = new System.Drawing.Point(284, 93);
             this.BrushColorButton.Name = "BrushColorButton";
             this.BrushColorButton.Size = new System.Drawing.Size(26, 23);
             this.BrushColorButton.TabIndex = 29;
             this.BrushColorButton.UseVisualStyleBackColor = false;
             this.BrushColorButton.Click += new System.EventHandler(this.BrushColorButton_Click);
+            // 
+            // EllipseButton
+            // 
+            this.EllipseButton.BackColor = System.Drawing.Color.Transparent;
+            this.EllipseButton.ForeColor = System.Drawing.Color.Black;
+            this.EllipseButton.Location = new System.Drawing.Point(284, 41);
+            this.EllipseButton.Name = "EllipseButton";
+            this.EllipseButton.Size = new System.Drawing.Size(61, 23);
+            this.EllipseButton.TabIndex = 31;
+            this.EllipseButton.Text = "Овал";
+            this.EllipseButton.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -343,6 +355,7 @@ namespace Paint
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 613);
+            this.Controls.Add(this.EllipseButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BrushColorButton);
             this.Controls.Add(this.RectangleButton);
@@ -414,6 +427,7 @@ namespace Paint
         private System.Windows.Forms.Button RectangleButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BrushColorButton;
+        private System.Windows.Forms.Button EllipseButton;
     }
 }
 

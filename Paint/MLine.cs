@@ -24,7 +24,7 @@ namespace Paint
             pen.Width = size;
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
-            GRepres.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
+            DrawLineGI(GRepres, X, Y);
             Canvas.Image = Repres;
         }
 
@@ -33,9 +33,14 @@ namespace Paint
             Canvas.Invalidate();
             float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
-            gI.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
+            DrawLineGI(gI, X, Y);
             pen.Width = SizeCoef;
             g.DrawLine(pen, fX, fY, X, Y);
+        }
+
+        private void DrawLineGI(Graphics gI, int X, int Y)
+        {
+            gI.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
         }
 
         public MLine(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)

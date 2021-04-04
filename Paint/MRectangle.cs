@@ -25,7 +25,7 @@ namespace Paint
             Graphics GRepres = Graphics.FromImage(Repres);
             float width = (float)Math.Abs((fX - X) / scale);
             float height = (float)Math.Abs((fY - Y) / scale);
-            GRepres.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale),width ,height);
+            DrawShapeGI(GRepres, X, Y, width, height);
             Canvas.Image = Repres;
         }
 
@@ -36,19 +36,32 @@ namespace Paint
             pen.Width = size;
             float width = (float)Math.Abs((fX - X) / scale);
             float height = (float)Math.Abs((fY - Y) / scale);
-            gI.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            DrawShapeGI(gI, X, Y, width, height);
             pen.Width = SizeCoef;
-            g.DrawRectangle(pen, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
+            DrawShapeG(X, Y, SizeCoef);
         }
 
-        public MRectangle(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
+        public MRectangle(Pen pen, Brush brush, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
+            this.brush = brush;
             this.size = size;
             this.scale = scale;
             this.g = g;
             this.gI = gI;
             this.Canvas = Canvas;
+        }
+
+        public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
+        {
+            gI.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            gI.FillRectangle(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+        }
+
+        public void DrawShapeG(int X, int Y,float SizeCoef)
+        {
+            g.DrawRectangle(pen, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
+            g.FillRectangle(brush, fX - SizeCoef / 2, fY - SizeCoef / 2, X - SizeCoef / 2, Y - SizeCoef / 2);
         }
     }
 }

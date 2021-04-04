@@ -435,7 +435,7 @@ namespace Paint
 
         private void RectangleButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MRectangle(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MRectangle(pen, brush, size, scale, g, gI, Canvas);
         }
     }
 }
