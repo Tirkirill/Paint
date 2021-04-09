@@ -42,7 +42,6 @@ namespace Paint
         public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
-            float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
             if (isShift)
             {
@@ -56,8 +55,6 @@ namespace Paint
                 }
             }
             DrawLineGI(gI, X, Y);
-            pen.Width = SizeCoef;
-            g.DrawLine(pen, fX, fY, X, Y);
         }
 
         private void DrawLineGI(Graphics gI, int X, int Y)

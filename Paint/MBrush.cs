@@ -14,13 +14,14 @@ namespace Paint
         List<Point> pointsG = new List<Point>();
         List<Point> pointsGI = new List<Point>();
 
-        public MBrush(Pen pen, int size, double scale, Graphics g, Graphics gI)
+        public MBrush(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.size = size;
             this.scale = scale;
             this.g = g;
             this.gI = gI;
+            this.Canvas = Canvas;
         }
 
         public MBrush(Pen pen, int size, double scale)
@@ -63,16 +64,39 @@ namespace Paint
         public override void OnMouseUp(int X, int Y, bool isShift)
         {
             pen.Width = (float)(size * scale);
-            g.DrawLines(pen, pointsG.ToArray());
-            pen.Width = size;
-            gI.DrawLines(pen, pointsGI.ToArray());
+            if (pointsG.Count < 2)
+            {
+                float SizeCoef = Utilities.GetSizeCoef(size, scale);
+                g.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForG(X, SizeCoef), Utilities.CoordForG(Y, SizeCoef), SizeCoef, SizeCoef);
+                gI.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
+            }
+            else
+            {
+                pen.Width = (float)(size * scale);
+                g.DrawLines(pen, pointsG.ToArray());
+                pen.Width = size;
+                gI.DrawLines(pen, pointsGI.ToArray());
+            }
             pointsG.Clear();
             pointsGI.Clear();
+        }
+        public void OnMouseEnter()
+        {
+            saved = (Bitmap)Canvas.Image.Clone();
+        }
+
+        public void OnMouseLeave()
+        {
+            Canvas.Image = (Bitmap)saved.Clone();
         }
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            
+            Canvas.Image = (Bitmap)saved.Clone();
+            Bitmap Repres = (Bitmap)saved.Clone();
+            Graphics RepresG = Graphics.FromImage(Repres);
+            RepresG.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
+            Canvas.Image = Repres;
         }
     }
 }

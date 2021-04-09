@@ -11,7 +11,5 @@ namespace Paint
     {
         public int fX;
         public int fY;
-        
-
     }
 }

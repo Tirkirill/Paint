@@ -49,7 +49,6 @@ namespace Paint
                 height = (float)Math.Abs((fY - Y) / scale);
             }
             DrawShapeGI(gI, X, Y, width, height);
-            pen.Width = SizeCoef;
         }
 
         public MEllipse(Pen pen, Brush brush, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)

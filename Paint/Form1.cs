@@ -23,6 +23,7 @@ namespace Paint
             ImgHeight = CanvasHeight;
             bm = CreateFrame();
             CurrentInstrument = new MBrush(pen, 20, 1);
+            CurrentInstrument.Canvas = Canvas;
             RefreshGI();
             Canvas.Width = CanvasWidth;
             Canvas.Height = CanvasHeight;
@@ -92,7 +93,7 @@ namespace Paint
             RefreshGI();
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
-            Canvas.Image = null;
+            RefreshCanvas();
             SetEraser();
         }
 
@@ -101,6 +102,7 @@ namespace Paint
         {
             g.Clear(CanvasColor);
             gI.Clear(CanvasColor);
+            RefreshCanvas();
             ClearHistory();
         }
 
@@ -110,6 +112,11 @@ namespace Paint
             RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y, isShift);
             AddToHistory();
+            if (CurrentInstrument is MBrush)
+            {
+                MBrush br = (MBrush)CurrentInstrument;
+                br.OnMouseEnter();
+            }
         }
 
         private void AddToHistory()
@@ -480,7 +487,7 @@ namespace Paint
 
         private void SetBrush()
         {
-            CurrentInstrument = new MBrush(pen, size, scale, g, gI);
+            CurrentInstrument = new MBrush(pen, size, scale, g, gI, Canvas);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -525,7 +532,7 @@ namespace Paint
         private void SetEraser()
         {
             Pen pen = new Pen(CanvasColor);
-            CurrentInstrument = new MBrush(pen, size, scale, g, gI);
+            CurrentInstrument = new MBrush(pen, size, scale, g, gI, Canvas);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -565,6 +572,24 @@ namespace Paint
                     isShift = true;
                     break;
 
+            }
+        }
+
+        private void Canvas_MouseEnter(object sender, EventArgs e)
+        {
+            if (CurrentInstrument is MBrush)
+            {
+                MBrush br = (MBrush)CurrentInstrument;
+                br.OnMouseEnter();
+            }
+        }
+
+        private void Canvas_MouseLeave(object sender, EventArgs e)
+        {
+            if (CurrentInstrument is MBrush)
+            {
+                MBrush br = (MBrush)CurrentInstrument;
+                br.OnMouseLeave();
             }
         }
     }

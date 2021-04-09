@@ -181,6 +181,8 @@ namespace Paint
             this.Canvas.TabIndex = 11;
             this.Canvas.TabStop = false;
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
+            this.Canvas.MouseEnter += new System.EventHandler(this.Canvas_MouseEnter);
+            this.Canvas.MouseLeave += new System.EventHandler(this.Canvas_MouseLeave);
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
@@ -393,7 +395,7 @@ namespace Paint
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1171, 641);
+            this.ClientSize = new System.Drawing.Size(1154, 641);
             this.Controls.Add(this.Eraser);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TriangleButton);
