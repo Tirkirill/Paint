@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Paint
 {
@@ -34,7 +35,7 @@ namespace Paint
             Draw(X, Y);
         }
 
-        public override void OnMouseMove(int X, int Y)
+        public override void OnMouseMove(int X, int Y, bool isShift)
         {
             Draw(X, Y);
         }

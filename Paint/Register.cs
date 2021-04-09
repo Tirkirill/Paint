@@ -18,5 +18,10 @@ namespace Paint
         public static Color NormalFrameBackColor = Color.Black;
         public static Color DroppableFrameBackColor = Color.Green;
         public static Color CurrentFrameBackColor = Color.Blue;
+
+        public enum ProgramRegimes
+        {
+            FreePaint, Tests
+        }
     }
 }

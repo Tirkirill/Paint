@@ -17,7 +17,7 @@ namespace Paint
             saved = (Bitmap)Canvas.Image.Clone();
         }
 
-        public override void OnMouseMove(int X, int Y)
+        public override void OnMouseMove(int X, int Y, bool isShift)
         {
             Canvas.Image = saved;
             pen.Width = size;

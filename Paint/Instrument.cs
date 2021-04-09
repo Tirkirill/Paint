@@ -19,7 +19,7 @@ namespace Paint
         public PictureBox Canvas;
         public abstract void OnMouseDown(int X, int Y);
 
-        public abstract void OnMouseMove(int X, int Y);
+        public abstract void OnMouseMove(int X, int Y, bool isShift);
 
         public abstract void OnMouseUp(int X, int Y);
     }

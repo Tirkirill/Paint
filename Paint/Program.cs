@@ -17,12 +17,18 @@ namespace Paint
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            CreateForm cr1 = new CreateForm();
-            if (cr1.ShowDialog() == DialogResult.OK)
+            MainForm mf = new MainForm();
+            if (mf.ShowDialog()== DialogResult.OK)
             {
-                Application.Run(new Form1(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
+                if (mf.Choice == Register.ProgramRegimes.FreePaint)
+                {
+                    CreateForm cr1 = new CreateForm();
+                    if (cr1.ShowDialog() == DialogResult.OK)
+                    {
+                        Application.Run(new Form1(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
+                    }
+                }
             }
-            
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class CreateForm : Form
+    public partial class CreateForm : System.Windows.Forms.Form
     {
         public CreateForm()
         {

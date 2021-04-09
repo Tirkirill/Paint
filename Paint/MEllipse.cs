@@ -17,7 +17,7 @@ namespace Paint
             saved = (Bitmap)Canvas.Image.Clone();
         }
 
-        public override void OnMouseMove(int X, int Y)
+        public override void OnMouseMove(int X, int Y, bool isShift)
         {
             Canvas.Image = saved;
             pen.Width = size;
@@ -25,6 +25,10 @@ namespace Paint
             Graphics GRepres = Graphics.FromImage(Repres);
             float width = (float)Math.Abs((fX - X) / scale);
             float height = (float)Math.Abs((fY - Y) / scale);
+            if (isShift)
+            {
+                height = width;
+            }
             DrawShapeGI(GRepres, X, Y, width, height);
             Canvas.Image = Repres;
         }

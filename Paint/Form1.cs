@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace Paint
 {
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         public Form1(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
@@ -50,6 +50,7 @@ namespace Paint
         bool paint;
         SolidBrush brush;
         Pen pen;
+        bool isShift = false;
 
         int size;
         double scale;
@@ -137,7 +138,7 @@ namespace Paint
         {
             if (paint)
             {
-                CurrentInstrument.OnMouseMove(e.X, e.Y);
+                CurrentInstrument.OnMouseMove(e.X, e.Y, isShift);
             }
         }
 
@@ -484,6 +485,10 @@ namespace Paint
                         RefreshGI();
                     }
                     break;
+                case 16:
+                    isShift = true;
+                    break;
+                    
             }
         }
 
