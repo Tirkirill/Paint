@@ -549,12 +549,15 @@ namespace Paint
         {
             switch (e.KeyCode) {
                 case Keys.Escape:
-                    if (IndexAfterDrag != -1 && IndexAfterDrag != CurrentIndex)
+                    if (isDragging)
                     {
-                        getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
-                    }
+                        if (IndexAfterDrag != -1 && IndexAfterDrag != CurrentIndex)
+                        {
+                            getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
+                        }
 
-                    StopDrag();
+                        StopDrag();
+                    }
                     break;
                 case Keys.Z:
                     if (e.Modifiers == Keys.Control)

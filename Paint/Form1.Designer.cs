@@ -60,7 +60,7 @@ namespace Paint
             this.BrushColorButton = new System.Windows.Forms.Button();
             this.EllipseButton = new System.Windows.Forms.Button();
             this.TriangleButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.FrameDurationLabel = new System.Windows.Forms.Label();
             this.Eraser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
@@ -367,16 +367,15 @@ namespace Paint
             this.TriangleButton.UseVisualStyleBackColor = false;
             this.TriangleButton.Click += new System.EventHandler(this.TriangleButton_Click);
             // 
-            // label2
+            // FrameDurationLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(833, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 13);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Длительность кадра(сек.)";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.FrameDurationLabel.AutoSize = true;
+            this.FrameDurationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FrameDurationLabel.Location = new System.Drawing.Point(833, 36);
+            this.FrameDurationLabel.Name = "FrameDurationLabel";
+            this.FrameDurationLabel.Size = new System.Drawing.Size(140, 13);
+            this.FrameDurationLabel.TabIndex = 33;
+            this.FrameDurationLabel.Text = "Длительность кадра(сек.)";
             // 
             // Eraser
             // 
@@ -397,7 +396,7 @@ namespace Paint
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1154, 641);
             this.Controls.Add(this.Eraser);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.FrameDurationLabel);
             this.Controls.Add(this.TriangleButton);
             this.Controls.Add(this.SaveAnimationButton);
             this.Controls.Add(this.EllipseButton);
@@ -474,7 +473,7 @@ namespace Paint
         private System.Windows.Forms.Button BrushColorButton;
         private System.Windows.Forms.Button EllipseButton;
         private System.Windows.Forms.Button TriangleButton;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label FrameDurationLabel;
         private System.Windows.Forms.Button Eraser;
     }
 }
