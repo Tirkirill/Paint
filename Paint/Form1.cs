@@ -117,11 +117,6 @@ namespace Paint
             RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y, isShift);
             AddToHistory();
-            if (CurrentInstrument is MBrush)
-            {
-                MBrush br = (MBrush)CurrentInstrument;
-                br.OnMouseEnter();
-            }
         }
 
         private void AddToHistory()
@@ -471,6 +466,11 @@ namespace Paint
         {
             Canvas.Image = bm;
             RefreshG();
+            if (CurrentInstrument is MBrush)
+            {
+                MBrush br = (MBrush)CurrentInstrument;
+                br.OnMouseEnter();
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)

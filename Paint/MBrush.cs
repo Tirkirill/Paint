@@ -44,7 +44,8 @@ namespace Paint
         private void Draw(int X, int Y) {
             pointsG.Add(new Point(X, Y));
             pointsGI.Add(new Point((int)(X / scale), (int)(Y / scale)));
-            pen.Width = (float)(size * scale);
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             if (pointsG.Count < 2)
             {
                 float SizeCoef = Utilities.GetSizeCoef(size, scale);
