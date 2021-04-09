@@ -23,6 +23,10 @@ namespace Paint
         public static int MaxBrushSize = 100;
         public static int InitBrushSize = 25;
 
+        public static int MaxScaleSize = 200;
+        public static int MinScaleSize = 25;
+        public static int InitScaleSize = 100;
+
         public enum ProgramRegimes
         {
             FreePaint, Tests

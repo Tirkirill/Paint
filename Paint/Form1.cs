@@ -583,15 +583,33 @@ namespace Paint
                             SetSize(new_size);
                         }
                     }
+                    if (e.Modifiers == Keys.Shift)
+                    {
+                        int new_scale = (int)(scale* 100) + 5;
+                        if (new_scale <= Register.MaxScaleSize)
+                        {
+                            ScaleBar.Value = new_scale;
+                            SetScale(new_scale);
+                        }
+                    }
                     break;
                 case Keys.Subtract:
                     if (e.Modifiers == Keys.Control)
                     {
                         int new_size = size - 5;
-                        if (new_size > Register.MinBrushSize)
+                        if (new_size >= Register.MinBrushSize)
                         {
                             BrushSizeBar.Value = new_size;
                             SetSize(new_size);
+                        }
+                    }
+                    if (e.Modifiers == Keys.Shift)
+                    {
+                        int new_scale = (int)(scale * 100) - 5;
+                        if (new_scale >= Register.MinScaleSize)
+                        {
+                            ScaleBar.Value = new_scale;
+                            SetScale(new_scale);
                         }
                     }
                     break;
