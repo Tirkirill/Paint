@@ -14,7 +14,14 @@ namespace Paint
             InitializeComponent();
             Init(BackColor, CanvasWidth, CanvasHeight);
         }
-
+        private void InitBrushSizeBar()
+        {
+            BrushSizeBar.Maximum = Register.MaxBrushSize;
+            BrushSizeBar.Minimum = Register.MinBrushSize;
+            BrushSizeBar.Value = Register.InitBrushSize;
+            BrushSizeValueLabel.Text = Register.InitBrushSize.ToString();
+            SetSize(Register.InitBrushSize);
+        }
         private void Init(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
             pen = new Pen(Color.Black);
@@ -36,8 +43,7 @@ namespace Paint
             LocY = 25;
             history = new List<Bitmap>();
             AddToHistory();
-            SetSize(20);
-            BrushSizeBar.Value = 20;
+            InitBrushSizeBar();
             SetScale(100);
             ScaleBar.Value = 100;
             paint = false;
@@ -94,7 +100,6 @@ namespace Paint
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
             RefreshCanvas();
-            SetEraser();
         }
 
 
@@ -526,11 +531,6 @@ namespace Paint
 
         private void Eraser_Click(object sender, EventArgs e)
         {
-            SetEraser();
-        }
-
-        private void SetEraser()
-        {
             Pen pen = new Pen(CanvasColor);
             CurrentInstrument = new MBrush(pen, size, scale, g, gI, Canvas);
         }
@@ -547,9 +547,8 @@ namespace Paint
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyValue)
-            {
-                case 27:
+            switch (e.KeyCode) {
+                case Keys.Escape:
                     if (IndexAfterDrag != -1 && IndexAfterDrag != CurrentIndex)
                     {
                         getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
@@ -557,7 +556,7 @@ namespace Paint
 
                     StopDrag();
                     break;
-                case 90:
+                case Keys.Z:
                     if (e.Modifiers == Keys.Control)
                     {
                         if (history.Count <= 1) break;
@@ -568,10 +567,31 @@ namespace Paint
                         RefreshGI();
                     }
                     break;
-                case 16:
+                case Keys.ShiftKey:
                     isShift = true;
                     break;
-
+                case Keys.Add:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        int new_size = size + 5;
+                        if (new_size <= Register.MaxBrushSize)
+                        {
+                            BrushSizeBar.Value = new_size;
+                            SetSize(new_size);
+                        }
+                    }
+                    break;
+                case Keys.Subtract:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        int new_size = size - 5;
+                        if (new_size > Register.MinBrushSize)
+                        {
+                            BrushSizeBar.Value = new_size;
+                            SetSize(new_size);
+                        }
+                    }
+                    break;
             }
         }
 

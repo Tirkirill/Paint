@@ -19,6 +19,10 @@ namespace Paint
         public static Color DroppableFrameBackColor = Color.Green;
         public static Color CurrentFrameBackColor = Color.Blue;
 
+        public static int MinBrushSize = 1;
+        public static int MaxBrushSize = 100;
+        public static int InitBrushSize = 25;
+
         public enum ProgramRegimes
         {
             FreePaint, Tests
