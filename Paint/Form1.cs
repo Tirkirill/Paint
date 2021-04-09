@@ -108,7 +108,7 @@ namespace Paint
         {
             paint = false;
             RefreshCanvas();
-            CurrentInstrument.OnMouseUp(e.X, e.Y);
+            CurrentInstrument.OnMouseUp(e.X, e.Y, isShift);
             AddToHistory();
         }
 
@@ -139,6 +139,10 @@ namespace Paint
             if (paint)
             {
                 CurrentInstrument.OnMouseMove(e.X, e.Y, isShift);
+            }
+            else
+            {
+                CurrentInstrument.OnMouseMoveWP(e.X, e.Y);
             }
         }
 
@@ -462,35 +466,7 @@ namespace Paint
             RefreshCanvas();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyValue)
-            {
-                case 27:
-                    if (IndexAfterDrag != -1 && IndexAfterDrag!=CurrentIndex)
-                    {
-                        getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
-                    }
-                    
-                    StopDrag();
-                    break;
-                case 90:
-                    if (e.Modifiers == Keys.Control)
-                    {
-                        if (history.Count <= 1) break;
-                        history.RemoveAt(history.Count - 1);
-                        if (history.Count == 0) break;
-                        bm = (Bitmap)history[history.Count - 1].Clone();
-                        RefreshCanvas();
-                        RefreshGI();
-                    }
-                    break;
-                case 16:
-                    isShift = true;
-                    break;
-                    
-            }
-        }
+        
 
         private void LineButton_Click(object sender, EventArgs e)
         {
@@ -550,6 +526,46 @@ namespace Paint
         {
             Pen pen = new Pen(CanvasColor);
             CurrentInstrument = new MBrush(pen, size, scale, g, gI);
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyValue)
+            {
+                case 16:
+                    isShift = false;
+                    break;
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyValue)
+            {
+                case 27:
+                    if (IndexAfterDrag != -1 && IndexAfterDrag != CurrentIndex)
+                    {
+                        getPb(IndexAfterDrag).Border.BackColor = Register.NormalFrameBackColor;
+                    }
+
+                    StopDrag();
+                    break;
+                case 90:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        if (history.Count <= 1) break;
+                        history.RemoveAt(history.Count - 1);
+                        if (history.Count == 0) break;
+                        bm = (Bitmap)history[history.Count - 1].Clone();
+                        RefreshCanvas();
+                        RefreshGI();
+                    }
+                    break;
+                case 16:
+                    isShift = true;
+                    break;
+
+            }
         }
     }
 }

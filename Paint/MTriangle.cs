@@ -24,18 +24,16 @@ namespace Paint
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
             float width = fX - X;
-            float height = Y - fY;
-            DrawShapeGI(GRepres, X, Y, width, height);
+            DrawShapeGI(GRepres, X, Y, width);
             Canvas.Image = Repres;
         }
 
-        public override void OnMouseUp(int X, int Y)
+        public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
             pen.Width = size;
             float width = fX - X;
-            float height = Y - fY;
-            DrawShapeGI(gI, X, Y, width, height);
+            DrawShapeGI(gI, X, Y, width);
         }
 
         public MTriangle(Pen pen, Brush brush, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
@@ -49,7 +47,7 @@ namespace Paint
             this.Canvas = Canvas;
         }
 
-        public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
+        public void DrawShapeGI(Graphics gI, int X, int Y, float width)
         {
             Point[] points = new Point[]
             {
@@ -59,6 +57,11 @@ namespace Paint
             };
             gI.DrawPolygon(pen, points);
             gI.FillPolygon(brush, points);
+        }
+
+        public override void OnMouseMoveWP(int X, int Y)
+        {
+            
         }
     }
 }

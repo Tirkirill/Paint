@@ -59,7 +59,7 @@ namespace Paint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 52);
+            this.ClientSize = new System.Drawing.Size(234, 52);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.FreePaintButton);
             this.Name = "MainForm";

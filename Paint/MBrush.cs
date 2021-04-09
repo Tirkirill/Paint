@@ -60,7 +60,7 @@ namespace Paint
            
         }
 
-        public override void OnMouseUp(int X, int Y)
+        public override void OnMouseUp(int X, int Y, bool isShift)
         {
             pen.Width = (float)(size * scale);
             g.DrawLines(pen, pointsG.ToArray());
@@ -68,6 +68,11 @@ namespace Paint
             gI.DrawLines(pen, pointsGI.ToArray());
             pointsG.Clear();
             pointsGI.Clear();
+        }
+
+        public override void OnMouseMoveWP(int X, int Y)
+        {
+            
         }
     }
 }

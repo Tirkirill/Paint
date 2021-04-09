@@ -11,7 +11,7 @@ namespace Paint
     {
         public int fX;
         public int fY;
-        public Bitmap saved;
+        
 
     }
 }

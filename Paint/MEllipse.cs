@@ -33,13 +33,21 @@ namespace Paint
             Canvas.Image = Repres;
         }
 
-        public override void OnMouseUp(int X, int Y)
+        public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
             float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
             float width = (float)Math.Abs((fX - X) / scale);
-            float height = (float)Math.Abs((fY - Y) / scale);
+            float height;
+            if (isShift)
+            {
+                height = width;
+            }
+            else
+            {
+                height = (float)Math.Abs((fY - Y) / scale);
+            }
             DrawShapeGI(gI, X, Y, width, height);
             pen.Width = SizeCoef;
         }
@@ -61,5 +69,9 @@ namespace Paint
             gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
         }
 
+        public override void OnMouseMoveWP(int X, int Y)
+        {
+            
+        }
     }
 }

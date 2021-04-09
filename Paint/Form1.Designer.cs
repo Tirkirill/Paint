@@ -393,7 +393,7 @@ namespace Paint
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1154, 641);
+            this.ClientSize = new System.Drawing.Size(1171, 641);
             this.Controls.Add(this.Eraser);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TriangleButton);
@@ -428,6 +428,7 @@ namespace Paint
             this.Text = "Penгвин";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();

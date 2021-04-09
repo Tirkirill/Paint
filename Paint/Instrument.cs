@@ -17,10 +17,13 @@ namespace Paint
         public Brush brush;
         public Pen pen;
         public PictureBox Canvas;
+        public Bitmap saved;
         public abstract void OnMouseDown(int X, int Y);
 
         public abstract void OnMouseMove(int X, int Y, bool isShift);
 
-        public abstract void OnMouseUp(int X, int Y);
+        public abstract void OnMouseUp(int X, int Y, bool isShift);
+
+        public abstract void OnMouseMoveWP(int X, int Y);
     }
 }

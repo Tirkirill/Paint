@@ -24,15 +24,37 @@ namespace Paint
             pen.Width = size;
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
+            if (isShift)
+            {
+                if (Math.Abs(X - fX) > Math.Abs(Y - fY))
+                {
+                    Y = fY;
+                }
+                else
+                {
+                    X = fX;
+                }
+            }
             DrawLineGI(GRepres, X, Y);
             Canvas.Image = Repres;
         }
 
-        public override void OnMouseUp(int X, int Y)
+        public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
             float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
+            if (isShift)
+            {
+                if (Math.Abs(X - fX) > Math.Abs(Y - fY))
+                {
+                    Y = fY;
+                }
+                else
+                {
+                    X = fX;
+                }
+            }
             DrawLineGI(gI, X, Y);
             pen.Width = SizeCoef;
             g.DrawLine(pen, fX, fY, X, Y);
@@ -41,6 +63,11 @@ namespace Paint
         private void DrawLineGI(Graphics gI, int X, int Y)
         {
             gI.DrawLine(pen, (float)(fX / scale), (float)(fY / scale), (float)(X / scale), (float)(Y / scale));
+        }
+
+        public override void OnMouseMoveWP(int X, int Y)
+        {
+            
         }
 
         public MLine(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
