@@ -1,7 +1,7 @@
 ﻿
 namespace Paint
 {
-    partial class Form1
+    partial class SandBoxForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,7 +29,7 @@ namespace Paint
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SandBoxForm));
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.ClearButton = new System.Windows.Forms.Button();
             this.PenColorButton = new System.Windows.Forms.Button();

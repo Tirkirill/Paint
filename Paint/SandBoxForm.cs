@@ -7,9 +7,9 @@ using System.Drawing.Drawing2D;
 
 namespace Paint
 {
-    public partial class Form1 : System.Windows.Forms.Form
+    public partial class SandBoxForm : System.Windows.Forms.Form
     {
-        public Form1(Color BackColor, int CanvasWidth, int CanvasHeight)
+        public SandBoxForm(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
             InitializeComponent();
             Init(BackColor, CanvasWidth, CanvasHeight);
@@ -47,7 +47,7 @@ namespace Paint
             SetScale(100);
             ScaleBar.Value = 100;
             paint = false;
-            framerate = 2;
+            framerate = Register.InitFrameRate;
             BrushColorButton.BackColor = Color.Black;
             PenColorButton.BackColor = Color.Black;
             SetBrush();
@@ -118,6 +118,7 @@ namespace Paint
             paint = false;
             RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y, isShift);
+            RefreshCanvas();
             AddToHistory();
         }
 
@@ -479,6 +480,11 @@ namespace Paint
                 MBrush br = (MBrush)CurrentInstrument;
                 br.OnMouseEnter();
             }
+            else if (CurrentInstrument is MRectangle)
+            {
+                MRectangle br = (MRectangle)CurrentInstrument;
+                br.OnMouseEnter();
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -601,6 +607,11 @@ namespace Paint
                                 MBrush br = (MBrush)CurrentInstrument;
                                 br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
                             }
+                            else if (CurrentInstrument is MRectangle)
+                            {
+                                MRectangle br = (MRectangle)CurrentInstrument;
+                                br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
+                            }
                         }
                     }
                     if (e.Modifiers == Keys.Shift)
@@ -625,6 +636,11 @@ namespace Paint
                         if (CurrentInstrument is MBrush)
                         {
                             MBrush br = (MBrush)CurrentInstrument;
+                            br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
+                        }
+                        else if (CurrentInstrument is MRectangle)
+                        {
+                            MRectangle br = (MRectangle)CurrentInstrument;
                             br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
                         }
                     }
@@ -654,6 +670,11 @@ namespace Paint
                 MBrush br = (MBrush)CurrentInstrument;
                 br.OnMouseEnter();
             }
+            else if (CurrentInstrument is MRectangle)
+            {
+                MRectangle br = (MRectangle)CurrentInstrument;
+                br.OnMouseEnter();
+            }
         }
 
         private void Canvas_MouseLeave(object sender, EventArgs e)
@@ -661,6 +682,11 @@ namespace Paint
             if (CurrentInstrument is MBrush)
             {
                 MBrush br = (MBrush)CurrentInstrument;
+                br.OnMouseLeave();
+            }
+            else if (CurrentInstrument is MRectangle)
+            {
+                MRectangle br = (MRectangle)CurrentInstrument;
                 br.OnMouseLeave();
             }
         }

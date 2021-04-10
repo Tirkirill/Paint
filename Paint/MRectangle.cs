@@ -72,6 +72,16 @@ namespace Paint
             this.Canvas = Canvas;
         }
 
+        public void OnMouseEnter()
+        {
+            saved = (Bitmap)Canvas.Image.Clone();
+        }
+
+        public void OnMouseLeave()
+        {
+            Canvas.Image = (Bitmap)saved.Clone();
+        }
+
         public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
         {
             if ((size >= width) || (size >= height))
@@ -90,7 +100,16 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            
+            Pen new_pen = (Pen)pen.Clone();
+            float coef = 3;
+            float new_width = size / coef;
+            new_pen.Width = new_width;
+            Canvas.Image = (Bitmap)saved.Clone();
+            Bitmap Repres = (Bitmap)saved.Clone();
+            Graphics RepresG = Graphics.FromImage(Repres);
+            RepresG.DrawRectangle(new_pen, (float)(X / scale), (float)(Y / scale), new_width / coef + 5, new_width / coef + 5);
+            RepresG.FillRectangle(brush, (float)(X / scale), (float)(Y / scale), new_width/ coef + 5, new_width / coef + 5);
+            Canvas.Image = Repres;
         }
     }
 }

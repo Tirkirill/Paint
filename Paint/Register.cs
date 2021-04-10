@@ -32,6 +32,7 @@ namespace Paint
 
         public static int MaxFrameRate = 24;
         public static int MinFrameRate = 2;
+        public static int InitFrameRate = 5;
 
         public enum ProgramRegimes
         {

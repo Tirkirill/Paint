@@ -25,7 +25,7 @@ namespace Paint
                     CreateForm cr1 = new CreateForm();
                     if (cr1.ShowDialog() == DialogResult.OK)
                     {
-                        Application.Run(new Form1(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
+                        Application.Run(new SandBoxForm(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
                     }
                 }
             }
