@@ -36,7 +36,7 @@ namespace Paint
 
         public enum ProgramRegimes
         {
-            FreePaint, Tests
+            NewProject, OpenVideo
         }
     }
 }

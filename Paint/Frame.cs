@@ -16,7 +16,7 @@ namespace Paint
         static public int FrameWidth = 100;
         static public int FrameHeight = 50;
 
-        public Frame(Control Parent, int Loc, string index, float FrameDuration, Bitmap bm):base()
+        public Frame(Control Parent, int Loc, string index, double FrameDuration, Bitmap bm):base()
         {
             this.Parent = Parent;
             Border.Parent = Parent;

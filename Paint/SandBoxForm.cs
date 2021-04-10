@@ -14,6 +14,53 @@ namespace Paint
             InitializeComponent();
             Init(BackColor, CanvasWidth, CanvasHeight);
         }
+
+        public SandBoxForm(string FileName)
+        {
+            InitializeComponent();
+            pen = new Pen(Color.Black);
+            brush = new SolidBrush(Color.Black);
+            AVIReader aw = new AVIReader();
+            aw.Open(FileName);
+            framerate = (int)aw.FrameRate;
+            Bitmap fr = aw.GetNextFrame();
+            FrameWidth = fr.Width;
+            FrameHeight = fr.Height;
+            int awLen = aw.Length;
+            double framedur = ((double)(60/framerate))/60;
+            bitmaps = new List<Bitmap>();
+            FrameDurations = new List<double>();
+            bitmaps.Add(fr);
+            FrameDurations.Add(framedur);
+            LocY = 25;
+            AddFrameToGallery(0, LocY);
+            LocY += 95;
+            for (int i = 1; i < awLen; i++)
+            {
+                fr = aw.GetNextFrame();
+                bitmaps.Add(fr);
+                FrameDurations.Add(framedur);
+                AddFrameToGallery(bitmaps.Count - 1, LocY);
+                LocY += 95;
+            }
+            CurrentIndex = 0;
+            history = new List<Bitmap>();
+            SelectPB(CurrentIndex);
+            bm = bitmaps[0];
+            Canvas.Width = FrameWidth;
+            Canvas.Height = FrameHeight;
+            SetBrush();
+            RefreshGI();
+            RefreshG();
+            
+            InitBrushSizeBar();
+            SetScale(100);
+            ScaleBar.Value = 100;
+            paint = false;
+            BrushColorButton.BackColor = Color.Black;
+            PenColorButton.BackColor = Color.Black;
+            SetUndoReturnButtonColor();
+        }
         private void InitBrushSizeBar()
         {
             BrushSizeBar.Maximum = Register.MaxBrushSize;
@@ -29,16 +76,14 @@ namespace Paint
             FrameWidth = CanvasWidth;
             FrameHeight = CanvasHeight;
             bm = CreateFrame();
-            CurrentInstrument = new MPen(pen, 20, 1);
-            CurrentInstrument.Canvas = Canvas;
-            RefreshGI();
             Canvas.Width = CanvasWidth;
             Canvas.Height = CanvasHeight;
+            SetBrush();
+            RefreshGI();
             RefreshG();
             SetBackColor(BackColor);
-            this.CanvasColor = BackColor;
             this.CurrentIndex = 0;
-            FrameDurations = new List<float>();
+            FrameDurations = new List<double>();
             bitmaps =  new List<Bitmap>();
             LocY = 25;
             history = new List<Bitmap>();
@@ -50,7 +95,6 @@ namespace Paint
             framerate = Register.InitFrameRate;
             BrushColorButton.BackColor = Color.Black;
             PenColorButton.BackColor = Color.Black;
-            SetBrush();
             SetUndoReturnButtonColor();
         }
 
@@ -72,7 +116,7 @@ namespace Paint
         List<Bitmap> bitmaps;
         int LocY;
         int CurrentIndex;
-        List<float> FrameDurations;
+        List<double> FrameDurations;
         int framerate;
         bool isDragging = false;
         Frame DraggingObj;
@@ -90,7 +134,7 @@ namespace Paint
         private void RefreshGI()
         {
             gI = Graphics.FromImage(bm);
-            CurrentInstrument.gI = gI;
+            if (CurrentInstrument != null) CurrentInstrument.gI = gI;
         }
 
         private void SetBackColor(Color BackColor)
@@ -280,7 +324,7 @@ namespace Paint
                 for (int j =0; j<bitmaps.Count; j++)
                 {
                     Bitmap bitmap = (Bitmap)bitmaps[j].Clone();
-                    float secs = FrameDurations[j];
+                    double secs = FrameDurations[j];
                     for (int i = 0; i < secs*framerate; i++)
                     {
                         aw.AddFrame(bitmap);
@@ -397,7 +441,7 @@ namespace Paint
         private void SwapFrames(int currentInd, int newInd)
         {
             Bitmap SwapBm = (Bitmap)bitmaps[currentInd].Clone();
-            float SwapFd = FrameDurations[currentInd];
+            double SwapFd = FrameDurations[currentInd];
 
             bitmaps[currentInd] = (Bitmap)bitmaps[newInd].Clone();
             FrameDurations[currentInd] = FrameDurations[newInd];
@@ -410,7 +454,7 @@ namespace Paint
 
         public void AddFrameToGallery(int index, int Loc)
         {
-            float FrameDuration = FrameDurations[index];
+            double FrameDuration = FrameDurations[index];
             Frame pb = new Frame(FrameGallery, Loc, index.ToString(), FrameDuration, (Bitmap)bitmaps[index].Clone());
             pb.Click += PbOnClick;
             pb.DoubleClick += PbOnDoubleClick;
@@ -421,7 +465,7 @@ namespace Paint
         }
             private void AddFrame_Click(object sender, EventArgs e)
         {
-            float dur;
+            double dur;
             if (TryGetFrameDuration(out dur))
             {
                 bitmaps.Add((Bitmap)bm.Clone());
@@ -440,9 +484,9 @@ namespace Paint
             }
         }
 
-        private bool TryGetFrameDuration(out float dur)
+        private bool TryGetFrameDuration(out double dur)
         {
-            return float.TryParse(FrameDurationBox.Text, out dur) && dur > 0;
+            return double.TryParse(FrameDurationBox.Text, out dur) && dur > 0;
         }
 
         private void ChangeButton_Click(object sender, EventArgs e)
@@ -452,7 +496,7 @@ namespace Paint
                 MessageBox.Show(StringResources.NoFrame);
                 return;
             }
-            float dur;
+            double dur;
             if (TryGetFrameDuration(out dur))
             {
                 bitmaps[CurrentIndex] = (Bitmap)bm.Clone();
@@ -498,8 +542,11 @@ namespace Paint
         private void RefreshCanvas()
         {
             Canvas.Image = bm;
-            RefreshG();
-            CurrentInstrument.OnMouseEnter();
+            if (CurrentInstrument != null)
+            {
+                RefreshG();
+                CurrentInstrument.OnMouseEnter();
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)

@@ -21,12 +21,12 @@ namespace Paint
 
         private void FreePaintButton_Click(object sender, EventArgs e)
         {
-            Choice = Register.ProgramRegimes.FreePaint;
+            Choice = Register.ProgramRegimes.NewProject;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Choice = Register.ProgramRegimes.Tests;
+            Choice = Register.ProgramRegimes.OpenVideo;
         }
     }
 }

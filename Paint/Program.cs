@@ -20,7 +20,7 @@ namespace Paint
             MainForm mf = new MainForm();
             if (mf.ShowDialog()== DialogResult.OK)
             {
-                if (mf.Choice == Register.ProgramRegimes.FreePaint)
+                if (mf.Choice == Register.ProgramRegimes.NewProject)
                 {
                     CreateForm cr1 = new CreateForm();
                     if (cr1.ShowDialog() == DialogResult.OK)
@@ -29,12 +29,13 @@ namespace Paint
                     }
                 }
 
-                if (mf.Choice == Register.ProgramRegimes.Tests)
+                if (mf.Choice == Register.ProgramRegimes.OpenVideo)
                 {
-                    MainTestsForm mtf = new MainTestsForm();
-                    if (mtf.ShowDialog() == DialogResult.OK)
+                    OpenFileDialog oFD = new OpenFileDialog();
+                    oFD.Filter = "(*.avi)|*.avi";
+                    if (oFD.ShowDialog() == DialogResult.OK)
                     {
-                        
+                        Application.Run(new SandBoxForm(oFD.FileName));
                     }
                 }
             }
