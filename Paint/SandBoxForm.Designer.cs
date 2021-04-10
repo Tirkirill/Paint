@@ -88,7 +88,7 @@ namespace Paint
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(548, 39);
+            this.ClearButton.Location = new System.Drawing.Point(280, 37);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(100, 23);
             this.ClearButton.TabIndex = 1;
@@ -142,7 +142,7 @@ namespace Paint
             // 
             this.BackColorLabel.AutoSize = true;
             this.BackColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BackColorLabel.Location = new System.Drawing.Point(580, 9);
+            this.BackColorLabel.Location = new System.Drawing.Point(314, 9);
             this.BackColorLabel.Name = "BackColorLabel";
             this.BackColorLabel.Size = new System.Drawing.Size(94, 20);
             this.BackColorLabel.TabIndex = 7;
@@ -151,7 +151,7 @@ namespace Paint
             // BackColorButton
             // 
             this.BackColorButton.BackColor = System.Drawing.Color.White;
-            this.BackColorButton.Location = new System.Drawing.Point(548, 9);
+            this.BackColorButton.Location = new System.Drawing.Point(282, 9);
             this.BackColorButton.Name = "BackColorButton";
             this.BackColorButton.Size = new System.Drawing.Size(26, 23);
             this.BackColorButton.TabIndex = 6;
@@ -180,7 +180,7 @@ namespace Paint
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(654, 39);
+            this.SaveButton.Location = new System.Drawing.Point(386, 37);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(140, 23);
             this.SaveButton.TabIndex = 10;
@@ -452,7 +452,7 @@ namespace Paint
             this.BottomPanel.Controls.Add(this.BackColorLabel);
             this.BottomPanel.Controls.Add(this.ClearButton);
             this.BottomPanel.Controls.Add(this.SaveButton);
-            this.BottomPanel.Location = new System.Drawing.Point(18, 101);
+            this.BottomPanel.Location = new System.Drawing.Point(18, 93);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(797, 65);
             this.BottomPanel.TabIndex = 38;
@@ -535,7 +535,7 @@ namespace Paint
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1205, 725);
+            this.ClientSize = new System.Drawing.Size(1205, 709);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.WorkPanel);
@@ -543,7 +543,7 @@ namespace Paint
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "SandBoxForm";
-            this.Text = "Penгвин";
+            this.Text = "Penгвин: песочница";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);

@@ -28,6 +28,15 @@ namespace Paint
                         Application.Run(new SandBoxForm(cr1.CanvasColor, cr1.CanvasWidth, cr1.CanvasHeight));
                     }
                 }
+
+                if (mf.Choice == Register.ProgramRegimes.Tests)
+                {
+                    MainTestsForm mtf = new MainTestsForm();
+                    if (mtf.ShowDialog() == DialogResult.OK)
+                    {
+                        
+                    }
+                }
             }
         }
     }

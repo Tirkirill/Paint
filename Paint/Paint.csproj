@@ -79,6 +79,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainTestsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainTestsForm.Designer.cs">
+      <DependentUpon>MainTestsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MCircleBrush.cs" />
     <Compile Include="MEllipse.cs" />
     <Compile Include="MPen.cs" />
@@ -89,6 +95,7 @@
       <DependentUpon>CreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MSquareBrush.cs" />
+    <Compile Include="Question.cs" />
     <Compile Include="SandBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,9 +120,19 @@
     </Compile>
     <Compile Include="Shape.cs" />
     <Compile Include="StringResources.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="CreateForm.resx">
       <DependentUpon>CreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainTestsForm.resx">
+      <DependentUpon>MainTestsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SandBoxForm.resx">
       <DependentUpon>SandBoxForm.cs</DependentUpon>
@@ -135,6 +152,9 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
