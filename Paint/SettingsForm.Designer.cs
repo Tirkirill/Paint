@@ -29,6 +29,7 @@ namespace Paint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.FrameWidthBox = new System.Windows.Forms.TextBox();
             this.FrameHeightBox = new System.Windows.Forms.TextBox();
             this.FrameRateBox = new System.Windows.Forms.TextBox();
@@ -111,6 +112,7 @@ namespace Paint
             this.Controls.Add(this.FrameRateBox);
             this.Controls.Add(this.FrameHeightBox);
             this.Controls.Add(this.FrameWidthBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
             this.Text = "Penгвин: настройки";

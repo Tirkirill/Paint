@@ -29,6 +29,7 @@ namespace Paint
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.NewProjectButton = new System.Windows.Forms.Button();
             this.OpenVideoButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -62,6 +63,7 @@ namespace Paint
             this.ClientSize = new System.Drawing.Size(274, 54);
             this.Controls.Add(this.OpenVideoButton);
             this.Controls.Add(this.NewProjectButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Penгвин: Главная";
             this.ResumeLayout(false);

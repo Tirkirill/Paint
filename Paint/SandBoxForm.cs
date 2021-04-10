@@ -18,6 +18,10 @@ namespace Paint
         public SandBoxForm(string FileName)
         {
             InitializeComponent();
+            Init(FileName);
+        }
+        private void Init(string FileName)
+        {
             pen = new Pen(Color.Black);
             brush = new SolidBrush(Color.Black);
             AVIReader aw = new AVIReader();
@@ -26,8 +30,11 @@ namespace Paint
             Bitmap fr = aw.GetNextFrame();
             FrameWidth = fr.Width;
             FrameHeight = fr.Height;
+            CanvasColor = Color.White;
+            BackColorButton.BackColor = Color.White;
+            
             int awLen = aw.Length;
-            double framedur = ((double)(60/framerate))/60;
+            double framedur = ((double)(60 / framerate)) / 60;
             bitmaps = new List<Bitmap>();
             FrameDurations = new List<double>();
             bitmaps.Add(fr);
@@ -45,14 +52,14 @@ namespace Paint
             }
             CurrentIndex = 0;
             history = new List<Bitmap>();
-            SelectPB(CurrentIndex);
-            bm = bitmaps[0];
+
+            
             Canvas.Width = FrameWidth;
             Canvas.Height = FrameHeight;
             SetBrush();
+            SelectPB(0);
             RefreshGI();
             RefreshG();
-            
             InitBrushSizeBar();
             SetScale(100);
             ScaleBar.Value = 100;
@@ -777,6 +784,16 @@ namespace Paint
         private void ReturnButton_Click(object sender, EventArgs e)
         {
             ReturnHistory();
+        }
+
+        private void OpenButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog oFD = new OpenFileDialog();
+            oFD.Filter = "(*.avi)|*.avi";
+            if (oFD.ShowDialog() == DialogResult.OK)
+            {
+                Init(oFD.FileName);
+            }
         }
     }
 }

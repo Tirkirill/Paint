@@ -70,10 +70,11 @@ namespace Paint
             this.BrushesButtons = new System.Windows.Forms.GroupBox();
             this.WorkPanel = new System.Windows.Forms.Panel();
             this.ProjectPanel = new System.Windows.Forms.Panel();
+            this.ReturnButton = new System.Windows.Forms.Button();
+            this.UndoButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.UndoButton = new System.Windows.Forms.Button();
-            this.ReturnButton = new System.Windows.Forms.Button();
+            this.OpenButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.CanvasPanel.SuspendLayout();
@@ -174,7 +175,7 @@ namespace Paint
             // 
             this.CreateNewButton.Location = new System.Drawing.Point(5, 3);
             this.CreateNewButton.Name = "CreateNewButton";
-            this.CreateNewButton.Size = new System.Drawing.Size(91, 23);
+            this.CreateNewButton.Size = new System.Drawing.Size(59, 23);
             this.CreateNewButton.TabIndex = 9;
             this.CreateNewButton.Text = "Новый";
             this.CreateNewButton.UseVisualStyleBackColor = true;
@@ -412,9 +413,9 @@ namespace Paint
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(102, 3);
+            this.SettingsButton.Location = new System.Drawing.Point(135, 3);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(91, 23);
+            this.SettingsButton.Size = new System.Drawing.Size(76, 23);
             this.SettingsButton.TabIndex = 35;
             this.SettingsButton.Text = "Настройки";
             this.SettingsButton.UseVisualStyleBackColor = true;
@@ -497,6 +498,7 @@ namespace Paint
             // 
             // ProjectPanel
             // 
+            this.ProjectPanel.Controls.Add(this.OpenButton);
             this.ProjectPanel.Controls.Add(this.ReturnButton);
             this.ProjectPanel.Controls.Add(this.CreateNewButton);
             this.ProjectPanel.Controls.Add(this.UndoButton);
@@ -505,6 +507,28 @@ namespace Paint
             this.ProjectPanel.Name = "ProjectPanel";
             this.ProjectPanel.Size = new System.Drawing.Size(396, 28);
             this.ProjectPanel.TabIndex = 41;
+            // 
+            // ReturnButton
+            // 
+            this.ReturnButton.BackColor = System.Drawing.Color.Transparent;
+            this.ReturnButton.Location = new System.Drawing.Point(311, 3);
+            this.ReturnButton.Name = "ReturnButton";
+            this.ReturnButton.Size = new System.Drawing.Size(75, 23);
+            this.ReturnButton.TabIndex = 43;
+            this.ReturnButton.Text = "Вернуть";
+            this.ReturnButton.UseVisualStyleBackColor = false;
+            this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
+            // 
+            // UndoButton
+            // 
+            this.UndoButton.BackColor = System.Drawing.Color.Transparent;
+            this.UndoButton.Location = new System.Drawing.Point(230, 3);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(75, 23);
+            this.UndoButton.TabIndex = 42;
+            this.UndoButton.Text = "Отменить";
+            this.UndoButton.UseVisualStyleBackColor = false;
+            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
             // 
             // TopPanel
             // 
@@ -534,27 +558,15 @@ namespace Paint
             this.panel1.Size = new System.Drawing.Size(201, 579);
             this.panel1.TabIndex = 43;
             // 
-            // UndoButton
+            // OpenButton
             // 
-            this.UndoButton.BackColor = System.Drawing.Color.Transparent;
-            this.UndoButton.Location = new System.Drawing.Point(230, 3);
-            this.UndoButton.Name = "UndoButton";
-            this.UndoButton.Size = new System.Drawing.Size(75, 23);
-            this.UndoButton.TabIndex = 42;
-            this.UndoButton.Text = "Отменить";
-            this.UndoButton.UseVisualStyleBackColor = false;
-            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
-            // 
-            // ReturnButton
-            // 
-            this.ReturnButton.BackColor = System.Drawing.Color.Transparent;
-            this.ReturnButton.Location = new System.Drawing.Point(311, 3);
-            this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(75, 23);
-            this.ReturnButton.TabIndex = 43;
-            this.ReturnButton.Text = "Вернуть";
-            this.ReturnButton.UseVisualStyleBackColor = false;
-            this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
+            this.OpenButton.Location = new System.Drawing.Point(70, 3);
+            this.OpenButton.Name = "OpenButton";
+            this.OpenButton.Size = new System.Drawing.Size(59, 23);
+            this.OpenButton.TabIndex = 44;
+            this.OpenButton.Text = "Открыть";
+            this.OpenButton.UseVisualStyleBackColor = true;
+            this.OpenButton.Click += new System.EventHandler(this.OpenButton_Click);
             // 
             // SandBoxForm
             // 
@@ -640,6 +652,7 @@ namespace Paint
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ReturnButton;
         private System.Windows.Forms.Button UndoButton;
+        private System.Windows.Forms.Button OpenButton;
     }
 }
 
