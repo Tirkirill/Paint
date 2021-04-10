@@ -76,7 +76,7 @@ namespace Paint
                 Pen new_pen = (Pen)pen.Clone();
                 new_pen.Width = Math.Min(width, height);
                 gI.DrawEllipse(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-                gI.DrawEllipse(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+                gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
             }
             else
             {
@@ -88,7 +88,17 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-
+            Pen new_pen = (Pen)pen.Clone();
+            float coef = 7;
+            float new_width = size / coef;
+            new_pen.Width = new_width;
+            Canvas.Image = (Bitmap)saved.Clone();
+            Bitmap Repres = (Bitmap)saved.Clone();
+            Graphics RepresG = Graphics.FromImage(Repres);
+            float new_size = new_width / coef + 5;
+            RepresG.DrawEllipse(new_pen, (float)(X / scale), (float)(Y / scale), new_size, new_size);
+            RepresG.FillEllipse(brush, (float)(X / scale), (float)(Y / scale), new_size, new_size);
+            Canvas.Image = Repres;
         }
     }
 }

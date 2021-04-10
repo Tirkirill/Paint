@@ -25,5 +25,15 @@ namespace Paint
         public abstract void OnMouseUp(int X, int Y, bool isShift);
 
         public abstract void OnMouseMoveWP(int X, int Y);
+
+        public virtual void OnMouseEnter()
+        {
+            saved = (Bitmap)Canvas.Image.Clone();
+        }
+
+        public virtual void OnMouseLeave()
+        {
+            Canvas.Image = (Bitmap)saved.Clone();
+        }
     }
 }

@@ -72,7 +72,22 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            
+            Pen new_pen = (Pen)pen.Clone();
+            float coef = 7;
+            float new_width = size / coef;
+            new_pen.Width = new_width;
+            Canvas.Image = (Bitmap)saved.Clone();
+            Bitmap Repres = (Bitmap)saved.Clone();
+            Graphics RepresG = Graphics.FromImage(Repres);
+            Point[] points = new Point[]
+            {
+                new Point((int)(X / scale), (int)(Y / scale)),
+                new Point((int)((X + 10)/scale), (int)((Y+5)/scale)),
+                new Point((int)((X - 10)/scale), (int)((Y+5)/scale))
+            };
+            RepresG.DrawPolygon(new_pen, points);
+            RepresG.FillPolygon(brush, points);
+            Canvas.Image = Repres;
         }
     }
 }

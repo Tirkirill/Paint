@@ -64,7 +64,11 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            
+            Canvas.Image = (Bitmap)saved.Clone();
+            Bitmap Repres = (Bitmap)saved.Clone();
+            Graphics RepresG = Graphics.FromImage(Repres);
+            RepresG.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
+            Canvas.Image = Repres;
         }
 
         public MLine(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)

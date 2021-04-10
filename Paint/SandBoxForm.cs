@@ -475,16 +475,7 @@ namespace Paint
         {
             Canvas.Image = bm;
             RefreshG();
-            if (CurrentInstrument is MBrush)
-            {
-                MBrush br = (MBrush)CurrentInstrument;
-                br.OnMouseEnter();
-            }
-            else if (CurrentInstrument is MRectangle)
-            {
-                MRectangle br = (MRectangle)CurrentInstrument;
-                br.OnMouseEnter();
-            }
+            CurrentInstrument.OnMouseEnter();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -602,16 +593,7 @@ namespace Paint
                         {
                             BrushSizeBar.Value = new_size;
                             SetSize(new_size);
-                            if (CurrentInstrument is MBrush)
-                            {
-                                MBrush br = (MBrush)CurrentInstrument;
-                                br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
-                            }
-                            else if (CurrentInstrument is MRectangle)
-                            {
-                                MRectangle br = (MRectangle)CurrentInstrument;
-                                br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
-                            }
+                            CurrentInstrument.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
                         }
                     }
                     if (e.Modifiers == Keys.Shift)
@@ -633,16 +615,7 @@ namespace Paint
                             BrushSizeBar.Value = new_size;
                             SetSize(new_size);
                         }
-                        if (CurrentInstrument is MBrush)
-                        {
-                            MBrush br = (MBrush)CurrentInstrument;
-                            br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
-                        }
-                        else if (CurrentInstrument is MRectangle)
-                        {
-                            MRectangle br = (MRectangle)CurrentInstrument;
-                            br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
-                        }
+                        CurrentInstrument.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
                     }
                     if (e.Modifiers == Keys.Shift)
                     {
@@ -665,30 +638,12 @@ namespace Paint
 
         private void Canvas_MouseEnter(object sender, EventArgs e)
         {
-            if (CurrentInstrument is MBrush)
-            {
-                MBrush br = (MBrush)CurrentInstrument;
-                br.OnMouseEnter();
-            }
-            else if (CurrentInstrument is MRectangle)
-            {
-                MRectangle br = (MRectangle)CurrentInstrument;
-                br.OnMouseEnter();
-            }
+            CurrentInstrument.OnMouseEnter();
         }
 
         private void Canvas_MouseLeave(object sender, EventArgs e)
         {
-            if (CurrentInstrument is MBrush)
-            {
-                MBrush br = (MBrush)CurrentInstrument;
-                br.OnMouseLeave();
-            }
-            else if (CurrentInstrument is MRectangle)
-            {
-                MRectangle br = (MRectangle)CurrentInstrument;
-                br.OnMouseLeave();
-            }
+            CurrentInstrument.OnMouseLeave();
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

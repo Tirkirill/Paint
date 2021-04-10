@@ -81,15 +81,6 @@ namespace Paint
             pointsG.Clear();
             pointsGI.Clear();
         }
-        public void OnMouseEnter()
-        {
-            saved = (Bitmap)Canvas.Image.Clone();
-        }
-
-        public void OnMouseLeave()
-        {
-            Canvas.Image = (Bitmap)saved.Clone();
-        }
 
         public override void OnMouseMoveWP(int X, int Y)
         {
