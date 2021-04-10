@@ -77,6 +77,8 @@ namespace Paint
         Frame DraggingObj;
         int IndexAfterDrag;
         Instrument CurrentInstrument;
+
+        Point LastMouseMovePosition;
         
         private Bitmap CreateFrame()
         {
@@ -143,6 +145,7 @@ namespace Paint
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            LastMouseMovePosition = new Point(e.X, e.Y);
             if (paint)
             {
                 CurrentInstrument.OnMouseMove(e.X, e.Y, isShift);
@@ -155,12 +158,16 @@ namespace Paint
 
         private void PenColorButton_Click(object sender, EventArgs e)
         {
+            ChoosePenColor();
+        }
+
+        private void ChoosePenColor()
+        {
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 pen.Color = ColorDialog.Color;
                 PenColorButton.BackColor = ColorDialog.Color;
             }
-                
         }
 
         private void BrushSizeBar_Scroll(object sender, EventArgs e)
@@ -502,6 +509,11 @@ namespace Paint
 
         private void BrushColorButton_Click(object sender, EventArgs e)
         {
+            ChooseBrushColor();
+        }
+
+        private void ChooseBrushColor()
+        {
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 brush.Color = ColorDialog.Color;
@@ -581,6 +593,11 @@ namespace Paint
                         {
                             BrushSizeBar.Value = new_size;
                             SetSize(new_size);
+                            if (CurrentInstrument is MBrush)
+                            {
+                                MBrush br = (MBrush)CurrentInstrument;
+                                br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
+                            }
                         }
                     }
                     if (e.Modifiers == Keys.Shift)
@@ -602,6 +619,11 @@ namespace Paint
                             BrushSizeBar.Value = new_size;
                             SetSize(new_size);
                         }
+                        if (CurrentInstrument is MBrush)
+                        {
+                            MBrush br = (MBrush)CurrentInstrument;
+                            br.OnMouseMoveWP(LastMouseMovePosition.X, LastMouseMovePosition.Y);
+                        }
                     }
                     if (e.Modifiers == Keys.Shift)
                     {
@@ -612,6 +634,12 @@ namespace Paint
                             SetScale(new_scale);
                         }
                     }
+                    break;
+                case Keys.D1:
+                    if (e.Modifiers == Keys.Control) ChoosePenColor();
+                    break;
+                case Keys.D2:
+                    if (e.Modifiers == Keys.Control) ChooseBrushColor();
                     break;
             }
         }
