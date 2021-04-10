@@ -51,6 +51,7 @@ namespace Paint
             BrushColorButton.BackColor = Color.Black;
             PenColorButton.BackColor = Color.Black;
             SetBrush();
+            SetUndoReturnButtonColor();
         }
 
         List<Bitmap> history;
@@ -77,6 +78,7 @@ namespace Paint
         Frame DraggingObj;
         int IndexAfterDrag;
         Instrument CurrentInstrument;
+        int CurrentHistoryIndex;
 
         Point LastMouseMovePosition;
         
@@ -124,11 +126,33 @@ namespace Paint
 
         private void AddToHistory()
         {
+            if (CurrentHistoryIndex != history.Count - 1 && history.Count != 0)
+            {
+                history.RemoveRange(CurrentHistoryIndex+1, history.Count - CurrentHistoryIndex - 1);
+            }
             history.Add((Bitmap)bm.Clone());
+            CurrentHistoryIndex = history.Count - 1;
             if (history.Count > 100)
             {
                 history.RemoveAt(0);
             }
+            SetUndoReturnButtonColor();
+        }
+
+        private void SetUndoButtonColor()
+        {
+            UndoButton.Enabled = CurrentHistoryIndex != 0;
+        }
+
+        private void SetReturnButtonColor()
+        {
+            ReturnButton.Enabled = CurrentHistoryIndex != history.Count - 1;
+        }
+
+        private void SetUndoReturnButtonColor()
+        {
+            SetUndoButtonColor();
+            SetReturnButtonColor();
         }
 
         private void ClearHistory()
@@ -573,12 +597,13 @@ namespace Paint
                 case Keys.Z:
                     if (e.Modifiers == Keys.Control)
                     {
-                        if (history.Count <= 1) break;
-                        history.RemoveAt(history.Count - 1);
-                        if (history.Count == 0) break;
-                        bm = (Bitmap)history[history.Count - 1].Clone();
-                        RefreshCanvas();
-                        RefreshGI();
+                        Undo();
+                    }
+                    break;
+                case Keys.Y:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        ReturnHistory();
                     }
                     break;
                 case Keys.ShiftKey:
@@ -674,6 +699,37 @@ namespace Paint
         private void SquareBrushButton_Click(object sender, EventArgs e)
         {
             CurrentInstrument = new MSquareBrush(pen, size, scale, g, gI, Canvas);
+        }
+
+        private void Undo()
+        {
+            if (history.Count == 0 || CurrentHistoryIndex == 0) return;
+            CurrentHistoryIndex -= 1;
+            bm = (Bitmap)history[CurrentHistoryIndex].Clone();
+            RefreshCanvas();
+            RefreshGI();
+            SetUndoReturnButtonColor();
+        }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void ReturnHistory()
+        {
+            if (history.Count == 0) return;
+            if (history.Count <= CurrentHistoryIndex + 1) return;
+            CurrentHistoryIndex += 1;
+            bm = (Bitmap)history[CurrentHistoryIndex].Clone();
+            RefreshCanvas();
+            RefreshGI();
+            SetUndoReturnButtonColor();
+        }
+
+        private void ReturnButton_Click(object sender, EventArgs e)
+        {
+            ReturnHistory();
         }
     }
 }

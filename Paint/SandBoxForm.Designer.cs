@@ -72,6 +72,8 @@ namespace Paint
             this.ProjectPanel = new System.Windows.Forms.Panel();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.UndoButton = new System.Windows.Forms.Button();
+            this.ReturnButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.CanvasPanel.SuspendLayout();
@@ -463,7 +465,7 @@ namespace Paint
             this.ShapesButton.Controls.Add(this.RectangleButton);
             this.ShapesButton.Controls.Add(this.EllipseButton);
             this.ShapesButton.Controls.Add(this.TriangleButton);
-            this.ShapesButton.Location = new System.Drawing.Point(209, 5);
+            this.ShapesButton.Location = new System.Drawing.Point(411, 3);
             this.ShapesButton.Name = "ShapesButton";
             this.ShapesButton.Size = new System.Drawing.Size(181, 82);
             this.ShapesButton.TabIndex = 12;
@@ -476,7 +478,7 @@ namespace Paint
             this.BrushesButtons.Controls.Add(this.SquareBrushButton);
             this.BrushesButtons.Controls.Add(this.PenButton);
             this.BrushesButtons.Controls.Add(this.Eraser);
-            this.BrushesButtons.Location = new System.Drawing.Point(396, 5);
+            this.BrushesButtons.Location = new System.Drawing.Point(611, 2);
             this.BrushesButtons.Name = "BrushesButtons";
             this.BrushesButtons.Size = new System.Drawing.Size(183, 82);
             this.BrushesButtons.TabIndex = 39;
@@ -495,11 +497,13 @@ namespace Paint
             // 
             // ProjectPanel
             // 
+            this.ProjectPanel.Controls.Add(this.ReturnButton);
             this.ProjectPanel.Controls.Add(this.CreateNewButton);
+            this.ProjectPanel.Controls.Add(this.UndoButton);
             this.ProjectPanel.Controls.Add(this.SettingsButton);
             this.ProjectPanel.Location = new System.Drawing.Point(3, 5);
             this.ProjectPanel.Name = "ProjectPanel";
-            this.ProjectPanel.Size = new System.Drawing.Size(200, 28);
+            this.ProjectPanel.Size = new System.Drawing.Size(396, 28);
             this.ProjectPanel.TabIndex = 41;
             // 
             // TopPanel
@@ -529,6 +533,28 @@ namespace Paint
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(201, 579);
             this.panel1.TabIndex = 43;
+            // 
+            // UndoButton
+            // 
+            this.UndoButton.BackColor = System.Drawing.Color.Transparent;
+            this.UndoButton.Location = new System.Drawing.Point(230, 3);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(75, 23);
+            this.UndoButton.TabIndex = 42;
+            this.UndoButton.Text = "Отменить";
+            this.UndoButton.UseVisualStyleBackColor = false;
+            this.UndoButton.Click += new System.EventHandler(this.UndoButton_Click);
+            // 
+            // ReturnButton
+            // 
+            this.ReturnButton.BackColor = System.Drawing.Color.Transparent;
+            this.ReturnButton.Location = new System.Drawing.Point(311, 3);
+            this.ReturnButton.Name = "ReturnButton";
+            this.ReturnButton.Size = new System.Drawing.Size(75, 23);
+            this.ReturnButton.TabIndex = 43;
+            this.ReturnButton.Text = "Вернуть";
+            this.ReturnButton.UseVisualStyleBackColor = false;
+            this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
             // 
             // SandBoxForm
             // 
@@ -612,6 +638,8 @@ namespace Paint
         private System.Windows.Forms.Panel ProjectPanel;
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button ReturnButton;
+        private System.Windows.Forms.Button UndoButton;
     }
 }
 
