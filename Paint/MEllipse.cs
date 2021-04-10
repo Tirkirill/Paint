@@ -71,8 +71,19 @@ namespace Paint
 
         public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
         {
-            gI.DrawEllipse(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-            gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            if ((size >= width) || (size >= height))
+            {
+                Pen new_pen = (Pen)pen.Clone();
+                new_pen.Width = Math.Min(width, height);
+                gI.DrawEllipse(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+                gI.DrawEllipse(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            }
+            else
+            {
+                gI.DrawEllipse(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+                gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            }
+            
         }
 
         public override void OnMouseMoveWP(int X, int Y)

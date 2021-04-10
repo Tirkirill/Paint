@@ -74,8 +74,18 @@ namespace Paint
 
         public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
         {
-            gI.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-            gI.FillRectangle(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            if ((size >= width) || (size >= height))
+            {
+                Pen new_pen = (Pen)pen.Clone();
+                new_pen.Width = Math.Min(width, height);
+                gI.DrawRectangle(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+                gI.FillRectangle(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            }
+            else
+            {
+                gI.DrawRectangle(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+                gI.FillRectangle(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            }
         }
 
         public override void OnMouseMoveWP(int X, int Y)
