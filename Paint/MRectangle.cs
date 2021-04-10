@@ -28,6 +28,8 @@ namespace Paint
             if (isShift)
             {
                 height = width;
+                if (fY < Y) Y = (int)(fY + height);
+                else Y = (int)(fY - height);
             }
             else
             {
@@ -47,6 +49,8 @@ namespace Paint
             if (isShift)
             {
                 height = width;
+                if (fY < Y) Y = (int)(fY + height);
+                else Y = (int)(fY - height);
             }
             else
             {

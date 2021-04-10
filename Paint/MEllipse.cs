@@ -24,10 +24,16 @@ namespace Paint
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
             float width = (float)Math.Abs((fX - X) / scale);
-            float height = (float)Math.Abs((fY - Y) / scale);
+            float height;
             if (isShift)
             {
                 height = width;
+                if (fY < Y) Y = (int)(fY + height);
+                else Y = (int)(fY - height);
+            }
+            else
+            {
+                height = (float)Math.Abs((fY - Y) / scale);
             }
             DrawShapeGI(GRepres, X, Y, width, height);
             Canvas.Image = Repres;
@@ -36,13 +42,14 @@ namespace Paint
         public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
-            float SizeCoef = Utilities.GetSizeCoef(size, scale);
             pen.Width = size;
             float width = (float)Math.Abs((fX - X) / scale);
             float height;
             if (isShift)
             {
                 height = width;
+                if (fY < Y) Y = (int)(fY + height);
+                else Y = (int)(fY - height);
             }
             else
             {
@@ -70,7 +77,7 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            
+
         }
     }
 }

@@ -553,6 +553,7 @@ namespace Paint
             {
                 case 16:
                     isShift = false;
+                    if (paint) CurrentInstrument.OnMouseMove(LastMouseMovePosition.X, LastMouseMovePosition.Y, false);
                     break;
             }
         }
@@ -584,6 +585,7 @@ namespace Paint
                     break;
                 case Keys.ShiftKey:
                     isShift = true;
+                    if (paint) CurrentInstrument.OnMouseMove(LastMouseMovePosition.X, LastMouseMovePosition.Y, true);
                     break;
                 case Keys.Add:
                     if (e.Modifiers == Keys.Control)
