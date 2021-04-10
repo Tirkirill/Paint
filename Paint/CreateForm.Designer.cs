@@ -78,7 +78,6 @@ namespace Paint
             this.WidthBox.Name = "WidthBox";
             this.WidthBox.Size = new System.Drawing.Size(100, 20);
             this.WidthBox.TabIndex = 10;
-            this.WidthBox.Text = "900";
             // 
             // HeightBox
             // 
@@ -86,7 +85,6 @@ namespace Paint
             this.HeightBox.Name = "HeightBox";
             this.HeightBox.Size = new System.Drawing.Size(100, 20);
             this.HeightBox.TabIndex = 11;
-            this.HeightBox.Text = "600";
             // 
             // WidthLabel
             // 
@@ -125,6 +123,7 @@ namespace Paint
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateForm";
             this.Text = "Создание";
+            this.Load += new System.EventHandler(this.CreateForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

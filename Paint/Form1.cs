@@ -26,8 +26,8 @@ namespace Paint
         {
             pen = new Pen(Color.Black);
             brush = new SolidBrush(Color.Black);
-            ImgWidth = CanvasWidth;
-            ImgHeight = CanvasHeight;
+            FrameWidth = CanvasWidth;
+            FrameHeight = CanvasHeight;
             bm = CreateFrame();
             CurrentInstrument = new MBrush(pen, 20, 1);
             CurrentInstrument.Canvas = Canvas;
@@ -47,7 +47,7 @@ namespace Paint
             SetScale(100);
             ScaleBar.Value = 100;
             paint = false;
-            framerate = 24;
+            framerate = 2;
             BrushColorButton.BackColor = Color.Black;
             PenColorButton.BackColor = Color.Black;
             SetBrush();
@@ -65,8 +65,8 @@ namespace Paint
         Bitmap bm;
         Graphics g;
         Graphics gI;
-        int ImgWidth;
-        int ImgHeight;
+        int FrameWidth;
+        int FrameHeight;
         Color CanvasColor;
         List<Bitmap> bitmaps;
         int LocY;
@@ -82,7 +82,7 @@ namespace Paint
         
         private Bitmap CreateFrame()
         {
-            return new Bitmap(ImgWidth, ImgHeight);
+            return new Bitmap(FrameWidth, FrameHeight);
         }
 
         private void RefreshGI()
@@ -230,14 +230,14 @@ namespace Paint
             double coef = (double)value / 100;
             CurrentInstrument.scale = coef;
             scale = coef;
-            Canvas.Width = (int)(ImgWidth * coef);
-            Canvas.Height = (int)(ImgHeight * coef);
+            Canvas.Width = (int)(FrameWidth * coef);
+            Canvas.Height = (int)(FrameHeight * coef);
             ScaleLabel.Text = value.ToString() + "%";
             RefreshCanvas();
         }
 
         private void SaveAnimationButton_Click(object sender, EventArgs e)
-        {
+        { 
             if (bitmaps.Count == 0)
             {
                 MessageBox.Show(StringResources.NoFrame);
@@ -249,9 +249,9 @@ namespace Paint
             sfd.Filter = "(*.avi)|*.avi";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                AVIWriter aw = new AVIWriter();
+                AVIWriter aw = new AVIWriter("MSVC");
                 aw.FrameRate = framerate;
-                aw.Open(sfd.FileName, bm.Width, bm.Height);
+                aw.Open(sfd.FileName, FrameWidth, FrameHeight);
                 for (int j =0; j<bitmaps.Count; j++)
                 {
                     Bitmap bitmap = (Bitmap)bitmaps[j].Clone();
@@ -261,6 +261,7 @@ namespace Paint
                         aw.AddFrame(bitmap);
                     }
                 }
+                aw.Quality = 1;
                 aw.Close();
             }
         }
@@ -661,6 +662,26 @@ namespace Paint
             {
                 MBrush br = (MBrush)CurrentInstrument;
                 br.OnMouseLeave();
+            }
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            SettingsForm sf = new SettingsForm(FrameWidth, FrameHeight, framerate);
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                int new_width = sf.FrameWidth;
+                int new_height = sf.FrameHeight;
+                framerate = sf.FrameRate;
+                Canvas.Width = new_width;
+                Canvas.Height = new_height;
+                FrameWidth = new_width;
+                FrameHeight = new_height;
+                
+                for (int i = 0; i < bitmaps.Count; i++)
+                {
+                    bitmaps[i] = new Bitmap(bitmaps[i], new Size(new_width, new_height));
+                }
             }
         }
     }

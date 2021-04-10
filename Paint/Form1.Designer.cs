@@ -62,6 +62,7 @@ namespace Paint
             this.TriangleButton = new System.Windows.Forms.Button();
             this.FrameDurationLabel = new System.Windows.Forms.Label();
             this.Eraser = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.panel1.SuspendLayout();
@@ -389,12 +390,23 @@ namespace Paint
             this.Eraser.UseVisualStyleBackColor = false;
             this.Eraser.Click += new System.EventHandler(this.Eraser_Click);
             // 
+            // SettingsButton
+            // 
+            this.SettingsButton.Location = new System.Drawing.Point(114, 12);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(91, 23);
+            this.SettingsButton.TabIndex = 35;
+            this.SettingsButton.Text = "Настройки";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1154, 641);
+            this.ClientSize = new System.Drawing.Size(1171, 641);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.Eraser);
             this.Controls.Add(this.FrameDurationLabel);
             this.Controls.Add(this.TriangleButton);
@@ -475,6 +487,7 @@ namespace Paint
         private System.Windows.Forms.Button TriangleButton;
         private System.Windows.Forms.Label FrameDurationLabel;
         private System.Windows.Forms.Button Eraser;
+        private System.Windows.Forms.Button SettingsButton;
     }
 }
 

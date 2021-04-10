@@ -15,6 +15,8 @@ namespace Paint
         public CreateForm()
         {
             InitializeComponent();
+            HeightBox.Text = Register.InitFrameHeight.ToString();
+            WidthBox.Text = Register.InitFrameWidth.ToString();
         }
 
         public Color CanvasColor = Color.White;
@@ -47,6 +49,11 @@ namespace Paint
             {
                 MessageBox.Show(String.Format(StringResources.IncorrectWidthInputTemplate, Register.MinFrameWidth, Register.MaxFrameWidth));
             }
+        }
+
+        private void CreateForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

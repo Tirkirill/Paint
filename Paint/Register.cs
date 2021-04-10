@@ -27,6 +27,12 @@ namespace Paint
         public static int MinScaleSize = 25;
         public static int InitScaleSize = 100;
 
+        public static int InitFrameWidth = 900;
+        public static int InitFrameHeight = 600;
+
+        public static int MaxFrameRate = 24;
+        public static int MinFrameRate = 2;
+
         public enum ProgramRegimes
         {
             FreePaint, Tests
