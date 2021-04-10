@@ -55,8 +55,19 @@ namespace Paint
                 new Point((int)((fX + width)/scale), (int)(Y/scale)),
                 new Point((int)((fX- width)/scale), (int)(Y/scale))
             };
-            gI.DrawPolygon(pen, points);
-            gI.FillPolygon(brush, points);
+            float height = Math.Abs(fY - Y);
+            if ((size >= width) || (size >= height))
+            {
+                Pen new_pen = (Pen)pen.Clone();
+                new_pen.Width = Math.Min(width, height);
+                gI.DrawPolygon(new_pen, points);
+                gI.FillPolygon(brush, points);
+            }
+            else
+            {
+                gI.DrawPolygon(pen, points);
+                gI.FillPolygon(brush, points);
+            }
         }
 
         public override void OnMouseMoveWP(int X, int Y)
