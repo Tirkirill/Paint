@@ -59,7 +59,7 @@ namespace Paint
             if ((size >= width) || (size >= height))
             {
                 Pen new_pen = (Pen)pen.Clone();
-                new_pen.Width = Math.Min(width, height);
+                new_pen.Width = Math.Min(Math.Abs(width), height);
                 gI.DrawPolygon(new_pen, points);
                 gI.FillPolygon(brush, points);
             }
