@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class MBrush:Instrument
+    public class MPen:Instrument
     {
 
         List<Point> pointsG = new List<Point>();
         List<Point> pointsGI = new List<Point>();
 
-        public MBrush(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
+        public MPen(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.size = size;
@@ -24,7 +24,7 @@ namespace Paint
             this.Canvas = Canvas;
         }
 
-        public MBrush(Pen pen, int size, double scale)
+        public MPen(Pen pen, int size, double scale)
         {
             this.pen = pen;
             this.size = size;
@@ -84,11 +84,7 @@ namespace Paint
 
         public override void OnMouseMoveWP(int X, int Y)
         {
-            Canvas.Image = (Bitmap)saved.Clone();
-            Bitmap Repres = (Bitmap)saved.Clone();
-            Graphics RepresG = Graphics.FromImage(Repres);
-            RepresG.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
-            Canvas.Image = Repres;
+            InstrumentUtilities.OnMouseMoveWPBrush(Canvas, saved, pen, X, Y, scale, size);
         }
     }
 }

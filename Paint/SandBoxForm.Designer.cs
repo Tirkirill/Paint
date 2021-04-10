@@ -42,7 +42,7 @@ namespace Paint
             this.CreateNewButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.Canvas = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.CanvasPanel = new System.Windows.Forms.Panel();
             this.ScaleBar = new System.Windows.Forms.TrackBar();
             this.GalleryLabel = new System.Windows.Forms.Label();
             this.SaveAnimationButton = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@ namespace Paint
             this.DeleteFrameButton = new System.Windows.Forms.Button();
             this.ScaleLabel = new System.Windows.Forms.Label();
             this.LineButton = new System.Windows.Forms.Button();
-            this.BrushButton = new System.Windows.Forms.Button();
+            this.PenButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.RectangleButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,18 +63,34 @@ namespace Paint
             this.FrameDurationLabel = new System.Windows.Forms.Label();
             this.Eraser = new System.Windows.Forms.Button();
             this.SettingsButton = new System.Windows.Forms.Button();
+            this.CircleBrushButton = new System.Windows.Forms.Button();
+            this.SquareBrushButton = new System.Windows.Forms.Button();
+            this.BottomPanel = new System.Windows.Forms.Panel();
+            this.ShapesButton = new System.Windows.Forms.GroupBox();
+            this.BrushesButtons = new System.Windows.Forms.GroupBox();
+            this.WorkPanel = new System.Windows.Forms.Panel();
+            this.ProjectPanel = new System.Windows.Forms.Panel();
+            this.TopPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.CanvasPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScaleBar)).BeginInit();
             this.FrameGallery.SuspendLayout();
+            this.BottomPanel.SuspendLayout();
+            this.ShapesButton.SuspendLayout();
+            this.BrushesButtons.SuspendLayout();
+            this.WorkPanel.SuspendLayout();
+            this.ProjectPanel.SuspendLayout();
+            this.TopPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(566, 97);
+            this.ClearButton.Location = new System.Drawing.Point(548, 39);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(100, 32);
+            this.ClearButton.Size = new System.Drawing.Size(100, 23);
             this.ClearButton.TabIndex = 1;
             this.ClearButton.Text = "Очистить";
             this.ClearButton.UseVisualStyleBackColor = true;
@@ -83,7 +99,7 @@ namespace Paint
             // PenColorButton
             // 
             this.PenColorButton.BackColor = System.Drawing.Color.Black;
-            this.PenColorButton.Location = new System.Drawing.Point(284, 69);
+            this.PenColorButton.Location = new System.Drawing.Point(10, 39);
             this.PenColorButton.Name = "PenColorButton";
             this.PenColorButton.Size = new System.Drawing.Size(26, 23);
             this.PenColorButton.TabIndex = 2;
@@ -94,7 +110,7 @@ namespace Paint
             // 
             this.BrushColorLabel.AutoSize = true;
             this.BrushColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushColorLabel.Location = new System.Drawing.Point(316, 69);
+            this.BrushColorLabel.Location = new System.Drawing.Point(40, 39);
             this.BrushColorLabel.Name = "BrushColorLabel";
             this.BrushColorLabel.Size = new System.Drawing.Size(163, 20);
             this.BrushColorLabel.TabIndex = 3;
@@ -102,7 +118,8 @@ namespace Paint
             // 
             // BrushSizeBar
             // 
-            this.BrushSizeBar.Location = new System.Drawing.Point(17, 71);
+            this.BrushSizeBar.BackColor = System.Drawing.SystemColors.Control;
+            this.BrushSizeBar.Location = new System.Drawing.Point(3, 3);
             this.BrushSizeBar.Maximum = 100;
             this.BrushSizeBar.Minimum = 1;
             this.BrushSizeBar.Name = "BrushSizeBar";
@@ -115,7 +132,7 @@ namespace Paint
             // 
             this.BrushSizeBarLabel.AutoSize = true;
             this.BrushSizeBarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushSizeBarLabel.Location = new System.Drawing.Point(156, 78);
+            this.BrushSizeBarLabel.Location = new System.Drawing.Point(155, 12);
             this.BrushSizeBarLabel.Name = "BrushSizeBarLabel";
             this.BrushSizeBarLabel.Size = new System.Drawing.Size(112, 20);
             this.BrushSizeBarLabel.TabIndex = 5;
@@ -125,7 +142,7 @@ namespace Paint
             // 
             this.BackColorLabel.AutoSize = true;
             this.BackColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BackColorLabel.Location = new System.Drawing.Point(598, 66);
+            this.BackColorLabel.Location = new System.Drawing.Point(580, 9);
             this.BackColorLabel.Name = "BackColorLabel";
             this.BackColorLabel.Size = new System.Drawing.Size(94, 20);
             this.BackColorLabel.TabIndex = 7;
@@ -134,7 +151,7 @@ namespace Paint
             // BackColorButton
             // 
             this.BackColorButton.BackColor = System.Drawing.Color.White;
-            this.BackColorButton.Location = new System.Drawing.Point(566, 66);
+            this.BackColorButton.Location = new System.Drawing.Point(548, 9);
             this.BackColorButton.Name = "BackColorButton";
             this.BackColorButton.Size = new System.Drawing.Size(26, 23);
             this.BackColorButton.TabIndex = 6;
@@ -145,7 +162,7 @@ namespace Paint
             // 
             this.BrushSizeValueLabel.AutoSize = true;
             this.BrushSizeValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BrushSizeValueLabel.Location = new System.Drawing.Point(141, 109);
+            this.BrushSizeValueLabel.Location = new System.Drawing.Point(118, 45);
             this.BrushSizeValueLabel.Name = "BrushSizeValueLabel";
             this.BrushSizeValueLabel.Size = new System.Drawing.Size(22, 16);
             this.BrushSizeValueLabel.TabIndex = 8;
@@ -153,7 +170,7 @@ namespace Paint
             // 
             // CreateNewButton
             // 
-            this.CreateNewButton.Location = new System.Drawing.Point(17, 12);
+            this.CreateNewButton.Location = new System.Drawing.Point(5, 3);
             this.CreateNewButton.Name = "CreateNewButton";
             this.CreateNewButton.Size = new System.Drawing.Size(91, 23);
             this.CreateNewButton.TabIndex = 9;
@@ -163,9 +180,9 @@ namespace Paint
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(672, 97);
+            this.SaveButton.Location = new System.Drawing.Point(654, 39);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(140, 32);
+            this.SaveButton.Size = new System.Drawing.Size(140, 23);
             this.SaveButton.TabIndex = 10;
             this.SaveButton.Text = "Сохранить кадр  как...";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -187,20 +204,21 @@ namespace Paint
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
-            // panel1
+            // CanvasPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.Canvas);
-            this.panel1.Location = new System.Drawing.Point(12, 131);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 470);
-            this.panel1.TabIndex = 13;
+            this.CanvasPanel.AutoScroll = true;
+            this.CanvasPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.CanvasPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CanvasPanel.Controls.Add(this.Canvas);
+            this.CanvasPanel.Location = new System.Drawing.Point(3, 3);
+            this.CanvasPanel.Name = "CanvasPanel";
+            this.CanvasPanel.Size = new System.Drawing.Size(794, 470);
+            this.CanvasPanel.TabIndex = 13;
             // 
             // ScaleBar
             // 
             this.ScaleBar.LargeChange = 25;
-            this.ScaleBar.Location = new System.Drawing.Point(605, 606);
+            this.ScaleBar.Location = new System.Drawing.Point(587, 476);
             this.ScaleBar.Maximum = 200;
             this.ScaleBar.Minimum = 25;
             this.ScaleBar.Name = "ScaleBar";
@@ -222,7 +240,7 @@ namespace Paint
             // 
             // SaveAnimationButton
             // 
-            this.SaveAnimationButton.Location = new System.Drawing.Point(934, 102);
+            this.SaveAnimationButton.Location = new System.Drawing.Point(104, 73);
             this.SaveAnimationButton.Name = "SaveAnimationButton";
             this.SaveAnimationButton.Size = new System.Drawing.Size(92, 23);
             this.SaveAnimationButton.TabIndex = 19;
@@ -232,7 +250,7 @@ namespace Paint
             // 
             // AddFrame
             // 
-            this.AddFrame.Location = new System.Drawing.Point(836, 78);
+            this.AddFrame.Location = new System.Drawing.Point(6, 44);
             this.AddFrame.Name = "AddFrame";
             this.AddFrame.Size = new System.Drawing.Size(92, 23);
             this.AddFrame.TabIndex = 20;
@@ -244,7 +262,7 @@ namespace Paint
             // 
             this.FrameGallery.AutoScroll = true;
             this.FrameGallery.Controls.Add(this.GalleryLabel);
-            this.FrameGallery.Location = new System.Drawing.Point(836, 131);
+            this.FrameGallery.Location = new System.Drawing.Point(6, 106);
             this.FrameGallery.Name = "FrameGallery";
             this.FrameGallery.Size = new System.Drawing.Size(190, 470);
             this.FrameGallery.TabIndex = 21;
@@ -252,7 +270,7 @@ namespace Paint
             // 
             // ChangeButton
             // 
-            this.ChangeButton.Location = new System.Drawing.Point(836, 102);
+            this.ChangeButton.Location = new System.Drawing.Point(6, 73);
             this.ChangeButton.Name = "ChangeButton";
             this.ChangeButton.Size = new System.Drawing.Size(92, 23);
             this.ChangeButton.TabIndex = 22;
@@ -262,7 +280,7 @@ namespace Paint
             // 
             // FrameDurationBox
             // 
-            this.FrameDurationBox.Location = new System.Drawing.Point(836, 52);
+            this.FrameDurationBox.Location = new System.Drawing.Point(6, 18);
             this.FrameDurationBox.Name = "FrameDurationBox";
             this.FrameDurationBox.Size = new System.Drawing.Size(92, 20);
             this.FrameDurationBox.TabIndex = 23;
@@ -270,7 +288,7 @@ namespace Paint
             // 
             // DeleteFrameButton
             // 
-            this.DeleteFrameButton.Location = new System.Drawing.Point(934, 78);
+            this.DeleteFrameButton.Location = new System.Drawing.Point(104, 44);
             this.DeleteFrameButton.Name = "DeleteFrameButton";
             this.DeleteFrameButton.Size = new System.Drawing.Size(92, 23);
             this.DeleteFrameButton.TabIndex = 24;
@@ -282,7 +300,7 @@ namespace Paint
             // 
             this.ScaleLabel.AutoSize = true;
             this.ScaleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ScaleLabel.Location = new System.Drawing.Point(566, 611);
+            this.ScaleLabel.Location = new System.Drawing.Point(551, 476);
             this.ScaleLabel.Name = "ScaleLabel";
             this.ScaleLabel.Size = new System.Drawing.Size(41, 16);
             this.ScaleLabel.TabIndex = 25;
@@ -292,7 +310,7 @@ namespace Paint
             // 
             this.LineButton.BackColor = System.Drawing.Color.Transparent;
             this.LineButton.ForeColor = System.Drawing.Color.Black;
-            this.LineButton.Location = new System.Drawing.Point(284, 12);
+            this.LineButton.Location = new System.Drawing.Point(6, 19);
             this.LineButton.Name = "LineButton";
             this.LineButton.Size = new System.Drawing.Size(61, 23);
             this.LineButton.TabIndex = 26;
@@ -300,25 +318,25 @@ namespace Paint
             this.LineButton.UseVisualStyleBackColor = false;
             this.LineButton.Click += new System.EventHandler(this.LineButton_Click);
             // 
-            // BrushButton
+            // PenButton
             // 
-            this.BrushButton.BackColor = System.Drawing.Color.Transparent;
-            this.BrushButton.ForeColor = System.Drawing.Color.Black;
-            this.BrushButton.Location = new System.Drawing.Point(351, 12);
-            this.BrushButton.Name = "BrushButton";
-            this.BrushButton.Size = new System.Drawing.Size(80, 23);
-            this.BrushButton.TabIndex = 27;
-            this.BrushButton.Text = "Кисть";
-            this.BrushButton.UseVisualStyleBackColor = false;
-            this.BrushButton.Click += new System.EventHandler(this.BrushButton_Click);
+            this.PenButton.BackColor = System.Drawing.Color.Transparent;
+            this.PenButton.ForeColor = System.Drawing.Color.Black;
+            this.PenButton.Location = new System.Drawing.Point(6, 48);
+            this.PenButton.Name = "PenButton";
+            this.PenButton.Size = new System.Drawing.Size(80, 23);
+            this.PenButton.TabIndex = 27;
+            this.PenButton.Text = "Перо";
+            this.PenButton.UseVisualStyleBackColor = false;
+            this.PenButton.Click += new System.EventHandler(this.PenButton_Click);
             // 
             // RectangleButton
             // 
             this.RectangleButton.BackColor = System.Drawing.Color.Transparent;
             this.RectangleButton.ForeColor = System.Drawing.Color.Black;
-            this.RectangleButton.Location = new System.Drawing.Point(437, 12);
+            this.RectangleButton.Location = new System.Drawing.Point(73, 19);
             this.RectangleButton.Name = "RectangleButton";
-            this.RectangleButton.Size = new System.Drawing.Size(100, 23);
+            this.RectangleButton.Size = new System.Drawing.Size(98, 23);
             this.RectangleButton.TabIndex = 28;
             this.RectangleButton.Text = "Прямоугольник";
             this.RectangleButton.UseVisualStyleBackColor = false;
@@ -328,7 +346,7 @@ namespace Paint
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(316, 95);
+            this.label1.Location = new System.Drawing.Point(42, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 20);
             this.label1.TabIndex = 30;
@@ -337,7 +355,7 @@ namespace Paint
             // BrushColorButton
             // 
             this.BrushColorButton.BackColor = System.Drawing.Color.Black;
-            this.BrushColorButton.Location = new System.Drawing.Point(284, 93);
+            this.BrushColorButton.Location = new System.Drawing.Point(10, 64);
             this.BrushColorButton.Name = "BrushColorButton";
             this.BrushColorButton.Size = new System.Drawing.Size(26, 23);
             this.BrushColorButton.TabIndex = 29;
@@ -348,7 +366,7 @@ namespace Paint
             // 
             this.EllipseButton.BackColor = System.Drawing.Color.Transparent;
             this.EllipseButton.ForeColor = System.Drawing.Color.Black;
-            this.EllipseButton.Location = new System.Drawing.Point(284, 41);
+            this.EllipseButton.Location = new System.Drawing.Point(6, 48);
             this.EllipseButton.Name = "EllipseButton";
             this.EllipseButton.Size = new System.Drawing.Size(61, 23);
             this.EllipseButton.TabIndex = 31;
@@ -360,9 +378,9 @@ namespace Paint
             // 
             this.TriangleButton.BackColor = System.Drawing.Color.Transparent;
             this.TriangleButton.ForeColor = System.Drawing.Color.Black;
-            this.TriangleButton.Location = new System.Drawing.Point(350, 41);
+            this.TriangleButton.Location = new System.Drawing.Point(73, 48);
             this.TriangleButton.Name = "TriangleButton";
-            this.TriangleButton.Size = new System.Drawing.Size(81, 23);
+            this.TriangleButton.Size = new System.Drawing.Size(98, 23);
             this.TriangleButton.TabIndex = 32;
             this.TriangleButton.Text = "Треугольник";
             this.TriangleButton.UseVisualStyleBackColor = false;
@@ -372,7 +390,7 @@ namespace Paint
             // 
             this.FrameDurationLabel.AutoSize = true;
             this.FrameDurationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FrameDurationLabel.Location = new System.Drawing.Point(833, 36);
+            this.FrameDurationLabel.Location = new System.Drawing.Point(3, 5);
             this.FrameDurationLabel.Name = "FrameDurationLabel";
             this.FrameDurationLabel.Size = new System.Drawing.Size(140, 13);
             this.FrameDurationLabel.TabIndex = 33;
@@ -382,9 +400,9 @@ namespace Paint
             // 
             this.Eraser.BackColor = System.Drawing.Color.Transparent;
             this.Eraser.ForeColor = System.Drawing.Color.Black;
-            this.Eraser.Location = new System.Drawing.Point(437, 41);
+            this.Eraser.Location = new System.Drawing.Point(92, 48);
             this.Eraser.Name = "Eraser";
-            this.Eraser.Size = new System.Drawing.Size(100, 23);
+            this.Eraser.Size = new System.Drawing.Size(80, 23);
             this.Eraser.TabIndex = 34;
             this.Eraser.Text = "Ластик";
             this.Eraser.UseVisualStyleBackColor = false;
@@ -392,7 +410,7 @@ namespace Paint
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(114, 12);
+            this.SettingsButton.Location = new System.Drawing.Point(102, 3);
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.Size = new System.Drawing.Size(91, 23);
             this.SettingsButton.TabIndex = 35;
@@ -400,44 +418,131 @@ namespace Paint
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
-            // Form1
+            // CircleBrushButton
+            // 
+            this.CircleBrushButton.BackColor = System.Drawing.Color.Transparent;
+            this.CircleBrushButton.ForeColor = System.Drawing.Color.Black;
+            this.CircleBrushButton.Location = new System.Drawing.Point(6, 19);
+            this.CircleBrushButton.Name = "CircleBrushButton";
+            this.CircleBrushButton.Size = new System.Drawing.Size(80, 23);
+            this.CircleBrushButton.TabIndex = 36;
+            this.CircleBrushButton.Text = "Круглая кисть";
+            this.CircleBrushButton.UseVisualStyleBackColor = false;
+            this.CircleBrushButton.Click += new System.EventHandler(this.CircleBrushButton_Click);
+            // 
+            // SquareBrushButton
+            // 
+            this.SquareBrushButton.BackColor = System.Drawing.Color.Transparent;
+            this.SquareBrushButton.ForeColor = System.Drawing.Color.Black;
+            this.SquareBrushButton.Location = new System.Drawing.Point(92, 19);
+            this.SquareBrushButton.Name = "SquareBrushButton";
+            this.SquareBrushButton.Size = new System.Drawing.Size(80, 23);
+            this.SquareBrushButton.TabIndex = 37;
+            this.SquareBrushButton.Text = "Квадратная кисть";
+            this.SquareBrushButton.UseVisualStyleBackColor = false;
+            this.SquareBrushButton.Click += new System.EventHandler(this.SquareBrushButton_Click);
+            // 
+            // BottomPanel
+            // 
+            this.BottomPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BottomPanel.Controls.Add(this.BrushSizeBar);
+            this.BottomPanel.Controls.Add(this.BrushSizeValueLabel);
+            this.BottomPanel.Controls.Add(this.BrushSizeBarLabel);
+            this.BottomPanel.Controls.Add(this.BackColorButton);
+            this.BottomPanel.Controls.Add(this.BackColorLabel);
+            this.BottomPanel.Controls.Add(this.ClearButton);
+            this.BottomPanel.Controls.Add(this.SaveButton);
+            this.BottomPanel.Location = new System.Drawing.Point(18, 101);
+            this.BottomPanel.Name = "BottomPanel";
+            this.BottomPanel.Size = new System.Drawing.Size(797, 65);
+            this.BottomPanel.TabIndex = 38;
+            // 
+            // ShapesButton
+            // 
+            this.ShapesButton.Controls.Add(this.LineButton);
+            this.ShapesButton.Controls.Add(this.RectangleButton);
+            this.ShapesButton.Controls.Add(this.EllipseButton);
+            this.ShapesButton.Controls.Add(this.TriangleButton);
+            this.ShapesButton.Location = new System.Drawing.Point(209, 5);
+            this.ShapesButton.Name = "ShapesButton";
+            this.ShapesButton.Size = new System.Drawing.Size(181, 82);
+            this.ShapesButton.TabIndex = 12;
+            this.ShapesButton.TabStop = false;
+            this.ShapesButton.Text = "Фигуры";
+            // 
+            // BrushesButtons
+            // 
+            this.BrushesButtons.Controls.Add(this.CircleBrushButton);
+            this.BrushesButtons.Controls.Add(this.SquareBrushButton);
+            this.BrushesButtons.Controls.Add(this.PenButton);
+            this.BrushesButtons.Controls.Add(this.Eraser);
+            this.BrushesButtons.Location = new System.Drawing.Point(396, 5);
+            this.BrushesButtons.Name = "BrushesButtons";
+            this.BrushesButtons.Size = new System.Drawing.Size(183, 82);
+            this.BrushesButtons.TabIndex = 39;
+            this.BrushesButtons.TabStop = false;
+            this.BrushesButtons.Text = "Кисти";
+            // 
+            // WorkPanel
+            // 
+            this.WorkPanel.Controls.Add(this.CanvasPanel);
+            this.WorkPanel.Controls.Add(this.ScaleLabel);
+            this.WorkPanel.Controls.Add(this.ScaleBar);
+            this.WorkPanel.Location = new System.Drawing.Point(18, 172);
+            this.WorkPanel.Name = "WorkPanel";
+            this.WorkPanel.Size = new System.Drawing.Size(797, 526);
+            this.WorkPanel.TabIndex = 40;
+            // 
+            // ProjectPanel
+            // 
+            this.ProjectPanel.Controls.Add(this.CreateNewButton);
+            this.ProjectPanel.Controls.Add(this.SettingsButton);
+            this.ProjectPanel.Location = new System.Drawing.Point(3, 5);
+            this.ProjectPanel.Name = "ProjectPanel";
+            this.ProjectPanel.Size = new System.Drawing.Size(200, 28);
+            this.ProjectPanel.TabIndex = 41;
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.Controls.Add(this.ProjectPanel);
+            this.TopPanel.Controls.Add(this.ShapesButton);
+            this.TopPanel.Controls.Add(this.BrushesButtons);
+            this.TopPanel.Controls.Add(this.label1);
+            this.TopPanel.Controls.Add(this.BrushColorLabel);
+            this.TopPanel.Controls.Add(this.BrushColorButton);
+            this.TopPanel.Controls.Add(this.PenColorButton);
+            this.TopPanel.Location = new System.Drawing.Point(18, 5);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(797, 90);
+            this.TopPanel.TabIndex = 42;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.FrameDurationLabel);
+            this.panel1.Controls.Add(this.FrameDurationBox);
+            this.panel1.Controls.Add(this.AddFrame);
+            this.panel1.Controls.Add(this.DeleteFrameButton);
+            this.panel1.Controls.Add(this.FrameGallery);
+            this.panel1.Controls.Add(this.SaveAnimationButton);
+            this.panel1.Controls.Add(this.ChangeButton);
+            this.panel1.Location = new System.Drawing.Point(821, 65);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(201, 579);
+            this.panel1.TabIndex = 43;
+            // 
+            // SandBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1171, 641);
-            this.Controls.Add(this.SettingsButton);
-            this.Controls.Add(this.Eraser);
-            this.Controls.Add(this.FrameDurationLabel);
-            this.Controls.Add(this.TriangleButton);
-            this.Controls.Add(this.SaveAnimationButton);
-            this.Controls.Add(this.EllipseButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BrushColorButton);
-            this.Controls.Add(this.RectangleButton);
-            this.Controls.Add(this.BrushButton);
-            this.Controls.Add(this.LineButton);
-            this.Controls.Add(this.ScaleLabel);
-            this.Controls.Add(this.DeleteFrameButton);
-            this.Controls.Add(this.FrameDurationBox);
-            this.Controls.Add(this.ChangeButton);
-            this.Controls.Add(this.FrameGallery);
-            this.Controls.Add(this.AddFrame);
-            this.Controls.Add(this.ScaleBar);
+            this.ClientSize = new System.Drawing.Size(1205, 725);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.CreateNewButton);
-            this.Controls.Add(this.BrushSizeValueLabel);
-            this.Controls.Add(this.BackColorLabel);
-            this.Controls.Add(this.BackColorButton);
-            this.Controls.Add(this.BrushSizeBarLabel);
-            this.Controls.Add(this.BrushSizeBar);
-            this.Controls.Add(this.BrushColorLabel);
-            this.Controls.Add(this.PenColorButton);
-            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.TopPanel);
+            this.Controls.Add(this.WorkPanel);
+            this.Controls.Add(this.BottomPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Name = "Form1";
+            this.Name = "SandBoxForm";
             this.Text = "Penгвин";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -445,12 +550,22 @@ namespace Paint
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.CanvasPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ScaleBar)).EndInit();
             this.FrameGallery.ResumeLayout(false);
             this.FrameGallery.PerformLayout();
+            this.BottomPanel.ResumeLayout(false);
+            this.BottomPanel.PerformLayout();
+            this.ShapesButton.ResumeLayout(false);
+            this.BrushesButtons.ResumeLayout(false);
+            this.WorkPanel.ResumeLayout(false);
+            this.WorkPanel.PerformLayout();
+            this.ProjectPanel.ResumeLayout(false);
+            this.TopPanel.ResumeLayout(false);
+            this.TopPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -467,7 +582,7 @@ namespace Paint
         private System.Windows.Forms.Button CreateNewButton;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.PictureBox Canvas;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel CanvasPanel;
         private System.Windows.Forms.TrackBar ScaleBar;
         private System.Windows.Forms.Label GalleryLabel;
         private System.Windows.Forms.Button SaveAnimationButton;
@@ -478,7 +593,7 @@ namespace Paint
         private System.Windows.Forms.Button DeleteFrameButton;
         private System.Windows.Forms.Label ScaleLabel;
         private System.Windows.Forms.Button LineButton;
-        private System.Windows.Forms.Button BrushButton;
+        private System.Windows.Forms.Button PenButton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button RectangleButton;
         private System.Windows.Forms.Label label1;
@@ -488,6 +603,15 @@ namespace Paint
         private System.Windows.Forms.Label FrameDurationLabel;
         private System.Windows.Forms.Button Eraser;
         private System.Windows.Forms.Button SettingsButton;
+        private System.Windows.Forms.Button CircleBrushButton;
+        private System.Windows.Forms.Button SquareBrushButton;
+        private System.Windows.Forms.Panel BottomPanel;
+        private System.Windows.Forms.GroupBox ShapesButton;
+        private System.Windows.Forms.GroupBox BrushesButtons;
+        private System.Windows.Forms.Panel WorkPanel;
+        private System.Windows.Forms.Panel ProjectPanel;
+        private System.Windows.Forms.Panel TopPanel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

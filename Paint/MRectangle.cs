@@ -91,13 +91,13 @@ namespace Paint
         public override void OnMouseMoveWP(int X, int Y)
         {
             Pen new_pen = (Pen)pen.Clone();
-            float coef = 7;
+            float coef = 4;
             float new_width = size / coef;
             new_pen.Width = new_width;
             Canvas.Image = (Bitmap)saved.Clone();
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics RepresG = Graphics.FromImage(Repres);
-            float new_size = new_width / coef + 5;
+            float new_size = new_width / coef + 15;
             RepresG.DrawRectangle(new_pen, (float)(X / scale), (float)(Y / scale), new_size, new_size);
             RepresG.FillRectangle(brush, (float)(X / scale), (float)(Y / scale), new_size, new_size);
             Canvas.Image = Repres;

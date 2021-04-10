@@ -29,7 +29,7 @@ namespace Paint
             FrameWidth = CanvasWidth;
             FrameHeight = CanvasHeight;
             bm = CreateFrame();
-            CurrentInstrument = new MBrush(pen, 20, 1);
+            CurrentInstrument = new MPen(pen, 20, 1);
             CurrentInstrument.Canvas = Canvas;
             RefreshGI();
             Canvas.Width = CanvasWidth;
@@ -490,14 +490,14 @@ namespace Paint
             CurrentInstrument = new MLine(pen, size, scale, g, gI, Canvas);
         }
 
-        private void BrushButton_Click(object sender, EventArgs e)
+        private void PenButton_Click(object sender, EventArgs e)
         {
             SetBrush();
         }
 
         private void SetBrush()
         {
-            CurrentInstrument = new MBrush(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MPen(pen, size, scale, g, gI, Canvas);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -541,8 +541,8 @@ namespace Paint
 
         private void Eraser_Click(object sender, EventArgs e)
         {
-            Pen pen = new Pen(CanvasColor);
-            CurrentInstrument = new MBrush(pen, size, scale, g, gI, Canvas);
+            Pen new_pen = new Pen(CanvasColor);
+            CurrentInstrument = new MCircleBrush(new_pen, size, scale, g, gI, Canvas);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -664,6 +664,16 @@ namespace Paint
                     bitmaps[i] = new Bitmap(bitmaps[i], new Size(new_width, new_height));
                 }
             }
+        }
+
+        private void CircleBrushButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MCircleBrush(pen, size, scale, g, gI, Canvas);
+        }
+
+        private void SquareBrushButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new MSquareBrush(pen, size, scale, g, gI, Canvas);
         }
     }
 }

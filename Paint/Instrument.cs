@@ -18,6 +18,7 @@ namespace Paint
         public Pen pen;
         public PictureBox Canvas;
         public Bitmap saved;
+
         public abstract void OnMouseDown(int X, int Y);
 
         public abstract void OnMouseMove(int X, int Y, bool isShift);
