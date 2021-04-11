@@ -279,6 +279,7 @@ namespace Paint
             if (ColorDialog.ShowDialog() == DialogResult.OK)
             {
                 SetBackColor(ColorDialog.Color);
+                AddToHistory();
             }
         }
 
