@@ -743,16 +743,27 @@ namespace Paint
             {
                 int new_width = sf.FrameWidth;
                 int new_height = sf.FrameHeight;
-                framerate = sf.FrameRate;
-                Canvas.Width = new_width;
-                Canvas.Height = new_height;
-                FrameWidth = new_width;
-                FrameHeight = new_height;
-                
-                for (int i = 0; i < bitmaps.Count; i++)
+                if (new_width != FrameWidth || new_height != FrameHeight)
                 {
-                    bitmaps[i] = new Bitmap(bitmaps[i], new Size(new_width, new_height));
+                    Canvas.Width = (int)(new_width * scale);
+                    Canvas.Height = (int)(new_height * scale);
+                    FrameWidth = new_width;
+                    FrameHeight = new_height;
+                    for (int i = 0; i < bitmaps.Count; i++)
+                    {
+                        bitmaps[i] = new Bitmap(bitmaps[i], new Size(new_width, new_height));
+                    }
+                    for (int i = 0; i < history.Count; i++)
+                    {
+                        history[i] = new Bitmap(history[i], new Size(new_width, new_height));
+                    }
+                    bm = new Bitmap(bm, new Size(new_width, new_height));
+                    RefreshCanvas();
+                    RefreshGI();
                 }
+                framerate = sf.FrameRate;
+
+
             }
         }
 
