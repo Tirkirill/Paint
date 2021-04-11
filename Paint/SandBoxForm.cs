@@ -22,24 +22,19 @@ namespace Paint
         }
         private void Init(string FileName)
         {
-            pen = new Pen(Color.Black);
-            brush = new SolidBrush(Color.Black);
+            InitBrushPen();
             AVIReader aw = new AVIReader();
             aw.Open(FileName);
             framerate = (int)aw.FrameRate;
             Bitmap fr = aw.GetNextFrame();
-            FrameWidth = fr.Width;
-            FrameHeight = fr.Height;
-            CanvasColor = Color.White;
-            BackColorButton.BackColor = Color.White;
-            
+            InitFrameSize(fr.Width, fr.Height);
+            SetBackColor(Color.White);
+            InitLists();
+            InitVariables();
             int awLen = aw.Length;
             double framedur = ((double)(60 / framerate)) / 60;
-            bitmaps = new List<Bitmap>();
-            FrameDurations = new List<double>();
             bitmaps.Add(fr);
             FrameDurations.Add(framedur);
-            LocY = 25;
             AddFrameToGallery(0, LocY);
             LocY += 95;
             for (int i = 1; i < awLen; i++)
@@ -50,23 +45,12 @@ namespace Paint
                 AddFrameToGallery(bitmaps.Count - 1, LocY);
                 LocY += 95;
             }
-            CurrentIndex = 0;
-            history = new List<Bitmap>();
-
-            
-            Canvas.Width = FrameWidth;
-            Canvas.Height = FrameHeight;
             SetBrush();
             SelectPB(0);
             RefreshGI();
             RefreshG();
             InitBrushSizeBar();
-            SetScale(100);
-            ScaleBar.Value = 100;
-            paint = false;
-            BrushColorButton.BackColor = Color.Black;
-            PenColorButton.BackColor = Color.Black;
-            SetUndoReturnButtonColor();
+            InitScaleBar();
         }
         private void InitBrushSizeBar()
         {
@@ -78,31 +62,55 @@ namespace Paint
         }
         private void Init(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
-            pen = new Pen(Color.Black);
-            brush = new SolidBrush(Color.Black);
-            FrameWidth = CanvasWidth;
-            FrameHeight = CanvasHeight;
+            InitBrushPen();
+            InitFrameSize(CanvasWidth, CanvasHeight);
             bm = CreateFrame();
-            Canvas.Width = CanvasWidth;
-            Canvas.Height = CanvasHeight;
             SetBrush();
             RefreshGI();
             RefreshG();
             SetBackColor(BackColor);
-            this.CurrentIndex = 0;
-            FrameDurations = new List<double>();
-            bitmaps =  new List<Bitmap>();
-            LocY = 25;
-            history = new List<Bitmap>();
+            InitVariables();
+            InitLists();
             AddToHistory();
             InitBrushSizeBar();
-            SetScale(100);
-            ScaleBar.Value = 100;
-            paint = false;
+            InitScaleBar();
             framerate = Register.InitFrameRate;
+        }
+        private void InitVariables()
+        {
+            paint = false;
+            LocY = 25;
+            CurrentIndex = 0;
+        }
+
+        private void InitFrameSize(int frameWidth, int frameHeight)
+        {
+            FrameWidth = frameWidth;
+            FrameHeight = frameHeight;
+            Canvas.Width = frameWidth;
+            Canvas.Height = frameHeight;
+        }
+
+        private void InitLists()
+        {
+            history = new List<Bitmap>();
+            bitmaps = new List<Bitmap>();
+            FrameDurations = new List<double>();
+        }
+
+        private void InitBrushPen()
+        {
+            pen = new Pen(Color.Black);
+            brush = new SolidBrush(Color.Black);
             BrushColorButton.BackColor = Color.Black;
             PenColorButton.BackColor = Color.Black;
-            SetUndoReturnButtonColor();
+        }
+
+        private void InitScaleBar()
+        {
+            int init = Register.InitScaleSize;
+            SetScale(init);
+            ScaleBar.Value = init;
         }
 
         List<Bitmap> history;
@@ -278,10 +286,7 @@ namespace Paint
             CreateForm cr = new CreateForm();
             if (cr.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i<bitmaps.Count; i++)
-                {
-                    getPb(i).Dispose();
-                }
+                ClearGallery();
                 Init(cr.CanvasColor, cr.CanvasWidth, cr.CanvasHeight);
             }
         }
@@ -792,12 +797,21 @@ namespace Paint
             ReturnHistory();
         }
 
+        private void ClearGallery()
+        {
+            for (int i = 0; i < bitmaps.Count; i++)
+            {
+                getPb(i).Dispose();
+            }
+        }
+
         private void OpenButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog oFD = new OpenFileDialog();
             oFD.Filter = "(*.avi)|*.avi";
             if (oFD.ShowDialog() == DialogResult.OK)
             {
+                ClearGallery();
                 Init(oFD.FileName);
             }
             opened = true;

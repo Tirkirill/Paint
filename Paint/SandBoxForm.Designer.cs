@@ -70,11 +70,11 @@ namespace Paint
             this.BrushesButtons = new System.Windows.Forms.GroupBox();
             this.WorkPanel = new System.Windows.Forms.Panel();
             this.ProjectPanel = new System.Windows.Forms.Panel();
+            this.OpenButton = new System.Windows.Forms.Button();
             this.ReturnButton = new System.Windows.Forms.Button();
             this.UndoButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.OpenButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.CanvasPanel.SuspendLayout();
@@ -508,9 +508,20 @@ namespace Paint
             this.ProjectPanel.Size = new System.Drawing.Size(396, 28);
             this.ProjectPanel.TabIndex = 41;
             // 
+            // OpenButton
+            // 
+            this.OpenButton.Location = new System.Drawing.Point(70, 3);
+            this.OpenButton.Name = "OpenButton";
+            this.OpenButton.Size = new System.Drawing.Size(59, 23);
+            this.OpenButton.TabIndex = 44;
+            this.OpenButton.Text = "Открыть";
+            this.OpenButton.UseVisualStyleBackColor = true;
+            this.OpenButton.Click += new System.EventHandler(this.OpenButton_Click);
+            // 
             // ReturnButton
             // 
             this.ReturnButton.BackColor = System.Drawing.Color.Transparent;
+            this.ReturnButton.Enabled = false;
             this.ReturnButton.Location = new System.Drawing.Point(311, 3);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Size = new System.Drawing.Size(75, 23);
@@ -522,6 +533,7 @@ namespace Paint
             // UndoButton
             // 
             this.UndoButton.BackColor = System.Drawing.Color.Transparent;
+            this.UndoButton.Enabled = false;
             this.UndoButton.Location = new System.Drawing.Point(230, 3);
             this.UndoButton.Name = "UndoButton";
             this.UndoButton.Size = new System.Drawing.Size(75, 23);
@@ -557,16 +569,6 @@ namespace Paint
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(201, 579);
             this.panel1.TabIndex = 43;
-            // 
-            // OpenButton
-            // 
-            this.OpenButton.Location = new System.Drawing.Point(70, 3);
-            this.OpenButton.Name = "OpenButton";
-            this.OpenButton.Size = new System.Drawing.Size(59, 23);
-            this.OpenButton.TabIndex = 44;
-            this.OpenButton.Text = "Открыть";
-            this.OpenButton.UseVisualStyleBackColor = true;
-            this.OpenButton.Click += new System.EventHandler(this.OpenButton_Click);
             // 
             // SandBoxForm
             // 
