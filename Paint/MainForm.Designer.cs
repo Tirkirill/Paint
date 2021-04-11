@@ -64,8 +64,11 @@ namespace Paint
             this.Controls.Add(this.OpenVideoButton);
             this.Controls.Add(this.NewProjectButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(290, 93);
+            this.MinimumSize = new System.Drawing.Size(290, 93);
             this.Name = "MainForm";
-            this.Text = "Penгвин: Главная";
+            this.Text = "Paintгвин: Главная";
             this.ResumeLayout(false);
 
         }

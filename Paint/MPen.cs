@@ -55,9 +55,9 @@ namespace Paint
             }
             else
             {
-                pen.Width = (float)(size * scale);
+                new_pen.Width = (float)(size * scale);
                 g.DrawLines(new_pen, pointsG.ToArray());
-                pen.Width = size;
+                new_pen.Width = size;
                 gI.DrawLines(new_pen, pointsGI.ToArray());
             }
            

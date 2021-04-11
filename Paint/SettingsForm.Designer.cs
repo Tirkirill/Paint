@@ -113,9 +113,11 @@ namespace Paint
             this.Controls.Add(this.FrameHeightBox);
             this.Controls.Add(this.FrameWidthBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(269, 186);
+            this.MinimumSize = new System.Drawing.Size(269, 186);
             this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
-            this.Text = "Penгвин: настройки";
+            this.Text = "Настройки";
             this.ResumeLayout(false);
             this.PerformLayout();
 

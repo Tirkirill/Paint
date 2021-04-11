@@ -28,7 +28,6 @@ namespace Paint
             framerate = (int)aw.FrameRate;
             Bitmap fr = aw.GetNextFrame();
             InitFrameSize(fr.Width, fr.Height);
-            SetBackColor(Color.White);
             InitLists();
             InitVariables();
             int awLen = aw.Length;
@@ -46,6 +45,7 @@ namespace Paint
                 LocY += 95;
             }
             SetBrush();
+            SetBackColor(Color.White);
             SelectPB(0);
             RefreshGI();
             RefreshG();
