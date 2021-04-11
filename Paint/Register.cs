@@ -34,6 +34,8 @@ namespace Paint
         public static int MinFrameRate = 2;
         public static int InitFrameRate = 5;
 
+        public static int MaxHistoryCount = 100;
+
         public enum ProgramRegimes
         {
             NewProject, OpenVideo

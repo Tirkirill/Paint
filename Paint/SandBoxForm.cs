@@ -197,8 +197,9 @@ namespace Paint
             }
             history.Add((Bitmap)bm.Clone());
             CurrentHistoryIndex = history.Count - 1;
-            if (history.Count > 100)
+            if (history.Count > Register.MaxHistoryCount)
             {
+                CurrentHistoryIndex -=1;
                 history.RemoveAt(0);
             }
             SetUndoReturnButtonColor();
