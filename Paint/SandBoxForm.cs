@@ -130,6 +130,7 @@ namespace Paint
         int IndexAfterDrag;
         Instrument CurrentInstrument;
         int CurrentHistoryIndex;
+        bool opened = false;
 
         Point LastMouseMovePosition;
         
@@ -168,6 +169,11 @@ namespace Paint
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
+            if (opened)
+            {
+                opened = false;
+                return;
+            }
             paint = false;
             RefreshCanvas();
             CurrentInstrument.OnMouseUp(e.X, e.Y, isShift);
@@ -794,6 +800,7 @@ namespace Paint
             {
                 Init(oFD.FileName);
             }
+            opened = true;
         }
     }
 }
