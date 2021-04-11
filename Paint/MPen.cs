@@ -44,20 +44,21 @@ namespace Paint
         private void Draw(int X, int Y) {
             pointsG.Add(new Point(X, Y));
             pointsGI.Add(new Point((int)(X / scale), (int)(Y / scale)));
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            Pen new_pen = (Pen)pen.Clone();
+            new_pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            new_pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             if (pointsG.Count < 2)
             {
                 float SizeCoef = Utilities.GetSizeCoef(size, scale);
-                g.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForG(X, SizeCoef), Utilities.CoordForG(Y, SizeCoef), SizeCoef, SizeCoef);
-                gI.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
+                g.FillEllipse(new SolidBrush(new_pen.Color), Utilities.CoordForG(X, SizeCoef), Utilities.CoordForG(Y, SizeCoef), SizeCoef, SizeCoef);
+                gI.FillEllipse(new SolidBrush(new_pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
             }
             else
             {
                 pen.Width = (float)(size * scale);
-                g.DrawLines(pen, pointsG.ToArray());
+                g.DrawLines(new_pen, pointsG.ToArray());
                 pen.Width = size;
-                gI.DrawLines(pen, pointsGI.ToArray());
+                gI.DrawLines(new_pen, pointsGI.ToArray());
             }
            
         }
@@ -65,18 +66,21 @@ namespace Paint
         public override void OnMouseUp(int X, int Y, bool isShift)
         {
             pen.Width = (float)(size * scale);
+            Pen new_pen = (Pen)pen.Clone();
+            new_pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            new_pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             if (pointsG.Count < 2)
             {
                 float SizeCoef = Utilities.GetSizeCoef(size, scale);
-                g.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForG(X, SizeCoef), Utilities.CoordForG(Y, SizeCoef), SizeCoef, SizeCoef);
-                gI.FillEllipse(new SolidBrush(pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
+                g.FillEllipse(new SolidBrush(new_pen.Color), Utilities.CoordForG(X, SizeCoef), Utilities.CoordForG(Y, SizeCoef), SizeCoef, SizeCoef);
+                gI.FillEllipse(new SolidBrush(new_pen.Color), Utilities.CoordForGI(X, scale, size), Utilities.CoordForGI(Y, scale, size), size, size);
             }
             else
             {
-                pen.Width = (float)(size * scale);
-                g.DrawLines(pen, pointsG.ToArray());
-                pen.Width = size;
-                gI.DrawLines(pen, pointsGI.ToArray());
+                new_pen.Width = (float)(size * scale);
+                g.DrawLines(new_pen, pointsG.ToArray());
+                new_pen.Width = size;
+                gI.DrawLines(new_pen, pointsGI.ToArray());
             }
             pointsG.Clear();
             pointsGI.Clear();
