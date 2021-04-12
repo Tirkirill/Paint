@@ -447,7 +447,6 @@ namespace Paint
             // 
             // BottomPanel
             // 
-            this.BottomPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BottomPanel.Controls.Add(this.BrushSizeBar);
             this.BottomPanel.Controls.Add(this.BrushSizeValueLabel);
             this.BottomPanel.Controls.Add(this.BrushSizeBarLabel);
@@ -575,7 +574,7 @@ namespace Paint
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1205, 709);
+            this.ClientSize = new System.Drawing.Size(1035, 709);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.WorkPanel);
