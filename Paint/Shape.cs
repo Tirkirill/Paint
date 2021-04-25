@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Paint
 {
@@ -17,6 +18,15 @@ namespace Paint
             fX = X;
             fY = Y;
             saved = (Bitmap)Canvas.Image.Clone();
+        }
+
+        public Shape(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas)
+        {
+            this.pen = pen;
+            this.size = size;
+            this.scale = scale;
+            this.gI = gI;
+            this.Canvas = Canvas;
         }
     }
 }

@@ -37,13 +37,9 @@ namespace Paint
         }
 
         public MTriangle(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)
+            :base(pen, size, scale, gI, Canvas)
         {
-            this.pen = pen;
             this.brush = brush;
-            this.size = size;
-            this.scale = scale;
-            this.gI = gI;
-            this.Canvas = Canvas;
         }
 
         public void DrawShapeGI(Graphics gI, int X, int Y, float width)

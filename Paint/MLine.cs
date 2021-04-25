@@ -11,13 +11,6 @@ namespace Paint
     public class MLine : Shape
     {
 
-        public override void OnMouseDown(int X, int Y)
-        {
-            fX = X;
-            fY = Y;
-            saved = (Bitmap)Canvas.Image.Clone();
-        }
-
         public override void OnMouseMove(int X, int Y, bool isShift)
         {
             Canvas.Image = saved;
@@ -67,13 +60,8 @@ namespace Paint
             InstrumentUtilities.OnMouseMoveWPBrush(Canvas, saved, pen, X, Y, scale, size);
         }
 
-        public MLine(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas)
+        public MLine(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas):base(pen, size, scale, gI, Canvas)
         {
-            this.pen = pen;
-            this.size = size;
-            this.scale = scale;
-            this.gI = gI;
-            this.Canvas = Canvas;
         }
     }
 }
