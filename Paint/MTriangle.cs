@@ -10,12 +10,6 @@ namespace Paint
 {
     class MTriangle : Shape
     {
-        public override void OnMouseDown(int X, int Y)
-        {
-            fX = X;
-            fY = Y;
-            saved = (Bitmap)Canvas.Image.Clone();
-        }
 
         public override void OnMouseMove(int X, int Y, bool isShift)
         {
