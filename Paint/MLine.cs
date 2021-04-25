@@ -67,12 +67,11 @@ namespace Paint
             InstrumentUtilities.OnMouseMoveWPBrush(Canvas, saved, pen, X, Y, scale, size);
         }
 
-        public MLine(Pen pen, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
+        public MLine(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.size = size;
             this.scale = scale;
-            this.g = g;
             this.gI = gI;
             this.Canvas = Canvas;
         }

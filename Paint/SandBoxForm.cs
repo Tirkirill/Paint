@@ -47,7 +47,6 @@ namespace Paint
             SetBackColor(Color.White);
             SelectPB(0);
             RefreshGI();
-            RefreshG();
             InitBrushSizeBar();
             InitScaleBar();
         }
@@ -66,7 +65,6 @@ namespace Paint
             bm = CreateFrame();
             SetBrush();
             RefreshGI();
-            RefreshG();
             gIWithSelection = Graphics.FromImage(bm);
             SetBackColor(BackColor);
             InitVariables();
@@ -124,7 +122,6 @@ namespace Paint
         double scale;
 
         Bitmap bm;
-        Graphics g;
         Graphics gI;
         int FrameWidth;
         int FrameHeight;
@@ -162,8 +159,6 @@ namespace Paint
             CanvasColor = BackColor;
             Canvas.BackColor = BackColor;
             bm = CreateFrame();
-            RefreshG();
-            g.Clear(BackColor);
             RefreshGI();
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
@@ -173,7 +168,6 @@ namespace Paint
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            g.Clear(CanvasColor);
             gI.Clear(CanvasColor);
             RefreshCanvas();
             ClearHistory();
@@ -297,12 +291,6 @@ namespace Paint
                 ClearGallery();
                 Init(cr.CanvasColor, cr.CanvasWidth, cr.CanvasHeight);
             }
-        }
-
-        private void RefreshG()
-        {
-            g = Canvas.CreateGraphics();
-            CurrentInstrument.g = g;
         }
 
         private void SaveFile(object sender, EventArgs e)
@@ -501,7 +489,6 @@ namespace Paint
                 LocY += 95;
                 SetGalleryFrameBorder(CurrentIndex, pbTag);
                 CurrentIndex = pbTag;
-                RefreshG();
                 RefreshGI();
             }
             else
@@ -570,7 +557,6 @@ namespace Paint
             Canvas.Image = bm;
             if (CurrentInstrument != null)
             {
-                RefreshG();
                 CurrentInstrument.OnMouseEnter();
             }
         }
@@ -584,7 +570,7 @@ namespace Paint
 
         private void LineButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MLine(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MLine(pen, size, scale, gI, Canvas);
         }
 
         private void PenButton_Click(object sender, EventArgs e)
@@ -594,7 +580,7 @@ namespace Paint
 
         private void SetBrush()
         {
-            CurrentInstrument = new MPen(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MPen(pen, size, scale, gI, Canvas);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -619,28 +605,23 @@ namespace Paint
 
         private void RectangleButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MRectangle(pen, brush, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MRectangle(pen, brush, size, scale,gI, Canvas);
         }
 
         private void EllipseButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MEllipse(pen, brush, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MEllipse(pen, brush, size, scale, gI, Canvas);
         }
 
         private void TriangleButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MTriangle(pen, brush, size, scale, g, gI, Canvas);
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            CurrentInstrument = new MTriangle(pen, brush, size, scale, gI, Canvas);
         }
 
         private void Eraser_Click(object sender, EventArgs e)
         {
             Pen new_pen = new Pen(CanvasColor);
-            CurrentInstrument = new MCircleBrush(new_pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MCircleBrush(new_pen, size, scale, gI, Canvas);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -778,12 +759,12 @@ namespace Paint
 
         private void CircleBrushButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MCircleBrush(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MCircleBrush(pen, size, scale, gI, Canvas);
         }
 
         private void SquareBrushButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new MSquareBrush(pen, size, scale, g, gI, Canvas);
+            CurrentInstrument = new MSquareBrush(pen, size, scale, gI, Canvas);
         }
 
         private void Undo()
@@ -839,7 +820,7 @@ namespace Paint
 
         private void SelectionButton_Click(object sender, EventArgs e)
         {
-            CurrentInstrument = new Selection(size, scale, g, gI, Canvas, selectionArea);
+            CurrentInstrument = new Selection(size, scale, gI, Canvas, selectionArea);
         }
     }
 }

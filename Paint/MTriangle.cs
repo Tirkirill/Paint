@@ -36,13 +36,12 @@ namespace Paint
             DrawShapeGI(gI, X, Y, width);
         }
 
-        public MTriangle(Pen pen, Brush brush, int size, double scale, Graphics g, Graphics gI, PictureBox Canvas)
+        public MTriangle(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.brush = brush;
             this.size = size;
             this.scale = scale;
-            this.g = g;
             this.gI = gI;
             this.Canvas = Canvas;
         }

@@ -10,7 +10,6 @@ namespace Paint
 {
     public abstract class Instrument
     {
-        public Graphics g;
         public Graphics gI;
         public int size;
         public double scale;

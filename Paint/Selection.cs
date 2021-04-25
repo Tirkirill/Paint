@@ -56,11 +56,10 @@ namespace Paint
             DrawShapeGI(gI, X, Y, width, height);
         }
 
-        public Selection(int size, double scale, Graphics g, Graphics gI, PictureBox Canvas, SelectionArea selectionArea)
+        public Selection(int size, double scale, Graphics gI, PictureBox Canvas, SelectionArea selectionArea)
         {
             this.size = size;
             this.scale = scale;
-            this.g = g;
             this.gI = gI;
             this.Canvas = Canvas;
             this.selectionArea = selectionArea;

@@ -94,6 +94,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MBrush.cs" />
     <Compile Include="MCircleBrush.cs" />
     <Compile Include="MEllipse.cs" />
     <Compile Include="MPen.cs" />
