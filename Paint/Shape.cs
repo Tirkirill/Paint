@@ -11,5 +11,12 @@ namespace Paint
     {
         public int fX;
         public int fY;
+
+        public override void OnMouseDown(int X, int Y)
+        {
+            fX = X;
+            fY = Y;
+            saved = (Bitmap)Canvas.Image.Clone();
+        }
     }
 }
