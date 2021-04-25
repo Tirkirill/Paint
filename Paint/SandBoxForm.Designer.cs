@@ -64,6 +64,7 @@ namespace Paint
             this.CircleBrushButton = new System.Windows.Forms.Button();
             this.SquareBrushButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.SelectionButton = new System.Windows.Forms.Button();
             this.ShapesButton = new System.Windows.Forms.GroupBox();
             this.BrushesButtons = new System.Windows.Forms.GroupBox();
             this.WorkPanel = new System.Windows.Forms.Panel();
@@ -73,7 +74,6 @@ namespace Paint
             this.UndoButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.SelectionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.CanvasPanel.SuspendLayout();
@@ -459,6 +459,18 @@ namespace Paint
             this.BottomPanel.Size = new System.Drawing.Size(797, 65);
             this.BottomPanel.TabIndex = 38;
             // 
+            // SelectionButton
+            // 
+            this.SelectionButton.BackColor = System.Drawing.Color.Transparent;
+            this.SelectionButton.ForeColor = System.Drawing.Color.Black;
+            this.SelectionButton.Location = new System.Drawing.Point(545, 37);
+            this.SelectionButton.Name = "SelectionButton";
+            this.SelectionButton.Size = new System.Drawing.Size(81, 23);
+            this.SelectionButton.TabIndex = 33;
+            this.SelectionButton.Text = "Выделение";
+            this.SelectionButton.UseVisualStyleBackColor = false;
+            this.SelectionButton.Click += new System.EventHandler(this.SelectionButton_Click);
+            // 
             // ShapesButton
             // 
             this.ShapesButton.Controls.Add(this.LineButton);
@@ -569,24 +581,12 @@ namespace Paint
             this.panel1.Size = new System.Drawing.Size(201, 579);
             this.panel1.TabIndex = 43;
             // 
-            // SelectionButton
-            // 
-            this.SelectionButton.BackColor = System.Drawing.Color.Transparent;
-            this.SelectionButton.ForeColor = System.Drawing.Color.Black;
-            this.SelectionButton.Location = new System.Drawing.Point(545, 37);
-            this.SelectionButton.Name = "SelectionButton";
-            this.SelectionButton.Size = new System.Drawing.Size(81, 23);
-            this.SelectionButton.TabIndex = 33;
-            this.SelectionButton.Text = "Выделение";
-            this.SelectionButton.UseVisualStyleBackColor = false;
-            this.SelectionButton.Click += new System.EventHandler(this.SelectionButton_Click);
-            // 
             // SandBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1035, 709);
+            this.ClientSize = new System.Drawing.Size(1185, 709);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.WorkPanel);

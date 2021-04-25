@@ -37,6 +37,9 @@ namespace Paint
             this.FrameHeightLabel = new System.Windows.Forms.Label();
             this.FrameWidthLabel = new System.Windows.Forms.Label();
             this.SaveSettingsButton = new System.Windows.Forms.Button();
+            this.AdditionalForms = new System.Windows.Forms.GroupBox();
+            this.LayersCheck = new System.Windows.Forms.CheckBox();
+            this.AdditionalForms.SuspendLayout();
             this.SuspendLayout();
             // 
             // FrameWidthBox
@@ -55,7 +58,7 @@ namespace Paint
             // 
             // FrameRateBox
             // 
-            this.FrameRateBox.Location = new System.Drawing.Point(12, 79);
+            this.FrameRateBox.Location = new System.Drawing.Point(12, 71);
             this.FrameRateBox.Name = "FrameRateBox";
             this.FrameRateBox.Size = new System.Drawing.Size(100, 20);
             this.FrameRateBox.TabIndex = 2;
@@ -64,7 +67,7 @@ namespace Paint
             // 
             this.FrameRateLabel.AutoSize = true;
             this.FrameRateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FrameRateLabel.Location = new System.Drawing.Point(118, 79);
+            this.FrameRateLabel.Location = new System.Drawing.Point(118, 71);
             this.FrameRateLabel.Name = "FrameRateLabel";
             this.FrameRateLabel.Size = new System.Drawing.Size(133, 20);
             this.FrameRateLabel.TabIndex = 3;
@@ -92,7 +95,7 @@ namespace Paint
             // 
             // SaveSettingsButton
             // 
-            this.SaveSettingsButton.Location = new System.Drawing.Point(12, 112);
+            this.SaveSettingsButton.Location = new System.Drawing.Point(12, 226);
             this.SaveSettingsButton.Name = "SaveSettingsButton";
             this.SaveSettingsButton.Size = new System.Drawing.Size(239, 23);
             this.SaveSettingsButton.TabIndex = 6;
@@ -100,11 +103,34 @@ namespace Paint
             this.SaveSettingsButton.UseVisualStyleBackColor = true;
             this.SaveSettingsButton.Click += new System.EventHandler(this.SaveSettingsButton_Click);
             // 
+            // AdditionalForms
+            // 
+            this.AdditionalForms.Controls.Add(this.LayersCheck);
+            this.AdditionalForms.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AdditionalForms.Location = new System.Drawing.Point(13, 105);
+            this.AdditionalForms.Name = "AdditionalForms";
+            this.AdditionalForms.Size = new System.Drawing.Size(238, 64);
+            this.AdditionalForms.TabIndex = 7;
+            this.AdditionalForms.TabStop = false;
+            this.AdditionalForms.Text = "Дополнительные окна";
+            // 
+            // LayersCheck
+            // 
+            this.LayersCheck.AutoSize = true;
+            this.LayersCheck.Location = new System.Drawing.Point(7, 26);
+            this.LayersCheck.Name = "LayersCheck";
+            this.LayersCheck.Size = new System.Drawing.Size(67, 24);
+            this.LayersCheck.TabIndex = 0;
+            this.LayersCheck.Text = "Слои";
+            this.LayersCheck.UseVisualStyleBackColor = true;
+            this.LayersCheck.CheckedChanged += new System.EventHandler(this.LayersCheck_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 147);
+            this.ClientSize = new System.Drawing.Size(254, 261);
+            this.Controls.Add(this.AdditionalForms);
             this.Controls.Add(this.SaveSettingsButton);
             this.Controls.Add(this.FrameWidthLabel);
             this.Controls.Add(this.FrameHeightLabel);
@@ -113,11 +139,13 @@ namespace Paint
             this.Controls.Add(this.FrameHeightBox);
             this.Controls.Add(this.FrameWidthBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(269, 186);
-            this.MinimumSize = new System.Drawing.Size(269, 186);
+            this.MaximumSize = new System.Drawing.Size(270, 300);
+            this.MinimumSize = new System.Drawing.Size(270, 300);
             this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
             this.Text = "Настройки";
+            this.AdditionalForms.ResumeLayout(false);
+            this.AdditionalForms.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,5 +160,7 @@ namespace Paint
         private System.Windows.Forms.Label FrameHeightLabel;
         private System.Windows.Forms.Label FrameWidthLabel;
         private System.Windows.Forms.Button SaveSettingsButton;
+        private System.Windows.Forms.GroupBox AdditionalForms;
+        private System.Windows.Forms.CheckBox LayersCheck;
     }
 }

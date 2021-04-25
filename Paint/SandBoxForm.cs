@@ -24,13 +24,13 @@ namespace Paint
             InitBrushPen();
             AVIReader aw = new AVIReader();
             aw.Open(FileName);
-            framerate = (int)aw.FrameRate;
+            Settings.framerate = (int)aw.FrameRate;
             Bitmap fr = aw.GetNextFrame();
             InitFrameSize(fr.Width, fr.Height);
             InitLists();
             InitVariables();
             int awLen = aw.Length;
-            double framedur = ((double)(60 / framerate)) / 60;
+            double framedur = ((double)(60 / Settings.framerate)) / 60;
             bitmaps.Add(fr);
             FrameDurations.Add(framedur);
             AddFrameToGallery(0, LocY);
@@ -65,14 +65,14 @@ namespace Paint
             bm = CreateFrame();
             SetBrush();
             RefreshGI();
-            gIWithSelection = Graphics.FromImage(bm);
             SetBackColor(BackColor);
             InitVariables();
             InitLists();
             AddToHistory();
+            layers.Add(CreateBGLayer());
             InitBrushSizeBar();
             InitScaleBar();
-            framerate = Register.InitFrameRate;
+            Settings.framerate = Register.InitFrameRate;
         }
         private void InitVariables()
         {
@@ -94,6 +94,7 @@ namespace Paint
         {
             history = new List<Bitmap>();
             bitmaps = new List<Bitmap>();
+            layers = new List<Layer>();
             FrameDurations = new List<double>();
         }
 
@@ -120,7 +121,6 @@ namespace Paint
 
         int size;
         double scale;
-
         Bitmap bm;
         Graphics gI;
         int FrameWidth;
@@ -130,16 +130,16 @@ namespace Paint
         int LocY;
         int CurrentIndex;
         List<double> FrameDurations;
-        int framerate;
         bool isDragging = false;
         Frame DraggingObj;
         int IndexAfterDrag;
         Instrument CurrentInstrument;
         int CurrentHistoryIndex;
         bool opened = false;
+        public LayersForm lF = new LayersForm();
+        List<Layer> layers;
 
         SelectionArea selectionArea;
-        Graphics gIWithSelection;
 
         Point LastMouseMovePosition;
         
@@ -163,6 +163,13 @@ namespace Paint
             gI.Clear(BackColor);
             BackColorButton.BackColor = BackColor;
             RefreshCanvas();
+        }
+
+        private Layer CreateBGLayer()
+        {
+            Bitmap bg = new Bitmap(FrameWidth, FrameHeight);
+            Graphics.FromImage(bg).Clear(CanvasColor);
+            return new RasterLayer("Фон", bg, gI);
         }
 
 
@@ -333,13 +340,13 @@ namespace Paint
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 AVIWriter aw = new AVIWriter("MSVC");
-                aw.FrameRate = framerate;
+                aw.FrameRate = Settings.framerate;
                 aw.Open(sfd.FileName, FrameWidth, FrameHeight);
                 for (int j =0; j<bitmaps.Count; j++)
                 {
                     Bitmap bitmap = (Bitmap)bitmaps[j].Clone();
                     double secs = FrameDurations[j];
-                    for (int i = 0; i < secs*framerate; i++)
+                    for (int i = 0; i < secs*Settings.framerate; i++)
                     {
                         aw.AddFrame(bitmap);
                     }
@@ -728,7 +735,7 @@ namespace Paint
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            SettingsForm sf = new SettingsForm(FrameWidth, FrameHeight, framerate);
+            SettingsForm sf = new SettingsForm(FrameWidth, FrameHeight);
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 int new_width = sf.FrameWidth;
@@ -751,9 +758,26 @@ namespace Paint
                     RefreshCanvas();
                     RefreshGI();
                 }
-                framerate = sf.FrameRate;
-
-
+                Settings.framerate = sf.FrameRate;
+                bool opened = Settings.OpenLayersForm;
+                Settings.OpenLayersForm = sf.OpenLayersForm;
+                if (sf.OpenLayersForm)
+                {
+                    try
+                    {
+                        lF.Show();
+                    }
+                    catch
+                    {
+                        lF = new LayersForm(layers);
+                        lF.Show();
+                    }
+                    lF.DrawLayerGallery();
+                }
+                else if (opened)
+                {
+                    lF.Close();
+                }
             }
         }
 

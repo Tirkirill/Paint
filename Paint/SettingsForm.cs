@@ -15,12 +15,14 @@ namespace Paint
         public int FrameWidth;
         public int FrameHeight;
         public int FrameRate;
-        public SettingsForm(int FrameWidth, int FrameHeight, int FrameRate)
+        public bool OpenLayersForm;
+        public SettingsForm(int FrameWidth, int FrameHeight)
         {
             InitializeComponent();
             FrameHeightBox.Text = FrameHeight.ToString();
             FrameWidthBox.Text = FrameWidth.ToString();
-            FrameRateBox.Text = FrameRate.ToString();
+            FrameRateBox.Text = Settings.framerate.ToString();
+            LayersCheck.Checked = Settings.OpenLayersForm;
         }
 
         private void SaveSettingsButton_Click(object sender, EventArgs e)
@@ -39,6 +41,11 @@ namespace Paint
                 else MessageBox.Show(String.Format(StringResources.IncorrectHeightInputTemplate, Register.MinFrameHeight, Register.MaxFrameHeight));
             }
             else MessageBox.Show(String.Format(StringResources.IncorrectWidthInputTemplate, Register.MinFrameWidth, Register.MaxFrameWidth));
+        }
+
+        private void LayersCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            OpenLayersForm = LayersCheck.Checked;
         }
     }
 }

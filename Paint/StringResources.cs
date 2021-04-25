@@ -17,5 +17,9 @@ namespace Paint
         static public string FrameNamePrefix = "pb";
         static public string LabelNamePrefix = "lpb";
         static public string BorderNamePrefix = "bpb";
+
+        static public string LayerFrameNamePrefix = "lpb";
+        static public string LayerLabelNamePrefix = "llpb";
+        static public string LayerBorderNamePrefix = "lbpb";
     }
 }
