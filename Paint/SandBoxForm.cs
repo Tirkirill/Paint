@@ -3,11 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using Accord.Video.VFW;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 
 namespace Paint
 {
-    public partial class SandBoxForm : System.Windows.Forms.Form
+    public partial class SandBoxForm : Form
     {
         public SandBoxForm(Color BackColor, int CanvasWidth, int CanvasHeight)
         {
@@ -68,6 +67,7 @@ namespace Paint
             SetBrush();
             RefreshGI();
             RefreshG();
+            gIWithSelection = Graphics.FromImage(bm);
             SetBackColor(BackColor);
             InitVariables();
             InitLists();
@@ -81,6 +81,7 @@ namespace Paint
             paint = false;
             LocY = 25;
             CurrentIndex = 0;
+            selectionArea = new SelectionArea();
         }
 
         private void InitFrameSize(int frameWidth, int frameHeight)
@@ -139,6 +140,9 @@ namespace Paint
         Instrument CurrentInstrument;
         int CurrentHistoryIndex;
         bool opened = false;
+
+        SelectionArea selectionArea;
+        Graphics gIWithSelection;
 
         Point LastMouseMovePosition;
         
@@ -254,10 +258,11 @@ namespace Paint
 
         private void ChoosePenColor()
         {
-            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
             {
-                pen.Color = ColorDialog.Color;
-                PenColorButton.BackColor = ColorDialog.Color;
+                pen.Color = cd.Color;
+                PenColorButton.BackColor = cd.Color;
             }
         }
 
@@ -276,9 +281,10 @@ namespace Paint
 
         private void BackColorButton_Click(object sender, EventArgs e)
         {
-            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
             {
-                SetBackColor(ColorDialog.Color);
+                SetBackColor(cd.Color);
                 AddToHistory();
             }
         }
@@ -603,10 +609,11 @@ namespace Paint
 
         private void ChooseBrushColor()
         {
-            if (ColorDialog.ShowDialog() == DialogResult.OK)
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
             {
-                brush.Color = ColorDialog.Color;
-                BrushColorButton.BackColor = ColorDialog.Color;
+                brush.Color = cd.Color;
+                BrushColorButton.BackColor = cd.Color;
             }
         }
 
@@ -828,6 +835,11 @@ namespace Paint
                 Init(oFD.FileName);
             }
             opened = true;
+        }
+
+        private void SelectionButton_Click(object sender, EventArgs e)
+        {
+            CurrentInstrument = new Selection(size, scale, g, gI, Canvas, selectionArea);
         }
     }
 }

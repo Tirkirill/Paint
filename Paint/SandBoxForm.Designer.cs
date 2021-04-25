@@ -30,7 +30,6 @@ namespace Paint
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SandBoxForm));
-            this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.ClearButton = new System.Windows.Forms.Button();
             this.PenColorButton = new System.Windows.Forms.Button();
             this.BrushColorLabel = new System.Windows.Forms.Label();
@@ -54,7 +53,6 @@ namespace Paint
             this.ScaleLabel = new System.Windows.Forms.Label();
             this.LineButton = new System.Windows.Forms.Button();
             this.PenButton = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.RectangleButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BrushColorButton = new System.Windows.Forms.Button();
@@ -75,6 +73,7 @@ namespace Paint
             this.UndoButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.SelectionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BrushSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.CanvasPanel.SuspendLayout();
@@ -447,6 +446,7 @@ namespace Paint
             // 
             // BottomPanel
             // 
+            this.BottomPanel.Controls.Add(this.SelectionButton);
             this.BottomPanel.Controls.Add(this.BrushSizeBar);
             this.BottomPanel.Controls.Add(this.BrushSizeValueLabel);
             this.BottomPanel.Controls.Add(this.BrushSizeBarLabel);
@@ -569,6 +569,18 @@ namespace Paint
             this.panel1.Size = new System.Drawing.Size(201, 579);
             this.panel1.TabIndex = 43;
             // 
+            // SelectionButton
+            // 
+            this.SelectionButton.BackColor = System.Drawing.Color.Transparent;
+            this.SelectionButton.ForeColor = System.Drawing.Color.Black;
+            this.SelectionButton.Location = new System.Drawing.Point(545, 37);
+            this.SelectionButton.Name = "SelectionButton";
+            this.SelectionButton.Size = new System.Drawing.Size(81, 23);
+            this.SelectionButton.TabIndex = 33;
+            this.SelectionButton.Text = "Выделение";
+            this.SelectionButton.UseVisualStyleBackColor = false;
+            this.SelectionButton.Click += new System.EventHandler(this.SelectionButton_Click);
+            // 
             // SandBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,7 +621,6 @@ namespace Paint
         }
 
         #endregion
-        private System.Windows.Forms.ColorDialog ColorDialog;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button PenColorButton;
         private System.Windows.Forms.Label BrushColorLabel;
@@ -633,7 +644,6 @@ namespace Paint
         private System.Windows.Forms.Label ScaleLabel;
         private System.Windows.Forms.Button LineButton;
         private System.Windows.Forms.Button PenButton;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button RectangleButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BrushColorButton;
@@ -654,6 +664,7 @@ namespace Paint
         private System.Windows.Forms.Button ReturnButton;
         private System.Windows.Forms.Button UndoButton;
         private System.Windows.Forms.Button OpenButton;
+        private System.Windows.Forms.Button SelectionButton;
     }
 }
 
