@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    abstract public class PrimeShape:Shape
+    abstract public class PrimeShape:MShape
     {
 
         abstract public void DrawShape(Graphics gI, int X, int Y);

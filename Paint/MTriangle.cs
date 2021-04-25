@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    class MTriangle : Shape
+    class MTriangle : MShape
     {
 
         public override void OnMouseMove(int X, int Y, bool isShift)

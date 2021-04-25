@@ -4,14 +4,8 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class Selection : Shape
+    public class Selection : MShape
     {
-        public override void OnMouseDown(int X, int Y)
-        {
-            fX = X;
-            fY = Y;
-            saved = (Bitmap)Canvas.Image.Clone();
-        }
 
         public SelectionArea selectionArea;
 
@@ -21,17 +15,7 @@ namespace Paint
             Bitmap Repres = (Bitmap)saved.Clone();
             Graphics GRepres = Graphics.FromImage(Repres);
             float width = (float)Math.Abs((fX - X) / scale);
-            float height;
-            if (isShift)
-            {
-                height = width;
-                if (fY < Y) Y = (int)(fY + height);
-                else Y = (int)(fY - height);
-            }
-            else
-            {
-                height = (float)Math.Abs((fY - Y) / scale);
-            }
+            float height = (float)Math.Abs((fY - Y) / scale);
             DrawShapeGI(GRepres, X, Y, width, height);
             Canvas.Image = Repres;
         }
@@ -39,31 +23,16 @@ namespace Paint
         public override void OnMouseUp(int X, int Y, bool isShift)
         {
             Canvas.Invalidate();
-            float SizeCoef = Utilities.GetSizeCoef(size, scale);
             float width = (float)Math.Abs((fX - X) / scale);
-            float height;
-            if (isShift)
-            {
-                height = width;
-                if (fY < Y) Y = (int)(fY + height);
-                else Y = (int)(fY - height);
-            }
-            else
-            {
-                height = (float)Math.Abs((fY - Y) / scale);
-            }
-            this.selectionArea.init(X, Y, width, height);
+            float height = (float)Math.Abs((fY - Y) / scale);
+            selectionArea.init((int)(Math.Min(fX, X) / scale), (int)(Math.Min(fY, Y) / scale), width, height);
             DrawShapeGI(gI, X, Y, width, height);
         }
 
-        public Selection(int size, double scale, Graphics gI, PictureBox Canvas, SelectionArea selectionArea)
+        public Selection(int size, double scale, Graphics gI, PictureBox Canvas, SelectionArea selectionArea):
+            base(new Pen(Color.Black, 2), size, scale, gI, Canvas)
         {
-            this.size = size;
-            this.scale = scale;
-            this.gI = gI;
-            this.Canvas = Canvas;
             this.selectionArea = selectionArea;
-            pen = new Pen(Color.Black, 2);
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
 

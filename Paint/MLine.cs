@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class MLine : Shape
+    public class MLine : MShape
     {
 
         public override void OnMouseMove(int X, int Y, bool isShift)

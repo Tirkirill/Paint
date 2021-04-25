@@ -130,7 +130,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Shape.cs" />
+    <Compile Include="MShape.cs" />
     <Compile Include="StringResources.cs" />
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="CreateForm.resx">

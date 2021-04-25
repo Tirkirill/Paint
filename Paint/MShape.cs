@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    abstract public class Shape:Instrument
+    abstract public class MShape:Instrument
     {
         public int fX;
         public int fY;
@@ -20,7 +20,7 @@ namespace Paint
             saved = (Bitmap)Canvas.Image.Clone();
         }
 
-        public Shape(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas)
+        public MShape(Pen pen, int size, double scale, Graphics gI, PictureBox Canvas)
         {
             this.pen = pen;
             this.size = size;
