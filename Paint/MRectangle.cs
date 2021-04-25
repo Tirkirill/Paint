@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class MRectangle : ColoredShape
+    public class MRectangle : PrimeShape
     {
 
         public MRectangle(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)

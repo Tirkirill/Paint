@@ -8,81 +8,22 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class MEllipse : Shape
+    public class MEllipse : PrimeShape
     {
-        public override void OnMouseDown(int X, int Y)
-        {
-            fX = X;
-            fY = Y;
-            saved = (Bitmap)Canvas.Image.Clone();
-        }
-
-        public override void OnMouseMove(int X, int Y, bool isShift)
-        {
-            Canvas.Image = saved;
-            pen.Width = size;
-            Bitmap Repres = (Bitmap)saved.Clone();
-            Graphics GRepres = Graphics.FromImage(Repres);
-            float width = (float)Math.Abs((fX - X) / scale);
-            float height;
-            if (isShift)
-            {
-                height = width;
-                if (fY < Y) Y = (int)(fY + height);
-                else Y = (int)(fY - height);
-            }
-            else
-            {
-                height = (float)Math.Abs((fY - Y) / scale);
-            }
-            DrawShapeGI(GRepres, X, Y, width, height);
-            Canvas.Image = Repres;
-        }
-
-        public override void OnMouseUp(int X, int Y, bool isShift)
-        {
-            Canvas.Invalidate();
-            pen.Width = size;
-            float width = (float)Math.Abs((fX - X) / scale);
-            float height;
-            if (isShift)
-            {
-                height = width;
-                if (fY < Y) Y = (int)(fY + height);
-                else Y = (int)(fY - height);
-            }
-            else
-            {
-                height = (float)Math.Abs((fY - Y) / scale);
-            }
-            DrawShapeGI(gI, X, Y, width, height);
-        }
 
         public MEllipse(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)
+            :base(pen, brush, size, scale, gI, Canvas)
         {
-            this.pen = pen;
-            this.brush = brush;
-            this.size = size;
-            this.scale = scale;
-            this.gI = gI;
-            this.Canvas = Canvas;
+
         }
 
-        public void DrawShapeGI(Graphics gI, int X, int Y, float width, float height)
+        public override void DrawShape(Graphics gI, int X, int Y)
         {
-            if ((size >= width) || (size >= height))
-            {
-                Pen new_pen = (Pen)pen.Clone();
-                new_pen.Width = Math.Min(width, height);
-                gI.DrawEllipse(new_pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-                gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-            }
-            else
-            {
-                gI.DrawEllipse(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-                gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
-            }
-            
+            float width = (float)(Math.Abs(fX - X) / scale);
+            float height = (float)(Math.Abs(fY - Y) / scale);
+            pen.Width = new float[] { width, height, size }.Min();
+            gI.DrawEllipse(pen, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
+            gI.FillEllipse(brush, (float)(Math.Min(fX, X) / scale), (float)(Math.Min(fY, Y) / scale), width, height);
         }
 
         public override void OnMouseMoveWP(int X, int Y)

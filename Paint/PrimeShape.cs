@@ -8,9 +8,11 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    abstract public class ColoredShape:Shape
+    abstract public class PrimeShape:Shape
     {
+
         abstract public void DrawShape(Graphics gI, int X, int Y);
+
 
         public override void OnMouseMove(int X, int Y, bool isShift)
         {
@@ -39,8 +41,8 @@ namespace Paint
             DrawShape(gI, X, Y);
         }
 
-        public ColoredShape(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)
-        {
+        public PrimeShape(Pen pen, Brush brush, int size, double scale, Graphics gI, PictureBox Canvas)
+        { 
             this.pen = pen;
             this.brush = brush;
             this.size = size;

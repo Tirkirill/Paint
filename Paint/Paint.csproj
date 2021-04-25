@@ -87,7 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColoredShape.cs" />
+    <Compile Include="PrimeShape.cs" />
     <Compile Include="InstrumentUtilities.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
